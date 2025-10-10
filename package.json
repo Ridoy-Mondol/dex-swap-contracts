@@ -1,0 +1,17 @@
+{
+  "name": "amm-contracts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:factory": "npx proton-asc assembly/factory/factory.contract.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@proton/vert": "^0.3.24",
+    "proton-tsc": "^0.3.58"
+  }
+}
