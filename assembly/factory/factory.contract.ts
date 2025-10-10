@@ -21,6 +21,7 @@ export class Factory extends Contract {
   // ============================================
   // INITIALIZATION
   // ============================================
+
   @action("init")
   initialize(feeToSetter: Name): void {
     requireAuth(this.receiver);
@@ -36,6 +37,7 @@ export class Factory extends Contract {
   // ============================================
   // PAIR MANAGEMENT
   // ============================================
+
   @action("createpair")
   createPair(tokenA: Name, tokenB: Name, pairAccount: Name): void {
     check(tokenA !== tokenB, "Factory: IDENTICAL_ADDRESSES");
@@ -66,13 +68,6 @@ export class Factory extends Contract {
     this.pairsTable.store(newPair, this.receiver);
   }
 
-  /**
-   * Gets the pair account for two tokens
-   * Returns EMPTY_NAME if pair doesn't exist
-   *
-   * @param tokenA - First token
-   * @param tokenB - Second token
-   */
   @action("getpair")
   getPair(tokenA: Name, tokenB: Name): Name {
     let token0: Name = tokenA;
@@ -86,166 +81,6 @@ export class Factory extends Contract {
     return this.findPair(token0, token1);
   }
 
-  /**
-   * Gets all pairs (paginated)
-   *
-   * @param limit - Maximum number of pairs to return
-   * @param offset - Starting position
-   */
-  // @action("getallpairs")
-  // getAllPairs(limit: u32, offset: u32): PairsTable[] {
-  //   const pairs: PairsTable[] = [];
-  //   const pairCount = this.pairsTable.availablePrimaryKey;
-
-  //   const start = offset;
-  //   const end = offset + limit > pairCount ? pairCount : offset + limit;
-
-  //   for (let i = start; i < end; i++) {
-  //     const pair = this.pairsTable.get(i);
-  //     if (pair) {
-  //       pairs.push(pair);
-  //     }
-  //   }
-
-  //   return pairs;
-  // }
-
-  /**
-   * Gets total number of pairs
-   */
-  // @action("paircount")
-  // getPairCount(): u64 {
-  //   return this.pairsTable.availablePrimaryKey;
-  // }
-
-  /**
-   * Finds all pairs where the given token is token0
-   */
-  @action("getpairstoken0")
-  getPairsByToken0(token: Name, limit: u32): PairsTable[] {
-    const pairs: PairsTable[] = [];
-
-    // Get secondary index for token0
-    const idx = this.pairsTable.getIndex<u64>("byToken0");
-
-    // Find first occurrence of this token
-    const itr = idx.find(token.N);
-
-    let count: u32 = 0;
-
-    while (itr.isValid() && count < limit) {
-      const pair = itr.getValue();
-
-      if (pair.token0.N != token.N) {
-        break;
-      }
-
-      pairs.push(pair);
-      count++;
-      itr.next();
-    }
-
-    // const pairCount = this.pairsTable.availablePrimaryKey;
-
-    // let found: u32 = 0;
-    // let skipped: u32 = 0;
-
-    // for (let i: u64 = 0; i < pairCount && found < limit; i++) {
-    //   const pair = this.pairsTable.get(i);
-
-    //   if (pair && (pair.token0.N == token.N || pair.token1.N == token.N)) {
-    //     if (skipped < offset) {
-    //       skipped++;
-    //       continue;
-    //     }
-    //     pairs.push(pair);
-    //     found++;
-    //   }
-    // }
-
-    return pairs;
-  }
-
-  /**
-   * Finds all pairs where the given token is token1
-   */
-
-  @action("getpairstoken1")
-  getPairsByToken1(token: Name, limit: u32): PairsTable[] {
-    const pairs: PairsTable[] = [];
-
-    // Get secondary index for token1
-    const idx = this.pairsTable.getIndex<u64>("byToken1");
-
-    // Find first occurrence
-    const itr = idx.find(token.N);
-
-    let count: u32 = 0;
-
-    while (itr.isValid() && count < limit) {
-      const pair = itr.getValue();
-
-      if (pair.token1.N != token.N) {
-        break;
-      }
-
-      pairs.push(pair);
-      count++;
-      itr.next();
-    }
-
-    return pairs;
-  }
-
-  @action("getpairsbytoken")
-  getPairsByToken(token: Name, limit: u32): PairsTable[] {
-    const pairs: PairsTable[] = [];
-    let count: u32 = 0;
-
-    // First, get pairs where token is token0 (using index)
-    const idx0 = this.pairsTable.getIndex<u64>("byToken0");
-    const itr0 = idx0.find(token.N);
-
-    while (itr0.isValid() && count < limit) {
-      const pair = itr0.getValue();
-
-      if (pair.token0.N != token.N) {
-        break;
-      }
-
-      pairs.push(pair);
-      count++;
-      itr0.next();
-    }
-
-    // Then, get pairs where token is token1 (using index)
-    if (count < limit) {
-      const idx1 = this.pairsTable.getIndex<u64>("byToken1");
-      const itr1 = idx1.find(token.N);
-
-      while (itr1.isValid() && count < limit) {
-        const pair = itr1.getValue();
-
-        if (pair.token1.N != token.N) {
-          break;
-        }
-
-        pairs.push(pair);
-        count++;
-        itr1.next();
-      }
-    }
-
-    return pairs;
-  }
-
-  /**
-   * Removes a pair (admin only)
-   * Only the factory contract itself can remove pairs
-   *
-   * @param tokenA - First token
-   * @param tokenB - Second token
-   */
   @action("removepair")
   removePair(tokenA: Name, tokenB: Name): void {
     requireAuth(this.receiver);
@@ -258,47 +93,21 @@ export class Factory extends Contract {
       token1 = tokenA;
     }
 
-    // const pairCount = this.pairsTable.availablePrimaryKey;
-    // for (let i = 0; i < pairCount; i++) {
-    //   const pair = this.pairsTable.get(i);
-    //   if (pair && pair.token0.N == token0.N && pair.token1.N == token1.N) {
-    //     return this.pairsTable.remove(pair);
-    //   }
-    // }
-
-    const pairAccount = this.findPairOptimized(token0, token1);
+    const pairAccount = this.findPair(token0, token1);
     check(pairAccount != EMPTY_NAME, "Factory: PAIR_NOT_FOUND");
 
-    // Find the pair by pairAccount using secondary index
-    const idx = this.pairsTable.getIndex<u64>("byPairAccount");
-    const itr = idx.find(pairAccount.N);
-
-    if (itr.isValid()) {
-      const pair = itr.getValue();
+    const pair = this.pairsTable.getBySecondaryU64(pairAccount.N, 2);
+    if (pair) {
       this.pairsTable.remove(pair);
+    } else {
+      check(false, "Factory: PAIR_NOT_FOUND");
     }
-
-    check(false, "Factory: PAIR_NOT_FOUND");
   }
 
   /// ============================================
   // FEE MANAGEMENT
   // ============================================
-  @action("getfees")
-  getFeeSettings(): FeeSettingsTable {
-    const settings = this.feeSettingsTable.requireGet(
-      0,
-      "Factory: NOT_INITIALIZED"
-    );
-    return settings;
-  }
 
-  /**
-   * Sets the feeTo address (protocol fee recipient)
-   * Only feeToSetter can call this
-   *
-   * @param feeTo - New fee recipient (EMPTY_NAME to disable)
-   */
   @action("setfeeto")
   setFeeTo(feeTo: Name): void {
     const settings = this.feeSettingsTable.requireGet(
@@ -311,12 +120,6 @@ export class Factory extends Contract {
     this.feeSettingsTable.update(settings, this.receiver);
   }
 
-  /**
-   * Changes the feeToSetter address
-   * Only current feeToSetter can call this
-   *
-   * @param newSetter - New fee setter account
-   */
   @action("setfeesetter")
   setFeeToSetter(newSetter: Name): void {
     check(newSetter != EMPTY_NAME, "Factory: ZERO_ADDRESS");
@@ -333,9 +136,6 @@ export class Factory extends Contract {
     this.feeSettingsTable.update(settings, this.receiver);
   }
 
-  /**
-   * Get current fee settings
-   */
   @action("getfeeto")
   getFeeTo(): Name {
     const settings = this.feeSettingsTable.requireGet(
@@ -345,42 +145,12 @@ export class Factory extends Contract {
     return settings.feeTo;
   }
 
-  @action("getfeesetter")
-  getFeeToSetter(): Name {
-    const settings = this.feeSettingsTable.requireGet(
-      0,
-      "Factory: NOT_INITIALIZED"
-    );
-    return settings.feeToSetter;
-  }
-
   // ============================================
   // INTERNAL HELPERS
   // ============================================
-  private findPairOptimized(token0: Name, token1: Name): Name {
-    const idx = this.pairsTable.getIndex<u64>("byToken0");
-    const itr = idx.find(token0.N);
-
-    while (itr.isValid()) {
-      const pair = itr.getValue();
-
-      if (pair.token0.N != token0.N) {
-        break;
-      }
-
-      if (pair.token1.N == token1.N) {
-        return pair.pairAccount;
-      }
-
-      itr.next();
-    }
-
-    return EMPTY_NAME;
-  }
-
   private findPair(token0: Name, token1: Name): Name {
     const pairCount = this.pairsTable.availablePrimaryKey;
-    for (let i = 0; i < pairCount; i++) {
+    for (let i: u64 = 0; i < pairCount; i++) {
       const pair = this.pairsTable.get(i);
       if (pair && pair.token0.N == token0.N && pair.token1.N == token1.N) {
         return pair.pairAccount;
