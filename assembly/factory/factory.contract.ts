@@ -5,8 +5,9 @@ import {
   Name,
   requireAuth,
   TableStore,
+  currentTimeSec,
 } from "proton-tsc";
-import { PairsTable, FeeSettingsTable } from "./tables";
+import { PairsTable, FeeSettingsTable, ConfigTable } from "./tables";
 
 @contract
 export class Factory extends Contract {
@@ -17,6 +18,11 @@ export class Factory extends Contract {
 
   private feeSettingsTable: TableStore<FeeSettingsTable> =
     new TableStore<FeeSettingsTable>(this.receiver, this.receiver);
+
+  private configTable: TableStore<ConfigTable> = new TableStore<ConfigTable>(
+    this.receiver,
+    this.receiver
+  );
 
   // ============================================
   // INITIALIZATION
@@ -39,13 +45,14 @@ export class Factory extends Contract {
   // ============================================
 
   @action("createpair")
-  createPair(tokenA: Name, tokenB: Name, pairAccount: Name): void {
+  createPair(tokenA: Name, tokenB: Name): void {
+    requireAuth(this.receiver);
+
     check(tokenA !== tokenB, "Factory: IDENTICAL_ADDRESSES");
     check(
       tokenA != EMPTY_NAME && tokenB != EMPTY_NAME,
       "Factory: ZERO_ADDRESS"
     );
-    check(pairAccount != EMPTY_NAME, "Factory: INVALID_PAIR_ACCOUNT");
 
     let token0: Name = tokenA;
     let token1: Name = tokenB;
@@ -56,20 +63,21 @@ export class Factory extends Contract {
     }
 
     const existingPair = this.findPair(token0, token1);
-    check(existingPair == EMPTY_NAME, "Factory: PAIR_EXISTS");
+    check(existingPair == 0, "Factory: PAIR_EXISTS");
 
     const newPair = new PairsTable(
       this.pairsTable.availablePrimaryKey,
       token0,
       token1,
-      pairAccount
+      this.receiver,
+      currentTimeSec()
     );
 
     this.pairsTable.store(newPair, this.receiver);
   }
 
   @action("getpair")
-  getPair(tokenA: Name, tokenB: Name): Name {
+  getPair(tokenA: Name, tokenB: Name): u64 {
     let token0: Name = tokenA;
     let token1: Name = tokenB;
 
@@ -93,15 +101,11 @@ export class Factory extends Contract {
       token1 = tokenA;
     }
 
-    const pairAccount = this.findPair(token0, token1);
-    check(pairAccount != EMPTY_NAME, "Factory: PAIR_NOT_FOUND");
+    const pairId = this.findPair(token0, token1);
+    check(pairId != 0, "Factory: PAIR_NOT_FOUND");
 
-    const pair = this.pairsTable.getBySecondaryU64(pairAccount.N, 2);
-    if (pair) {
-      this.pairsTable.remove(pair);
-    } else {
-      check(false, "Factory: PAIR_NOT_FOUND");
-    }
+    const pair = this.pairsTable.requireGet(pairId, "Factory: PAIR_NOT_FOUND");
+    this.pairsTable.remove(pair);
   }
 
   /// ============================================
@@ -142,21 +146,46 @@ export class Factory extends Contract {
       0,
       "Factory: NOT_INITIALIZED"
     );
+
     return settings.feeTo;
+  }
+
+  /// ============================================
+  // CONFIGURATION
+  // ============================================
+
+  @action("setamm")
+  setAmmContract(ammContract: Name): void {
+    requireAuth(this.receiver);
+
+    let config = this.configTable.get(0);
+    if (!config) {
+      config = new ConfigTable(0, ammContract);
+      this.configTable.store(config, this.receiver);
+    } else {
+      config.ammContract = ammContract;
+      this.configTable.update(config, this.receiver);
+    }
+  }
+
+  @action("getamm")
+  getAmmContract(): Name {
+    const config = this.configTable.requireGet(0, "Factory: CONFIG_NOT_FOUND");
+    return config.ammContract;
   }
 
   // ============================================
   // INTERNAL HELPERS
   // ============================================
-  private findPair(token0: Name, token1: Name): Name {
+  private findPair(token0: Name, token1: Name): u64 {
     const pairCount = this.pairsTable.availablePrimaryKey;
     for (let i: u64 = 0; i < pairCount; i++) {
       const pair = this.pairsTable.get(i);
       if (pair && pair.token0.N == token0.N && pair.token1.N == token1.N) {
-        return pair.pairAccount;
+        return pair.id;
       }
     }
 
-    return EMPTY_NAME;
+    return 0;
   }
 }

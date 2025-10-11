@@ -6,7 +6,8 @@ export class PairsTable extends Table {
     public id: u64 = 0,
     public token0: Name = EMPTY_NAME,
     public token1: Name = EMPTY_NAME,
-    public pairAccount: Name = EMPTY_NAME // Account where the pair contract is deployed
+    public creator: Name = EMPTY_NAME,
+    public createdAt: u32 = 0
   ) {
     super();
   }
@@ -32,14 +33,5 @@ export class PairsTable extends Table {
 
   set byToken1(value: u64) {
     this.token1 = Name.fromU64(value);
-  }
-
-  @secondary
-  get byPairAccount(): u64 {
-    return this.pairAccount.N;
-  }
-
-  set byPairAccount(value: u64) {
-    this.pairAccount = Name.fromU64(value);
   }
 }

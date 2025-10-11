@@ -1,5 +1,6 @@
 export * from './pairs.table';
 export * from './feesettings.table';
+export * from './config.table';
 
 
 /**
