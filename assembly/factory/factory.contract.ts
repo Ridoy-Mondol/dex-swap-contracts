@@ -29,15 +29,20 @@ export class Factory extends Contract {
   // ============================================
 
   @action("init")
-  initialize(feeToSetter: Name): void {
+  initialize(ammContract: Name, feeToSetter: Name): void {
     requireAuth(this.receiver);
+
+    check(ammContract != EMPTY_NAME, "Factory: INVALID_AMM_CONTRACT");
+    check(feeToSetter != EMPTY_NAME, "Factory: INVALID_FEE_SETTER");
 
     const existing = this.feeSettingsTable.get(0);
     check(!existing, "Factory: ALREADY_INITIALIZED");
 
     const settings = new FeeSettingsTable(0, EMPTY_NAME, feeToSetter);
-
     this.feeSettingsTable.store(settings, this.receiver);
+
+    const config = new ConfigTable(0, ammContract);
+    this.configTable.store(config, this.receiver);
   }
 
   // ============================================
@@ -45,8 +50,8 @@ export class Factory extends Contract {
   // ============================================
 
   @action("createpair")
-  createPair(tokenA: Name, tokenB: Name): void {
-    requireAuth(this.receiver);
+  createPair(tokenA: Name, tokenB: Name, creator: Name): void {
+    requireAuth(creator);
 
     check(tokenA !== tokenB, "Factory: IDENTICAL_ADDRESSES");
     check(
@@ -69,7 +74,7 @@ export class Factory extends Contract {
       this.pairsTable.availablePrimaryKey,
       token0,
       token1,
-      this.receiver,
+      creator,
       currentTimeSec()
     );
 
