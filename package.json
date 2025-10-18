@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:factory": "npx proton-asc assembly/factory/factory.contract.ts"
+    "build:factory": "npx proton-asc assembly/factory/factory.contract.ts",
+    "build:amm": "npx proton-asc assembly/amm/amm.contract.ts"
   },
   "keywords": [],
   "author": "",
