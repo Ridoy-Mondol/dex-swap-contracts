@@ -6,21 +6,12 @@ import {
   requireAuth,
   TableStore,
   currentTimeSec,
-  ActionData,
   InlineAction,
   PermissionLevel,
 } from "proton-tsc";
 import { PairsTable, FeeSettingsTable, ConfigTable } from "./tables";
+import { AddPairParams } from "./factory.inline";
 
-@packer
-class AddPairParams extends ActionData {
-  constructor(
-    public token0: Name = EMPTY_NAME,
-    public token1: Name = EMPTY_NAME
-  ) {
-    super();
-  }
-}
 @contract
 export class Factory extends Contract {
   private pairsTable: TableStore<PairsTable> = new TableStore<PairsTable>(

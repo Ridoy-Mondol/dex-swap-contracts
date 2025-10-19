@@ -7,25 +7,13 @@ import {
   TableStore,
   currentTimeSec,
   U128,
-  ActionData,
   InlineAction,
   PermissionLevel,
   Asset,
   Symbol,
 } from "proton-tsc";
 import { PairDataTable, LiquidityTable, AmmConfigTable } from "./tables";
-
-@packer
-export class TokenTransfer extends ActionData {
-  constructor(
-    public from: Name = new Name(),
-    public to: Name = new Name(),
-    public quantity: Asset = new Asset(),
-    public memo: string = ""
-  ) {
-    super();
-  }
-}
+import { TokenTransfer } from "./amm.inline";
 
 @contract
 export class ammContract extends Contract {
