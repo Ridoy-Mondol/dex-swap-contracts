@@ -6,9 +6,21 @@ import {
   requireAuth,
   TableStore,
   currentTimeSec,
+  ActionData,
+  InlineAction,
+  PermissionLevel,
 } from "proton-tsc";
 import { PairsTable, FeeSettingsTable, ConfigTable } from "./tables";
 
+@packer
+class AddPairParams extends ActionData {
+  constructor(
+    public token0: Name = EMPTY_NAME,
+    public token1: Name = EMPTY_NAME
+  ) {
+    super();
+  }
+}
 @contract
 export class Factory extends Contract {
   private pairsTable: TableStore<PairsTable> = new TableStore<PairsTable>(
@@ -79,6 +91,19 @@ export class Factory extends Contract {
     );
 
     this.pairsTable.store(newPair, this.receiver);
+
+    const config = this.configTable.requireGet(0, "Factory: CONFIG_NOT_FOUND");
+
+    const addPair = new InlineAction<AddPairParams>("addpair");
+
+    const action = addPair.act(
+      config.ammContract,
+      new PermissionLevel(this.receiver)
+    );
+
+    const params = new AddPairParams(token0, token1);
+
+    action.send(params);
   }
 
   @action("getpair")

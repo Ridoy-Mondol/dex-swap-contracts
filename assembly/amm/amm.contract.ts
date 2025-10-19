@@ -632,7 +632,7 @@ export class ammContract extends Contract {
     action.send(transferParams);
   }
 
-  private createAsset(amount: i64, symbolCode: string, precision: u8): Asset {
+  private createAsset(amount: u64, symbolCode: string, precision: u8): Asset {
     const symbol = new Symbol(symbolCode, precision);
     return new Asset(amount, symbol);
   }
