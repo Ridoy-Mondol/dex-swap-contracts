@@ -7,8 +7,25 @@ import {
   TableStore,
   currentTimeSec,
   U128,
+  ActionData,
+  InlineAction,
+  PermissionLevel,
+  Asset,
+  Symbol,
 } from "proton-tsc";
 import { PairDataTable, LiquidityTable, AmmConfigTable } from "./tables";
+
+@packer
+export class TokenTransfer extends ActionData {
+  constructor(
+    public from: Name = new Name(),
+    public to: Name = new Name(),
+    public quantity: Asset = new Asset(),
+    public memo: string = ""
+  ) {
+    super();
+  }
+}
 
 @contract
 export class ammContract extends Contract {
@@ -91,10 +108,16 @@ export class ammContract extends Contract {
   addLiquidity(
     token0: Name,
     token1: Name,
+    token0Contract: Name,
+    token1Contract: Name,
     amount0Desired: u64,
     amount1Desired: u64,
     amount0Min: u64,
     amount1Min: u64,
+    token0Symbol: string,
+    token1Symbol: string,
+    token0Precision: u8,
+    token1Precision: u8,
     provider: Name
   ): void {
     requireAuth(provider);
@@ -163,10 +186,25 @@ export class ammContract extends Contract {
 
     check(liquidity > 0, "AMM: INSUFFICIENT_LIQUIDITY_MINTED");
 
-    // Note: In production, tokens should be transferred here
-    // For now, we assume tokens are already in contract
-    // You need to implement: this.transferFrom(token0, provider, this.receiver, amount0);
-    // You need to implement: this.transferFrom(token1, provider, this.receiver, amount1);
+    // Transfer token0 from provider to AMM
+    const asset0 = this.createAsset(amount0, token0Symbol, token0Precision);
+    this.transferFrom(
+      token0Contract,
+      provider,
+      this.receiver,
+      asset0,
+      "Add liquidity: token0"
+    );
+
+    // Transfer token1 from provider to AMM
+    const asset1 = this.createAsset(amount1, token1Symbol, token1Precision);
+    this.transferFrom(
+      token1Contract,
+      provider,
+      this.receiver,
+      asset1,
+      "Add liquidity: token1"
+    );
 
     pair.reserve0 += amount0;
     pair.reserve1 += amount1;
@@ -201,9 +239,15 @@ export class ammContract extends Contract {
   removeLiquidity(
     token0: Name,
     token1: Name,
+    token0Contract: Name,
+    token1Contract: Name,
     liquidity: u64,
     amount0Min: u64,
     amount1Min: u64,
+    token0Symbol: string,
+    token1Symbol: string,
+    token0Precision: u8,
+    token1Precision: u8,
     provider: Name
   ): void {
     requireAuth(provider);
@@ -246,17 +290,39 @@ export class ammContract extends Contract {
 
     this.pairDataTable.update(pair, this.receiver);
 
-    // Note: In production, transfer tokens back to provider
-    // You need to implement: this.transfer(token0, this.receiver, provider, amount0);
-    // You need to implement: this.transfer(token1, this.receiver, provider, amount1);
+    // Transfer token0 from contract back to provider
+    const asset0 = this.createAsset(amount0, token0Symbol, token0Precision);
+    this.transfer(
+      token0Contract,
+      this.receiver,
+      provider,
+      asset0,
+      "Remove liquidity: token0"
+    );
+
+    // Transfer token1 from contract back to provider
+    const asset1 = this.createAsset(amount1, token1Symbol, token1Precision);
+    this.transfer(
+      token1Contract,
+      this.receiver,
+      provider,
+      asset1,
+      "Remove liquidity: token1"
+    );
   }
 
   @action("swap")
   swap(
     tokenIn: Name,
     tokenOut: Name,
+    tokenInContract: Name,
+    tokenOutContract: Name,
     amountIn: u64,
     amountOutMin: u64,
+    tokenInSymbol: string,
+    tokenOutSymbol: string,
+    tokenInPrecision: u8,
+    tokenOutPrecision: u8,
     to: Name
   ): void {
     requireAuth(to);
@@ -298,9 +364,29 @@ export class ammContract extends Contract {
     check(amountOut >= amountOutMin, "AMM: INSUFFICIENT_OUTPUT_AMOUNT");
     check(amountOut < reserveOut, "AMM: INSUFFICIENT_LIQUIDITY");
 
-    // Note: In production, transfer tokens here
-    // You need to implement: this.transferFrom(tokenIn, to, this.receiver, amountIn);
-    // You need to implement: this.transfer(tokenOut, this.receiver, to, amountOut);
+    // Transfer input tokens from user to contract
+    const assetIn = this.createAsset(amountIn, tokenInSymbol, tokenInPrecision);
+    this.transferFrom(
+      tokenInContract,
+      to,
+      this.receiver,
+      assetIn,
+      "Swap: input"
+    );
+
+    // Transfer output tokens from user to contract
+    const assetOut = this.createAsset(
+      amountOut,
+      tokenOutSymbol,
+      tokenOutPrecision
+    );
+    this.transfer(
+      tokenOutContract,
+      this.receiver,
+      to,
+      assetOut,
+      "Swap: output"
+    );
 
     if (isToken0Input) {
       pair.reserve0 += amountIn;
@@ -441,23 +527,6 @@ export class ammContract extends Contract {
     return amountOutU128.toU64();
   }
 
-  // private sqrt(y: u64): u64 {
-  //   if (y < 4) {
-  //     if (y == 0) return 0;
-  //     return 1;
-  //   }
-
-  //   let z: u64 = y;
-  //   let x: u64 = y / 2 + 1;
-
-  //   while (x < z) {
-  //     z = x;
-  //     x = (y / x + x) / 2;
-  //   }
-
-  //   return z;
-  // }
-
   private sqrtU128(y: U128): u64 {
     if (U128.lt(y, new U128(4))) {
       if (U128.eq(y, U128.from(0))) return 0;
@@ -522,5 +591,49 @@ export class ammContract extends Contract {
     }
 
     return null;
+  }
+
+  // Transfer tokens FROM user TO AMM contract
+  private transferFrom(
+    tokenContract: Name,
+    from: Name,
+    to: Name,
+    quantity: Asset,
+    memo: string
+  ): void {
+    const transfer = new InlineAction<TokenTransfer>("transfer");
+
+    const action = transfer.act(
+      tokenContract,
+      new PermissionLevel(from, Name.fromString("active"))
+    );
+
+    const transferParams = new TokenTransfer(from, to, quantity, memo);
+
+    action.send(transferParams);
+  }
+
+  private transfer(
+    tokenContract: Name,
+    from: Name,
+    to: Name,
+    quantity: Asset,
+    memo: string
+  ): void {
+    const transfer = new InlineAction<TokenTransfer>("transfer");
+
+    const action = transfer.act(
+      tokenContract,
+      new PermissionLevel(this.receiver, Name.fromString("active"))
+    );
+
+    const transferParams = new TokenTransfer(from, to, quantity, memo);
+
+    action.send(transferParams);
+  }
+
+  private createAsset(amount: i64, symbolCode: string, precision: u8): Asset {
+    const symbol = new Symbol(symbolCode, precision);
+    return new Asset(amount, symbol);
   }
 }
