@@ -8,8 +8,14 @@ import {
   currentTimeSec,
   InlineAction,
   PermissionLevel,
+  isAccount,
 } from "proton-tsc";
-import { PairsTable, FeeSettingsTable, ConfigTable } from "./tables";
+import {
+  PairsTable,
+  FeeSettingsTable,
+  ConfigTable,
+  TokenStatTable,
+} from "./tables";
 import { AddPairParams } from "./factory.inline";
 
 @contract
@@ -53,14 +59,28 @@ export class Factory extends Contract {
   // ============================================
 
   @action("createpair")
-  createPair(tokenA: Name, tokenB: Name, creator: Name): void {
+  createPair(
+    tokenA: Name,
+    tokenB: Name,
+    tokenAContract: Name,
+    tokenBContract: Name,
+    creator: Name
+  ): void {
     requireAuth(creator);
 
-    check(tokenA !== tokenB, "Factory: IDENTICAL_ADDRESSES");
+    check(tokenA != tokenB, "Factory: IDENTICAL_ADDRESSES");
     check(
       tokenA != EMPTY_NAME && tokenB != EMPTY_NAME,
       "Factory: ZERO_ADDRESS"
     );
+    check(tokenAContract != EMPTY_NAME, "Factory: INVALID_CONTRACT_A");
+    check(tokenBContract != EMPTY_NAME, "Factory: INVALID_CONTRACT_B");
+
+    check(isAccount(tokenAContract), "Factory: CONTRACT_A_NOT_FOUND");
+    check(isAccount(tokenBContract), "Factory: CONTRACT_B_NOT_FOUND");
+
+    this.verifyTokenExist(tokenAContract, tokenA);
+    this.verifyTokenExist(tokenBContract, tokenB);
 
     let token0: Name = tokenA;
     let token1: Name = tokenB;
@@ -208,5 +228,19 @@ export class Factory extends Contract {
     }
 
     return 0;
+  }
+
+  private verifyTokenExist(tokenContract: Name, tokenSymbol: Name): void {
+    const statTable = new TableStore<TokenStatTable>(
+      tokenContract,
+      tokenSymbol
+    );
+
+    const stat = statTable.get(tokenSymbol.N);
+
+    check(
+      stat != null,
+      `Factory: TOKEN ${tokenSymbol.toString()} NOT FOUND IN ${tokenContract.toString()}`
+    );
   }
 }
