@@ -10,8 +10,6 @@ import {
   InlineAction,
   PermissionLevel,
   isAccount,
-  SymbolCode,
-  Symbol,
 } from "proton-tsc";
 import {
   PairsTable,
@@ -45,6 +43,7 @@ export class Factory extends Contract {
     requireAuth(this.receiver);
 
     check(ammContract != EMPTY_NAME, "Factory: INVALID_AMM_CONTRACT");
+    check(isAccount(ammContract), "Factory: AMM_CONTRACT_NOT_FOUND");
     check(feeToSetter != EMPTY_NAME, "Factory: INVALID_FEE_SETTER");
 
     const existing = this.feeSettingsTable.get(0);
@@ -89,14 +88,10 @@ export class Factory extends Contract {
 
     let token0: Name = token0Name;
     let token1: Name = token1Name;
-    // let contract0: Name = tokenAContract;
-    // let contract1: Name = tokenBContract;
 
     if (token0Name.N > token1Name.N) {
       token0 = token1Name;
       token1 = token0Name;
-      // contract0 = tokenBContract;
-      // contract1 = tokenAContract;
     }
 
     const existingPair = this.findPair(token0, token1);
@@ -207,6 +202,7 @@ export class Factory extends Contract {
   @action("setamm")
   setAmmContract(ammContract: Name): void {
     requireAuth(this.receiver);
+    check(isAccount(ammContract), "Factory: AMM_CONTRACT_NOT_FOUND");
 
     let config = this.configTable.get(0);
     if (!config) {
@@ -244,27 +240,12 @@ export class Factory extends Contract {
     tokenSymbol: string,
     precision: u8
   ): void {
-    // const symbolCode = this.calculateSymbolCode(tokenSymbol);
-
     const symbolCode = this.calculateSymbolCode(tokenSymbol);
 
     const scopeName = Name.fromU64(symbolCode);
 
-    // const symbolCode = SymbolCode.fromString(tokenSymbol.toUpperCase());
-
-    // const symbol = new Symbol(tokenSymbol.toUpperCase(), precision);
-
-    // const symbolCode = symbol.code();
-
-    // const symCode = Name.fromString(tokenSymbol.toUpperCase());
-
-    // const symbolCode1 = new SymbolCode(tokenSymbol);
-
-    // const scopeAsName = Name.fromU64(symbolCode.raw());
-
     const statTable = new TableStore<TokenStatTable>(tokenContract, scopeName);
 
-    // const stat = statTable.get(symCode.N);
     const stat = statTable.get(symbolCode);
 
     check(

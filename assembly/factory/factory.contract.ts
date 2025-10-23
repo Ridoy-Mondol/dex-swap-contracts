@@ -9,8 +9,6 @@ import {
   InlineAction,
   PermissionLevel,
   isAccount,
-  SymbolCode,
-  Symbol,
 } from "proton-tsc";
 import {
   PairsTable,
@@ -44,6 +42,7 @@ export class Factory extends Contract {
     requireAuth(this.receiver);
 
     check(ammContract != EMPTY_NAME, "Factory: INVALID_AMM_CONTRACT");
+    check(isAccount(ammContract), "Factory: AMM_CONTRACT_NOT_FOUND");
     check(feeToSetter != EMPTY_NAME, "Factory: INVALID_FEE_SETTER");
 
     const existing = this.feeSettingsTable.get(0);
@@ -202,6 +201,7 @@ export class Factory extends Contract {
   @action("setamm")
   setAmmContract(ammContract: Name): void {
     requireAuth(this.receiver);
+    check(isAccount(ammContract), "Factory: AMM_CONTRACT_NOT_FOUND");
 
     let config = this.configTable.get(0);
     if (!config) {
