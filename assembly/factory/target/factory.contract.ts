@@ -10,6 +10,8 @@ import {
   InlineAction,
   PermissionLevel,
   isAccount,
+  SymbolCode,
+  Symbol,
 } from "proton-tsc";
 import {
   PairsTable,
@@ -61,34 +63,40 @@ export class Factory extends Contract {
 
   @action("createpair")
   createPair(
-    tokenA: Name,
-    tokenB: Name,
+    tokenA: string,
+    tokenB: string,
     tokenAContract: Name,
     tokenBContract: Name,
+    tokenAPrecision: u8,
+    tokenBPrecision: u8,
     creator: Name
   ): void {
     requireAuth(creator);
 
     check(tokenA != tokenB, "Factory: IDENTICAL_ADDRESSES");
-    check(
-      tokenA != EMPTY_NAME && tokenB != EMPTY_NAME,
-      "Factory: ZERO_ADDRESS"
-    );
+    check(tokenA.length > 0 && tokenB.length > 0, "Factory: ZERO_ADDRESS");
     check(tokenAContract != EMPTY_NAME, "Factory: INVALID_CONTRACT_A");
     check(tokenBContract != EMPTY_NAME, "Factory: INVALID_CONTRACT_B");
 
     check(isAccount(tokenAContract), "Factory: CONTRACT_A_NOT_FOUND");
     check(isAccount(tokenBContract), "Factory: CONTRACT_B_NOT_FOUND");
 
-    this.verifyTokenExist(tokenAContract, tokenA);
-    this.verifyTokenExist(tokenBContract, tokenB);
+    this.verifyTokenExist(tokenAContract, tokenA, tokenAPrecision);
+    this.verifyTokenExist(tokenBContract, tokenB, tokenBPrecision);
 
-    let token0: Name = tokenA;
-    let token1: Name = tokenB;
+    const token0Name = Name.fromString(tokenA.toLowerCase());
+    const token1Name = Name.fromString(tokenB.toLowerCase());
 
-    if (tokenA.N > tokenB.N) {
-      token0 = tokenB;
-      token1 = tokenA;
+    let token0: Name = token0Name;
+    let token1: Name = token1Name;
+    // let contract0: Name = tokenAContract;
+    // let contract1: Name = tokenBContract;
+
+    if (token0Name.N > token1Name.N) {
+      token0 = token1Name;
+      token1 = token0Name;
+      // contract0 = tokenBContract;
+      // contract1 = tokenAContract;
     }
 
     const existingPair = this.findPair(token0, token1);
@@ -231,18 +239,55 @@ export class Factory extends Contract {
     return 0;
   }
 
-  private verifyTokenExist(tokenContract: Name, tokenSymbol: Name): void {
-    const statTable = new TableStore<TokenStatTable>(
-      tokenContract,
-      tokenSymbol
-    );
+  private verifyTokenExist(
+    tokenContract: Name,
+    tokenSymbol: string,
+    precision: u8
+  ): void {
+    // const symbolCode = this.calculateSymbolCode(tokenSymbol);
 
-    const stat = statTable.get(tokenSymbol.N);
+    const symbolCode = this.calculateSymbolCode(tokenSymbol);
+
+    const scopeName = Name.fromU64(symbolCode);
+
+    // const symbolCode = SymbolCode.fromString(tokenSymbol.toUpperCase());
+
+    // const symbol = new Symbol(tokenSymbol.toUpperCase(), precision);
+
+    // const symbolCode = symbol.code();
+
+    // const symCode = Name.fromString(tokenSymbol.toUpperCase());
+
+    // const symbolCode1 = new SymbolCode(tokenSymbol);
+
+    // const scopeAsName = Name.fromU64(symbolCode.raw());
+
+    const statTable = new TableStore<TokenStatTable>(tokenContract, scopeName);
+
+    // const stat = statTable.get(symCode.N);
+    const stat = statTable.get(symbolCode);
 
     check(
       stat != null,
       `Factory: TOKEN ${tokenSymbol.toString()} NOT FOUND IN ${tokenContract.toString()}`
     );
+
+    check(
+      stat!.supply.symbol.precision() == precision,
+      `Factory: WRONG PRECISION FOR ${tokenSymbol}`
+    );
+  }
+
+  private calculateSymbolCode(symbolStr: string): u64 {
+    let value: u64 = 0;
+
+    for (let i = 0; i < symbolStr.length && i < 7; i++) {
+      const char = symbolStr.charCodeAt(i);
+      check(char >= 65 && char <= 90, "Factory: INVALID_SYMBOL_CHARACTER");
+      value |= u64(char) << (8 * i);
+    }
+
+    return value;
   }
 }
 
@@ -288,38 +333,32 @@ class initializeAction implements _chain.Packer {
 
 class createPairAction implements _chain.Packer {
     constructor (
-        public tokenA: _chain.Name | null = null,
-        public tokenB: _chain.Name | null = null,
+        public tokenA: string = "",
+        public tokenB: string = "",
         public tokenAContract: _chain.Name | null = null,
         public tokenBContract: _chain.Name | null = null,
+        public tokenAPrecision: u8 = 0,
+        public tokenBPrecision: u8 = 0,
         public creator: _chain.Name | null = null,
     ) {
     }
 
     pack(): u8[] {
         let enc = new _chain.Encoder(this.getSize());
-        enc.pack(this.tokenA!);
-        enc.pack(this.tokenB!);
+        enc.packString(this.tokenA);
+        enc.packString(this.tokenB);
         enc.pack(this.tokenAContract!);
         enc.pack(this.tokenBContract!);
+        enc.packNumber<u8>(this.tokenAPrecision);
+        enc.packNumber<u8>(this.tokenBPrecision);
         enc.pack(this.creator!);
         return enc.getBytes();
     }
     
     unpack(data: u8[]): usize {
         let dec = new _chain.Decoder(data);
-        
-        {
-            let obj = new _chain.Name();
-            dec.unpack(obj);
-            this.tokenA! = obj;
-        }
-        
-        {
-            let obj = new _chain.Name();
-            dec.unpack(obj);
-            this.tokenB! = obj;
-        }
+        this.tokenA = dec.unpackString();
+        this.tokenB = dec.unpackString();
         
         {
             let obj = new _chain.Name();
@@ -332,6 +371,8 @@ class createPairAction implements _chain.Packer {
             dec.unpack(obj);
             this.tokenBContract! = obj;
         }
+        this.tokenAPrecision = dec.unpackNumber<u8>();
+        this.tokenBPrecision = dec.unpackNumber<u8>();
         
         {
             let obj = new _chain.Name();
@@ -343,10 +384,12 @@ class createPairAction implements _chain.Packer {
 
     getSize(): usize {
         let size: usize = 0;
-        size += this.tokenA!.getSize();
-        size += this.tokenB!.getSize();
+        size += _chain.Utils.calcPackedStringLength(this.tokenA);
+        size += _chain.Utils.calcPackedStringLength(this.tokenB);
         size += this.tokenAContract!.getSize();
         size += this.tokenBContract!.getSize();
+        size += sizeof<u8>();
+        size += sizeof<u8>();
         size += this.creator!.getSize();
         return size;
     }
@@ -579,7 +622,7 @@ export function apply(receiver: u64, firstReceiver: u64, action: u64): void {
 		if (action == 0x45D46CAAA675C000) {//createpair
             const args = new createPairAction();
             args.unpack(actionData);
-            mycontract.createPair(args.tokenA!,args.tokenB!,args.tokenAContract!,args.tokenBContract!,args.creator!);
+            mycontract.createPair(args.tokenA,args.tokenB,args.tokenAContract!,args.tokenBContract!,args.tokenAPrecision,args.tokenBPrecision,args.creator!);
         }
 		if (action == 0x62B3533AE0000000) {//getpair
             const args = new getPairAction();

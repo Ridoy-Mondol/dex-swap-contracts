@@ -9,6 +9,8 @@ import {
   InlineAction,
   PermissionLevel,
   isAccount,
+  SymbolCode,
+  Symbol,
 } from "proton-tsc";
 import {
   PairsTable,
@@ -60,34 +62,36 @@ export class Factory extends Contract {
 
   @action("createpair")
   createPair(
-    tokenA: Name,
-    tokenB: Name,
+    tokenA: string,
+    tokenB: string,
     tokenAContract: Name,
     tokenBContract: Name,
+    tokenAPrecision: u8,
+    tokenBPrecision: u8,
     creator: Name
   ): void {
     requireAuth(creator);
 
     check(tokenA != tokenB, "Factory: IDENTICAL_ADDRESSES");
-    check(
-      tokenA != EMPTY_NAME && tokenB != EMPTY_NAME,
-      "Factory: ZERO_ADDRESS"
-    );
+    check(tokenA.length > 0 && tokenB.length > 0, "Factory: ZERO_ADDRESS");
     check(tokenAContract != EMPTY_NAME, "Factory: INVALID_CONTRACT_A");
     check(tokenBContract != EMPTY_NAME, "Factory: INVALID_CONTRACT_B");
 
     check(isAccount(tokenAContract), "Factory: CONTRACT_A_NOT_FOUND");
     check(isAccount(tokenBContract), "Factory: CONTRACT_B_NOT_FOUND");
 
-    this.verifyTokenExist(tokenAContract, tokenA);
-    this.verifyTokenExist(tokenBContract, tokenB);
+    this.verifyTokenExist(tokenAContract, tokenA, tokenAPrecision);
+    this.verifyTokenExist(tokenBContract, tokenB, tokenBPrecision);
 
-    let token0: Name = tokenA;
-    let token1: Name = tokenB;
+    const token0Name = Name.fromString(tokenA.toLowerCase());
+    const token1Name = Name.fromString(tokenB.toLowerCase());
 
-    if (tokenA.N > tokenB.N) {
-      token0 = tokenB;
-      token1 = tokenA;
+    let token0: Name = token0Name;
+    let token1: Name = token1Name;
+
+    if (token0Name.N > token1Name.N) {
+      token0 = token1Name;
+      token1 = token0Name;
     }
 
     const existingPair = this.findPair(token0, token1);
@@ -230,17 +234,39 @@ export class Factory extends Contract {
     return 0;
   }
 
-  private verifyTokenExist(tokenContract: Name, tokenSymbol: Name): void {
-    const statTable = new TableStore<TokenStatTable>(
-      tokenContract,
-      tokenSymbol
-    );
+  private verifyTokenExist(
+    tokenContract: Name,
+    tokenSymbol: string,
+    precision: u8
+  ): void {
+    const symbolCode = this.calculateSymbolCode(tokenSymbol);
 
-    const stat = statTable.get(tokenSymbol.N);
+    const scopeName = Name.fromU64(symbolCode);
+
+    const statTable = new TableStore<TokenStatTable>(tokenContract, scopeName);
+
+    const stat = statTable.get(symbolCode);
 
     check(
       stat != null,
       `Factory: TOKEN ${tokenSymbol.toString()} NOT FOUND IN ${tokenContract.toString()}`
     );
+
+    check(
+      stat!.supply.symbol.precision() == precision,
+      `Factory: WRONG PRECISION FOR ${tokenSymbol}`
+    );
+  }
+
+  private calculateSymbolCode(symbolStr: string): u64 {
+    let value: u64 = 0;
+
+    for (let i = 0; i < symbolStr.length && i < 7; i++) {
+      const char = symbolStr.charCodeAt(i);
+      check(char >= 65 && char <= 90, "Factory: INVALID_SYMBOL_CHARACTER");
+      value |= u64(char) << (8 * i);
+    }
+
+    return value;
   }
 }

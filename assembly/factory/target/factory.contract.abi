@@ -83,11 +83,11 @@
       "fields": [
         {
           "name": "tokenA",
-          "type": "name"
+          "type": "string"
         },
         {
           "name": "tokenB",
-          "type": "name"
+          "type": "string"
         },
         {
           "name": "tokenAContract",
@@ -96,6 +96,14 @@
         {
           "name": "tokenBContract",
           "type": "name"
+        },
+        {
+          "name": "tokenAPrecision",
+          "type": "uint8"
+        },
+        {
+          "name": "tokenBPrecision",
+          "type": "uint8"
         },
         {
           "name": "creator",
