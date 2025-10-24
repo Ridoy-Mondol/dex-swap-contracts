@@ -7,12 +7,13 @@
  (type $i32_=>_none (func (param i32)))
  (type $i32_i64_=>_none (func (param i32 i64)))
  (type $i64_=>_i32 (func (param i64) (result i32)))
+ (type $i32_i32_i32_=>_i32 (func (param i32 i32 i32) (result i32)))
  (type $i32_i32_i64_i32_=>_i32 (func (param i32 i32 i64 i32) (result i32)))
  (type $i32_i64_=>_i32 (func (param i32 i64) (result i32)))
  (type $i32_=>_i64 (func (param i32) (result i64)))
  (type $i32_i32_i32_i32_=>_none (func (param i32 i32 i32 i32)))
- (type $i32_i32_i32_=>_i32 (func (param i32 i32 i32) (result i32)))
  (type $i32_i32_i32_i32_=>_i32 (func (param i32 i32 i32 i32) (result i32)))
+ (type $i32_i64_i32_=>_i32 (func (param i32 i64 i32) (result i32)))
  (type $i64_i64_i64_i64_=>_i32 (func (param i64 i64 i64 i64) (result i32)))
  (type $i32_i32_i32_=>_i64 (func (param i32 i32 i32) (result i64)))
  (type $none_=>_none (func))
@@ -23,7 +24,6 @@
  (type $i32_i64_i32_i32_=>_none (func (param i32 i64 i32 i32)))
  (type $i32_i64_i32_i64_=>_none (func (param i32 i64 i32 i64)))
  (type $i64_i64_i64_=>_none (func (param i64 i64 i64)))
- (type $i32_i64_i32_=>_i32 (func (param i32 i64 i32) (result i32)))
  (type $i64_i32_i32_i32_i32_=>_i32 (func (param i64 i32 i32 i32 i32) (result i32)))
  (type $i64_i64_i64_=>_i32 (func (param i64 i64 i64) (result i32)))
  (type $i64_i64_i64_i32_=>_i32 (func (param i64 i64 i64 i32) (result i32)))
@@ -45,6 +45,7 @@
  (import "env" "send_inline" (func $~lib/as-chain/env/send_inline (param i32 i32)))
  (import "env" "db_remove_i64" (func $~lib/as-chain/env/db_remove_i64 (param i32)))
  (import "env" "db_update_i64" (func $~lib/as-chain/env/db_update_i64 (param i32 i64 i32 i32)))
+ (import "env" "db_next_i64" (func $~lib/as-chain/env/db_next_i64 (param i32 i32) (result i32)))
  (import "env" "action_data_size" (func $~lib/as-chain/env/action_data_size (result i32)))
  (import "env" "read_action_data" (func $~lib/as-chain/env/read_action_data (param i32 i32) (result i32)))
  (import "env" "set_action_return_value" (func $~lib/as-chain/env/set_action_return_value (param i32 i32)))
@@ -268,22 +269,28 @@
  (data (i32.const 13656) "\01\00\00\00.\00\00\00F\00a\00c\00t\00o\00r\00y\00:\00 \00P\00A\00I\00R\00_\00N\00O\00T\00_\00F\00O\00U\00N\00D")
  (data (i32.const 13724) "L")
  (data (i32.const 13736) "\01\00\00\000\00\00\00p\00r\00i\00m\00a\00r\00y\00 \00v\00a\00l\00u\00e\00 \00n\00o\00t\00 \00f\00o\00u\00n\00d\00!")
- (data (i32.const 13804) "L")
- (data (i32.const 13816) "\01\00\00\000\00\00\00F\00a\00c\00t\00o\00r\00y\00:\00 \00N\00O\00T\00_\00I\00N\00I\00T\00I\00A\00L\00I\00Z\00E\00D")
- (data (i32.const 13884) "<")
- (data (i32.const 13896) "\01\00\00\00&\00\00\00u\00p\00d\00a\00t\00e\00:\00b\00a\00d\00 \00i\00t\00e\00r\00a\00t\00o\00r")
- (data (i32.const 13948) "L")
- (data (i32.const 13960) "\01\00\00\00:\00\00\00g\00e\00t\00 \00p\00r\00i\00m\00a\00r\00y\00:\00 \00i\00n\00v\00a\00l\00i\00d\00 \00i\00t\00e\00r\00a\00t\00o\00r")
- (data (i32.const 14028) "l")
- (data (i32.const 14040) "\01\00\00\00V\00\00\00p\00r\00i\00m\00a\00r\00y\00 \00k\00e\00y\00 \00c\00a\00n\00\'\00t\00 \00b\00e\00 \00c\00h\00a\00n\00g\00e\00d\00 \00d\00u\00r\00i\00n\00g\00 \00u\00p\00d\00a\00t\00e\00!")
- (data (i32.const 14140) ",")
- (data (i32.const 14152) "\01\00\00\00\1c\00\00\00i\00n\00v\00a\00l\00i\00d\00 \00s\00y\00m\00b\00o\00l")
- (data (i32.const 14188) ",")
- (data (i32.const 14200) "\01\00\00\00\1a\00\00\00i\00n\00v\00a\00l\00i\00d\00 \00a\00s\00s\00e\00t")
- (data (i32.const 14236) "<")
- (data (i32.const 14248) "\01\00\00\00\1e\00\00\00i\00d\00x\006\004\00:\00 \00b\00a\00d\00 \00t\00y\00p\00e")
- (data (i32.const 14300) "<")
- (data (i32.const 14312) "\01\00\00\00 \00\00\00i\00d\00x\006\004\00:\00 \00b\00a\00d\00 \00v\00a\00l\00u\00e")
+ (data (i32.const 13804) ",")
+ (data (i32.const 13816) "\01\00\00\00\14\00\00\00r\00e\00m\00o\00v\00e\00p\00a\00i\00r")
+ (data (i32.const 13852) "L")
+ (data (i32.const 13864) "\01\00\00\000\00\00\00F\00a\00c\00t\00o\00r\00y\00:\00 \00N\00O\00T\00_\00I\00N\00I\00T\00I\00A\00L\00I\00Z\00E\00D")
+ (data (i32.const 13932) "\\")
+ (data (i32.const 13944) "\01\00\00\00@\00\00\00F\00a\00c\00t\00o\00r\00y\00:\00 \00F\00E\00E\00T\00O\00_\00A\00C\00C\00O\00U\00N\00T\00_\00N\00O\00T\00_\00E\00X\00I\00S\00T")
+ (data (i32.const 14028) "<")
+ (data (i32.const 14040) "\01\00\00\00&\00\00\00u\00p\00d\00a\00t\00e\00:\00b\00a\00d\00 \00i\00t\00e\00r\00a\00t\00o\00r")
+ (data (i32.const 14092) "L")
+ (data (i32.const 14104) "\01\00\00\00:\00\00\00g\00e\00t\00 \00p\00r\00i\00m\00a\00r\00y\00:\00 \00i\00n\00v\00a\00l\00i\00d\00 \00i\00t\00e\00r\00a\00t\00o\00r")
+ (data (i32.const 14172) "l")
+ (data (i32.const 14184) "\01\00\00\00V\00\00\00p\00r\00i\00m\00a\00r\00y\00 \00k\00e\00y\00 \00c\00a\00n\00\'\00t\00 \00b\00e\00 \00c\00h\00a\00n\00g\00e\00d\00 \00d\00u\00r\00i\00n\00g\00 \00u\00p\00d\00a\00t\00e\00!")
+ (data (i32.const 14284) "\\")
+ (data (i32.const 14296) "\01\00\00\00H\00\00\00F\00a\00c\00t\00o\00r\00y\00:\00 \00F\00E\00E\00S\00E\00T\00T\00E\00R\00_\00A\00C\00C\00O\00U\00N\00T\00_\00N\00O\00T\00_\00E\00X\00I\00S\00T")
+ (data (i32.const 14380) ",")
+ (data (i32.const 14392) "\01\00\00\00\1c\00\00\00i\00n\00v\00a\00l\00i\00d\00 \00s\00y\00m\00b\00o\00l")
+ (data (i32.const 14428) ",")
+ (data (i32.const 14440) "\01\00\00\00\1a\00\00\00i\00n\00v\00a\00l\00i\00d\00 \00a\00s\00s\00e\00t")
+ (data (i32.const 14476) "<")
+ (data (i32.const 14488) "\01\00\00\00\1e\00\00\00i\00d\00x\006\004\00:\00 \00b\00a\00d\00 \00t\00y\00p\00e")
+ (data (i32.const 14540) "<")
+ (data (i32.const 14552) "\01\00\00\00 \00\00\00i\00d\00x\006\004\00:\00 \00b\00a\00d\00 \00v\00a\00l\00u\00e")
  (table $0 2 funcref)
  (elem $0 (i32.const 1) $start:~lib/as-chain/name~anonymous|0)
  (export "Factory" (global $assembly/factory/factory.contract/Factory))
@@ -303,6 +310,7 @@
  (export "Factory#getFeeTo" (func $assembly/factory/factory.contract/Factory#getFeeTo))
  (export "Factory#setAmmContract" (func $assembly/factory/factory.contract/Factory#setAmmContract))
  (export "Factory#getAmmContract" (func $assembly/factory/factory.contract/Factory#getAmmContract))
+ (export "Factory#clearPair" (func $assembly/factory/factory.contract/Factory#clearPair))
  (export "apply" (func $assembly/factory/factory.contract/apply))
  (export "memory" (memory $0))
  (start $~start)
@@ -5814,6 +5822,29 @@
   )
   (local.get $4)
  )
+ (func $~lib/as-chain/mi/MultiIndex<assembly/factory/tables/pairs.table/PairsTable>#begin (param $0 i32) (result i32)
+  (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/factory/tables/pairs.table/PairsTable>#constructor
+   (local.tee $0
+    (i32.load
+     (local.get $0)
+    )
+   )
+   (call $~lib/as-chain/env/db_lowerbound_i64
+    (i64.load
+     (local.get $0)
+    )
+    (i64.load offset=8
+     (local.get $0)
+    )
+    (i64.load offset=16
+     (local.get $0)
+    )
+    (i64.const 0)
+   )
+   (i64.const 0)
+   (i32.const 0)
+  )
+ )
  (func $~lib/as-chain/mi/MultiIndex<assembly/factory/tables/pairs.table/PairsTable>#end (param $0 i32) (result i32)
   (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/factory/tables/pairs.table/PairsTable>#constructor
    (local.tee $0
@@ -5937,6 +5968,50 @@
    (local.get $1)
   )
  )
+ (func $~lib/as-chain/dbi64/DBI64<assembly/factory/tables/pairs.table/PairsTable>#getEx (param $0 i32) (param $1 i32) (result i32)
+  (if
+   (i32.eqz
+    (local.tee $0
+     (call $~lib/as-chain/env/db_get_i64
+      (local.get $1)
+      (i32.const 0)
+      (i32.const 0)
+     )
+    )
+   )
+   (return
+    (i32.const 0)
+   )
+  )
+  (drop
+   (call $~lib/as-chain/env/db_get_i64
+    (local.get $1)
+    (i32.load offset=4
+     (local.tee $1
+      (call $~lib/array/Array<u8>#constructor
+       (local.get $0)
+      )
+     )
+    )
+    (local.get $0)
+   )
+  )
+  (drop
+   (call $assembly/factory/tables/pairs.table/PairsTable#unpack
+    (local.tee $0
+     (call $assembly/factory/tables/pairs.table/PairsTable#constructor
+      (i64.const 0)
+      (global.get $~lib/as-chain/name/EMPTY_NAME)
+      (global.get $~lib/as-chain/name/EMPTY_NAME)
+      (global.get $~lib/as-chain/name/EMPTY_NAME)
+      (i32.const 0)
+     )
+    )
+    (local.get $1)
+   )
+  )
+  (local.get $0)
+ )
  (func $~lib/as-chain/dbi64/DBI64<assembly/factory/tables/pairs.table/PairsTable>#get (param $0 i32) (param $1 i32) (result i32)
   (if
    (i32.eqz
@@ -5948,53 +6023,11 @@
     (i32.const 0)
    )
   )
-  (block $__inlined_func$~lib/as-chain/dbi64/DBI64<assembly/factory/tables/pairs.table/PairsTable>#getEx (result i32)
-   (drop
-    (br_if $__inlined_func$~lib/as-chain/dbi64/DBI64<assembly/factory/tables/pairs.table/PairsTable>#getEx
-     (i32.const 0)
-     (i32.eqz
-      (local.tee $1
-       (call $~lib/as-chain/env/db_get_i64
-        (local.tee $0
-         (i32.load offset=4
-          (local.get $1)
-         )
-        )
-        (i32.const 0)
-        (i32.const 0)
-       )
-      )
-     )
-    )
+  (call $~lib/as-chain/dbi64/DBI64<assembly/factory/tables/pairs.table/PairsTable>#getEx
+   (local.get $0)
+   (i32.load offset=4
+    (local.get $1)
    )
-   (drop
-    (call $~lib/as-chain/env/db_get_i64
-     (local.get $0)
-     (i32.load offset=4
-      (local.tee $0
-       (call $~lib/array/Array<u8>#constructor
-        (local.get $1)
-       )
-      )
-     )
-     (local.get $1)
-    )
-   )
-   (drop
-    (call $assembly/factory/tables/pairs.table/PairsTable#unpack
-     (local.tee $1
-      (call $assembly/factory/tables/pairs.table/PairsTable#constructor
-       (i64.const 0)
-       (global.get $~lib/as-chain/name/EMPTY_NAME)
-       (global.get $~lib/as-chain/name/EMPTY_NAME)
-       (global.get $~lib/as-chain/name/EMPTY_NAME)
-       (i32.const 0)
-      )
-     )
-     (local.get $0)
-    )
-   )
-   (local.get $1)
   )
  )
  (func $~lib/as-chain/mi/MultiIndex<assembly/factory/tables/pairs.table/PairsTable>#get (param $0 i32) (param $1 i32) (result i32)
@@ -6035,28 +6068,10 @@
    (if
     (i32.eq
      (i32.load offset=4
-      (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/factory/tables/pairs.table/PairsTable>#constructor
-       (local.tee $1
-        (i32.load
-         (i32.load
-          (local.get $0)
-         )
-        )
+      (call $~lib/as-chain/mi/MultiIndex<assembly/factory/tables/pairs.table/PairsTable>#begin
+       (i32.load
+        (local.get $0)
        )
-       (call $~lib/as-chain/env/db_lowerbound_i64
-        (i64.load
-         (local.get $1)
-        )
-        (i64.load offset=8
-         (local.get $1)
-        )
-        (i64.load offset=16
-         (local.get $1)
-        )
-        (i64.const 0)
-       )
-       (i64.const 0)
-       (i32.const 0)
       )
      )
      (i32.load offset=4
@@ -6286,7 +6301,7 @@
     )
    )
   )
-  (i64.const 0)
+  (i64.const -1)
  )
  (func $~lib/as-chain/time/Microseconds#constructor (param $0 i64) (result i32)
   (local $1 i32)
@@ -6704,6 +6719,42 @@
    )
   )
  )
+ (func $~lib/as-chain/helpers/InlineAction<assembly/factory/factory.inline/InlinePairParams>#constructor (param $0 i32) (result i32)
+  (local $1 i32)
+  (local $2 i64)
+  (call $~lib/rt/common/BLOCK#set:mmInfo
+   (local.tee $1
+    (call $~lib/rt/stub/__new
+     (i32.const 4)
+     (i32.const 47)
+    )
+   )
+   (i32.const 0)
+  )
+  (local.set $2
+   (call $~lib/as-chain/name/S2N
+    (local.get $0)
+   )
+  )
+  (call $~lib/as-chain/name/Name#set:N
+   (local.tee $0
+    (call $~lib/rt/stub/__new
+     (i32.const 8)
+     (i32.const 5)
+    )
+   )
+   (i64.const 0)
+  )
+  (call $~lib/as-chain/name/Name#set:N
+   (local.get $0)
+   (local.get $2)
+  )
+  (call $~lib/rt/common/BLOCK#set:mmInfo
+   (local.get $1)
+   (local.get $0)
+  )
+  (local.get $1)
+ )
  (func $~lib/as-chain/action/PermissionLevel#constructor (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (call $~lib/rt/common/BLOCK#set:mmInfo
@@ -6721,7 +6772,101 @@
   )
   (local.get $2)
  )
- (func $assembly/factory/factory.inline/AddPairParams#pack (param $0 i32) (result i32)
+ (func $~lib/as-chain/action/PermissionLevel#constructor@varargs (param $0 i32) (result i32)
+  (local $1 i32)
+  (local $2 i64)
+  (block $2of2
+   (block $1of2
+    (block $0of2
+     (block $outOfRange
+      (br_table $0of2 $1of2 $2of2 $outOfRange
+       (global.get $~argumentsLength)
+      )
+     )
+     (unreachable)
+    )
+    (call $~lib/as-chain/name/Name#set:N
+     (local.tee $0
+      (call $~lib/rt/stub/__new
+       (i32.const 8)
+       (i32.const 5)
+      )
+     )
+     (i64.const 0)
+    )
+    (call $~lib/as-chain/name/Name#set:N
+     (local.get $0)
+     (i64.const 0)
+    )
+   )
+   (local.set $2
+    (call $~lib/as-chain/name/S2N
+     (i32.const 13632)
+    )
+   )
+   (call $~lib/as-chain/name/Name#set:N
+    (local.tee $1
+     (call $~lib/rt/stub/__new
+      (i32.const 8)
+      (i32.const 5)
+     )
+    )
+    (i64.const 0)
+   )
+   (call $~lib/as-chain/name/Name#set:N
+    (local.get $1)
+    (local.get $2)
+   )
+  )
+  (call $~lib/as-chain/action/PermissionLevel#constructor
+   (local.get $0)
+   (local.get $1)
+  )
+ )
+ (func $~lib/as-chain/helpers/InlineAction<assembly/factory/factory.inline/InlinePairParams>#act (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
+  (local $3 i32)
+  (local.set $3
+   (i32.load
+    (local.get $0)
+   )
+  )
+  (call $~lib/rt/common/BLOCK#set:mmInfo
+   (local.tee $0
+    (call $~lib/rt/stub/__new
+     (i32.const 12)
+     (i32.const 49)
+    )
+   )
+   (local.get $3)
+  )
+  (call $~lib/rt/common/OBJECT#set:gcInfo
+   (local.get $0)
+   (local.get $1)
+  )
+  (call $~lib/rt/common/OBJECT#set:gcInfo2
+   (local.get $0)
+   (local.get $2)
+  )
+  (local.get $0)
+ )
+ (func $assembly/factory/factory.inline/InlinePairParams#constructor (param $0 i32) (param $1 i32) (result i32)
+  (local $2 i32)
+  (call $~lib/rt/common/BLOCK#set:mmInfo
+   (local.tee $2
+    (call $~lib/rt/stub/__new
+     (i32.const 8)
+     (i32.const 46)
+    )
+   )
+   (local.get $0)
+  )
+  (call $~lib/rt/common/OBJECT#set:gcInfo
+   (local.get $2)
+   (local.get $1)
+  )
+  (local.get $2)
+ )
+ (func $assembly/factory/factory.inline/InlinePairParams#pack (param $0 i32) (result i32)
   (local $1 i32)
   (call $~lib/as-chain/serializer/Encoder#pack
    (local.tee $1
@@ -6981,6 +7126,81 @@
    (local.get $1)
   )
  )
+ (func $~lib/as-chain/helpers/InlineActionAct<assembly/factory/factory.inline/InlinePairParams>#send (param $0 i32) (param $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  (drop
+   (i32.load offset=4
+    (local.tee $2
+     (call $~lib/rt/__newArray
+      (i32.const 1)
+      (i32.const 2)
+      (i32.const 50)
+      (i32.const 0)
+     )
+    )
+   )
+  )
+  (call $~lib/array/Array<~lib/as-chain/idxdb/IDXDB>#__uset
+   (local.get $2)
+   (i32.const 0)
+   (i32.load offset=8
+    (local.get $0)
+   )
+  )
+  (local.set $3
+   (i32.load offset=4
+    (local.get $0)
+   )
+  )
+  (local.set $4
+   (i32.load
+    (local.get $0)
+   )
+  )
+  (local.set $1
+   (call $assembly/factory/factory.inline/InlinePairParams#pack
+    (local.get $1)
+   )
+  )
+  (call $~lib/rt/common/BLOCK#set:mmInfo
+   (local.tee $0
+    (call $~lib/rt/stub/__new
+     (i32.const 16)
+     (i32.const 51)
+    )
+   )
+   (local.get $3)
+  )
+  (call $~lib/rt/common/OBJECT#set:gcInfo
+   (local.get $0)
+   (local.get $4)
+  )
+  (call $~lib/rt/common/OBJECT#set:gcInfo2
+   (local.get $0)
+   (local.get $2)
+  )
+  (call $~lib/rt/common/OBJECT#set:rtId
+   (local.get $0)
+   (local.get $1)
+  )
+  (local.set $1
+   (i32.load offset=12
+    (local.tee $0
+     (call $~lib/as-chain/action/Action#pack
+      (local.get $0)
+     )
+    )
+   )
+  )
+  (call $~lib/as-chain/env/send_inline
+   (i32.load offset=4
+    (local.get $0)
+   )
+   (local.get $1)
+  )
+ )
  (func $assembly/factory/factory.contract/Factory#createPair (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (param $4 i32) (param $5 i32) (param $6 i32) (param $7 i32)
   (local $8 i32)
   (local $9 i32)
@@ -7223,12 +7443,13 @@
    )
   )
   (call $~lib/as-chain/system/check
-   (i64.eqz
+   (i64.eq
     (call $assembly/factory/factory.contract/Factory#findPair
      (local.get $0)
      (local.get $1)
      (local.get $2)
     )
+    (i64.const -1)
    )
    (i32.const 13392)
   )
@@ -7332,50 +7553,24 @@
     )
    )
   )
-  (local.set $5
+  (local.set $3
    (call $~lib/proton-tsc/modules/store/store/TableStore<assembly/factory/tables/config.table/ConfigTable>#requireGet
     (i32.load offset=20
      (local.get $0)
     )
    )
   )
-  (call $~lib/rt/common/BLOCK#set:mmInfo
-   (local.tee $3
-    (call $~lib/rt/stub/__new
-     (i32.const 4)
-     (i32.const 47)
-    )
-   )
-   (i32.const 0)
-  )
-  (local.set $12
-   (call $~lib/as-chain/name/S2N
+  (local.set $4
+   (call $~lib/as-chain/helpers/InlineAction<assembly/factory/factory.inline/InlinePairParams>#constructor
     (i32.const 13584)
    )
   )
-  (call $~lib/as-chain/name/Name#set:N
-   (local.tee $4
-    (call $~lib/rt/stub/__new
-     (i32.const 8)
-     (i32.const 5)
-    )
-   )
-   (i64.const 0)
-  )
-  (call $~lib/as-chain/name/Name#set:N
-   (local.get $4)
-   (local.get $12)
-  )
-  (call $~lib/rt/common/BLOCK#set:mmInfo
-   (local.get $3)
-   (local.get $4)
-  )
-  (local.set $4
+  (local.set $3
    (i32.load offset=8
-    (local.get $5)
+    (local.get $3)
    )
   )
-  (local.set $5
+  (local.set $0
    (i32.load
     (local.get $0)
    )
@@ -7383,13 +7578,32 @@
   (global.set $~argumentsLength
    (i32.const 1)
   )
-  (local.set $12
+  (call $~lib/as-chain/helpers/InlineActionAct<assembly/factory/factory.inline/InlinePairParams>#send
+   (call $~lib/as-chain/helpers/InlineAction<assembly/factory/factory.inline/InlinePairParams>#act
+    (local.get $4)
+    (local.get $3)
+    (call $~lib/as-chain/action/PermissionLevel#constructor@varargs
+     (local.get $0)
+    )
+   )
+   (call $assembly/factory/factory.inline/InlinePairParams#constructor
+    (local.get $1)
+    (local.get $2)
+   )
+  )
+ )
+ (func $assembly/factory/factory.contract/Factory#getPair (param $0 i32) (param $1 i32) (param $2 i32) (result i64)
+  (local $3 i32)
+  (local $4 i64)
+  (local.set $4
    (call $~lib/as-chain/name/S2N
-    (i32.const 13632)
+    (call $~lib/string/String#toLowerCase
+     (local.get $1)
+    )
    )
   )
   (call $~lib/as-chain/name/Name#set:N
-   (local.tee $0
+   (local.tee $3
     (call $~lib/rt/stub/__new
      (i32.const 8)
      (i32.const 5)
@@ -7398,130 +7612,38 @@
    (i64.const 0)
   )
   (call $~lib/as-chain/name/Name#set:N
-   (local.get $0)
-   (local.get $12)
-  )
-  (local.set $5
-   (call $~lib/as-chain/action/PermissionLevel#constructor
-    (local.get $5)
-    (local.get $0)
-   )
-  )
-  (local.set $3
-   (i32.load
-    (local.get $3)
-   )
-  )
-  (call $~lib/rt/common/BLOCK#set:mmInfo
-   (local.tee $0
-    (call $~lib/rt/stub/__new
-     (i32.const 12)
-     (i32.const 49)
-    )
-   )
    (local.get $3)
-  )
-  (call $~lib/rt/common/OBJECT#set:gcInfo
-   (local.get $0)
    (local.get $4)
-  )
-  (call $~lib/rt/common/OBJECT#set:gcInfo2
-   (local.get $0)
-   (local.get $5)
-  )
-  (call $~lib/rt/common/BLOCK#set:mmInfo
-   (local.tee $3
-    (call $~lib/rt/stub/__new
-     (i32.const 8)
-     (i32.const 46)
-    )
-   )
-   (local.get $1)
-  )
-  (call $~lib/rt/common/OBJECT#set:gcInfo
-   (local.get $3)
-   (local.get $2)
-  )
-  (drop
-   (i32.load offset=4
-    (local.tee $1
-     (call $~lib/rt/__newArray
-      (i32.const 1)
-      (i32.const 2)
-      (i32.const 50)
-      (i32.const 0)
-     )
-    )
-   )
-  )
-  (call $~lib/array/Array<~lib/as-chain/idxdb/IDXDB>#__uset
-   (local.get $1)
-   (i32.const 0)
-   (i32.load offset=8
-    (local.get $0)
-   )
-  )
-  (local.set $2
-   (i32.load offset=4
-    (local.get $0)
-   )
   )
   (local.set $4
-   (i32.load
-    (local.get $0)
-   )
-  )
-  (local.set $3
-   (call $assembly/factory/factory.inline/AddPairParams#pack
-    (local.get $3)
-   )
-  )
-  (call $~lib/rt/common/BLOCK#set:mmInfo
-   (local.tee $0
-    (call $~lib/rt/stub/__new
-     (i32.const 16)
-     (i32.const 51)
+   (call $~lib/as-chain/name/S2N
+    (call $~lib/string/String#toLowerCase
+     (local.get $2)
     )
    )
-   (local.get $2)
   )
-  (call $~lib/rt/common/OBJECT#set:gcInfo
-   (local.get $0)
+  (call $~lib/as-chain/name/Name#set:N
+   (local.tee $1
+    (call $~lib/rt/stub/__new
+     (i32.const 8)
+     (i32.const 5)
+    )
+   )
+   (i64.const 0)
+  )
+  (call $~lib/as-chain/name/Name#set:N
+   (local.get $1)
    (local.get $4)
   )
-  (call $~lib/rt/common/OBJECT#set:gcInfo2
-   (local.get $0)
-   (local.get $1)
-  )
-  (call $~lib/rt/common/OBJECT#set:rtId
-   (local.get $0)
-   (local.get $3)
-  )
-  (local.set $1
-   (i32.load offset=12
-    (local.tee $0
-     (call $~lib/as-chain/action/Action#pack
-      (local.get $0)
-     )
-    )
-   )
-  )
-  (call $~lib/as-chain/env/send_inline
-   (i32.load offset=4
-    (local.get $0)
-   )
-   (local.get $1)
-  )
- )
- (func $assembly/factory/factory.contract/Factory#getPair (param $0 i32) (param $1 i32) (param $2 i32) (result i64)
-  (local $3 i32)
-  (local.set $3
+  (local.set $2
    (local.get $1)
   )
   (if
    (i64.gt_u
     (i64.load
-     (local.get $1)
+     (local.tee $1
+      (local.get $3)
+     )
     )
     (i64.load
      (local.get $2)
@@ -7529,38 +7651,50 @@
    )
    (local.set $2
     (block (result i32)
-     (local.set $3
+     (local.set $1
       (local.get $2)
      )
-     (local.get $1)
+     (local.get $3)
     )
    )
   )
   (call $assembly/factory/factory.contract/Factory#findPair
    (local.get $0)
-   (local.get $3)
+   (local.get $1)
    (local.get $2)
   )
+ )
+ (func $~lib/as-chain/mi/MultiIndex<assembly/factory/tables/pairs.table/PairsTable>#requireFind (param $0 i32) (param $1 i64) (param $2 i32) (result i32)
+  (call $~lib/as-chain/system/check
+   (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/factory/tables/feesettings.table/FeeSettingsTable>#isOk
+    (local.tee $0
+     (call $~lib/as-chain/mi/MultiIndex<assembly/factory/tables/pairs.table/PairsTable>#find
+      (local.get $0)
+      (local.get $1)
+     )
+    )
+   )
+   (local.get $2)
+  )
+  (local.get $0)
  )
  (func $~lib/proton-tsc/modules/store/store/TableStore<assembly/factory/tables/pairs.table/PairsTable>#remove (param $0 i32) (param $1 i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i64)
   (local $5 i32)
-  (call $~lib/as-chain/system/check
-   (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/factory/tables/feesettings.table/FeeSettingsTable>#isOk
-    (call $~lib/as-chain/mi/MultiIndex<assembly/factory/tables/pairs.table/PairsTable>#find
-     (i32.load
-      (local.get $0)
-     )
-     (local.tee $4
-      (i64.load
-       (local.get $1)
-      )
+  (drop
+   (call $~lib/as-chain/mi/MultiIndex<assembly/factory/tables/pairs.table/PairsTable>#requireFind
+    (i32.load
+     (local.get $0)
+    )
+    (local.tee $4
+     (i64.load
+      (local.get $1)
      )
     )
+    (i32.const 1648)
    )
-   (i32.const 1648)
   )
   (local.set $1
    (i32.const 0)
@@ -7684,19 +7818,64 @@
  )
  (func $assembly/factory/factory.contract/Factory#removePair (param $0 i32) (param $1 i32) (param $2 i32)
   (local $3 i32)
-  (local $4 i64)
+  (local $4 i32)
+  (local $5 i64)
   (call $~lib/as-chain/action/requireAuth
    (i32.load
     (local.get $0)
    )
   )
-  (local.set $3
+  (local.set $5
+   (call $~lib/as-chain/name/S2N
+    (call $~lib/string/String#toLowerCase
+     (local.get $1)
+    )
+   )
+  )
+  (call $~lib/as-chain/name/Name#set:N
+   (local.tee $3
+    (call $~lib/rt/stub/__new
+     (i32.const 8)
+     (i32.const 5)
+    )
+   )
+   (i64.const 0)
+  )
+  (call $~lib/as-chain/name/Name#set:N
+   (local.get $3)
+   (local.get $5)
+  )
+  (local.set $5
+   (call $~lib/as-chain/name/S2N
+    (call $~lib/string/String#toLowerCase
+     (local.get $2)
+    )
+   )
+  )
+  (call $~lib/as-chain/name/Name#set:N
+   (local.tee $1
+    (call $~lib/rt/stub/__new
+     (i32.const 8)
+     (i32.const 5)
+    )
+   )
+   (i64.const 0)
+  )
+  (call $~lib/as-chain/name/Name#set:N
+   (local.get $1)
+   (local.get $5)
+  )
+  (local.set $2
    (local.get $1)
   )
   (if
    (i64.gt_u
     (i64.load
-     (local.get $1)
+     (local.tee $1
+      (local.tee $4
+       (local.get $3)
+      )
+     )
     )
     (i64.load
      (local.get $2)
@@ -7704,56 +7883,94 @@
    )
    (local.set $2
     (block (result i32)
-     (local.set $3
+     (local.set $1
       (local.get $2)
      )
-     (local.get $1)
+     (local.get $4)
     )
    )
   )
   (call $~lib/as-chain/system/check
    (i64.ne
-    (local.tee $4
+    (local.tee $5
      (call $assembly/factory/factory.contract/Factory#findPair
       (local.get $0)
-      (local.get $3)
+      (local.get $1)
       (local.get $2)
      )
     )
-    (i64.const 0)
+    (i64.const -1)
    )
    (i32.const 13664)
   )
   (call $~lib/as-chain/system/check
    (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/factory/tables/feesettings.table/FeeSettingsTable>#isOk
-    (local.tee $2
+    (local.tee $4
      (call $~lib/as-chain/mi/MultiIndex<assembly/factory/tables/pairs.table/PairsTable>#find
       (i32.load
-       (local.tee $1
+       (local.tee $3
         (i32.load offset=12
          (local.get $0)
         )
        )
       )
-      (local.get $4)
+      (local.get $5)
      )
     )
    )
    (i32.const 13664)
   )
-  (local.set $1
+  (local.set $3
    (call $~lib/as-chain/mi/MultiIndex<assembly/factory/tables/pairs.table/PairsTable>#get
     (i32.load
-     (local.get $1)
+     (local.get $3)
     )
-    (local.get $2)
+    (local.get $4)
    )
   )
   (call $~lib/proton-tsc/modules/store/store/TableStore<assembly/factory/tables/pairs.table/PairsTable>#remove
    (i32.load offset=12
     (local.get $0)
    )
-   (local.get $1)
+   (local.get $3)
+  )
+  (local.set $3
+   (call $~lib/proton-tsc/modules/store/store/TableStore<assembly/factory/tables/config.table/ConfigTable>#requireGet
+    (i32.load offset=20
+     (local.get $0)
+    )
+   )
+  )
+  (local.set $4
+   (call $~lib/as-chain/helpers/InlineAction<assembly/factory/factory.inline/InlinePairParams>#constructor
+    (i32.const 13824)
+   )
+  )
+  (local.set $3
+   (i32.load offset=8
+    (local.get $3)
+   )
+  )
+  (local.set $0
+   (i32.load
+    (local.get $0)
+   )
+  )
+  (global.set $~argumentsLength
+   (i32.const 1)
+  )
+  (call $~lib/as-chain/helpers/InlineActionAct<assembly/factory/factory.inline/InlinePairParams>#send
+   (call $~lib/as-chain/helpers/InlineAction<assembly/factory/factory.inline/InlinePairParams>#act
+    (local.get $4)
+    (local.get $3)
+    (call $~lib/as-chain/action/PermissionLevel#constructor@varargs
+     (local.get $0)
+    )
+   )
+   (call $assembly/factory/factory.inline/InlinePairParams#constructor
+    (local.get $1)
+    (local.get $2)
+   )
   )
  )
  (func $~lib/proton-tsc/modules/store/store/TableStore<assembly/factory/tables/feesettings.table/FeeSettingsTable>#requireGet (param $0 i32) (result i32)
@@ -7769,7 +7986,7 @@
      )
     )
    )
-   (i32.const 13824)
+   (i32.const 13872)
   )
   (if (result i32)
    (local.tee $0
@@ -7798,7 +8015,7 @@
    (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/factory/tables/feesettings.table/FeeSettingsTable>#isOk
     (local.get $1)
    )
-   (i32.const 13904)
+   (i32.const 14048)
   )
   (call $~lib/as-chain/system/check
    (i64.eq
@@ -7812,7 +8029,7 @@
       (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/factory/tables/feesettings.table/FeeSettingsTable>#isOk
        (local.get $1)
       )
-      (i32.const 13968)
+      (i32.const 14112)
      )
      (if
       (i32.load8_u offset=8
@@ -7866,7 +8083,7 @@
      )
     )
    )
-   (i32.const 14048)
+   (i32.const 14192)
   )
   (drop
    (i32.load
@@ -8036,6 +8253,12 @@
     )
    )
   )
+  (call $~lib/as-chain/system/check
+   (call $~lib/as-chain/action/isAccount
+    (local.get $1)
+   )
+   (i32.const 13952)
+  )
   (call $~lib/rt/common/OBJECT#set:gcInfo2
    (local.get $2)
    (local.get $1)
@@ -8062,6 +8285,12 @@
     )
    )
    (i32.const 3088)
+  )
+  (call $~lib/as-chain/system/check
+   (call $~lib/as-chain/action/isAccount
+    (local.get $1)
+   )
+   (i32.const 14304)
   )
   (call $~lib/as-chain/action/requireAuth
    (i32.load offset=12
@@ -8106,7 +8335,7 @@
    (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/factory/tables/feesettings.table/FeeSettingsTable>#isOk
     (local.get $1)
    )
-   (i32.const 13904)
+   (i32.const 14048)
   )
   (call $~lib/as-chain/system/check
    (i64.eq
@@ -8120,7 +8349,7 @@
       (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/factory/tables/feesettings.table/FeeSettingsTable>#isOk
        (local.get $1)
       )
-      (i32.const 13968)
+      (i32.const 14112)
      )
      (if
       (i32.load8_u offset=8
@@ -8174,7 +8403,7 @@
      )
     )
    )
-   (i32.const 14048)
+   (i32.const 14192)
   )
   (drop
    (i32.load
@@ -8412,6 +8641,109 @@
    (call $~lib/proton-tsc/modules/store/store/TableStore<assembly/factory/tables/config.table/ConfigTable>#requireGet
     (i32.load offset=20
      (local.get $0)
+    )
+   )
+  )
+ )
+ (func $~lib/as-chain/dbi64/PrimaryIterator<assembly/factory/tables/pairs.table/PairsTable>#getValue (param $0 i32) (result i32)
+  (if
+   (i32.eqz
+    (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/factory/tables/feesettings.table/FeeSettingsTable>#isOk
+     (local.get $0)
+    )
+   )
+   (return
+    (i32.const 0)
+   )
+  )
+  (call $~lib/as-chain/dbi64/DBI64<assembly/factory/tables/pairs.table/PairsTable>#getEx
+   (i32.load
+    (local.get $0)
+   )
+   (i32.load offset=4
+    (local.get $0)
+   )
+  )
+ )
+ (func $assembly/factory/factory.contract/Factory#clearPair (param $0 i32)
+  (local $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  (call $~lib/as-chain/action/requireAuth
+   (i32.load
+    (local.get $0)
+   )
+  )
+  (local.set $2
+   (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/factory/tables/pairs.table/PairsTable>#getValue
+    (call $~lib/as-chain/mi/MultiIndex<assembly/factory/tables/pairs.table/PairsTable>#begin
+     (i32.load
+      (i32.load offset=12
+       (local.get $0)
+      )
+     )
+    )
+   )
+  )
+  (loop $while-continue|0
+   (if
+    (local.get $2)
+    (block
+     (local.set $4
+      (call $~lib/as-chain/mi/MultiIndex<assembly/factory/tables/pairs.table/PairsTable>#requireFind
+       (i32.load
+        (local.tee $1
+         (i32.load offset=12
+          (local.get $0)
+         )
+        )
+       )
+       (i64.load
+        (local.get $2)
+       )
+       (i32.const 1872)
+      )
+     )
+     (local.set $1
+      (i32.load
+       (i32.load
+        (local.get $1)
+       )
+      )
+     )
+     (local.set $3
+      (call $~lib/rt/stub/__alloc
+       (i32.const 8)
+      )
+     )
+     (local.set $1
+      (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/factory/tables/pairs.table/PairsTable>#getValue
+       (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/factory/tables/pairs.table/PairsTable>#constructor
+        (local.get $1)
+        (call $~lib/as-chain/env/db_next_i64
+         (i32.load offset=4
+          (local.get $4)
+         )
+         (local.get $3)
+        )
+        (i64.load
+         (local.get $3)
+        )
+        (i32.const 1)
+       )
+      )
+     )
+     (call $~lib/proton-tsc/modules/store/store/TableStore<assembly/factory/tables/pairs.table/PairsTable>#remove
+      (i32.load offset=12
+       (local.get $0)
+      )
+      (local.get $2)
+     )
+     (local.set $2
+      (local.get $1)
+     )
+     (br $while-continue|0)
     )
    )
   )
@@ -8672,6 +9004,27 @@
   (call $assembly/factory/tables/pairs.table/PairsTable#set:createdAt
    (local.get $0)
    (local.get $2)
+  )
+  (i32.load offset=4
+   (local.get $1)
+  )
+ )
+ (func $assembly/factory/factory.contract/getPairAction#unpack (param $0 i32) (param $1 i32) (result i32)
+  (call $~lib/rt/common/BLOCK#set:mmInfo
+   (local.get $0)
+   (call $~lib/as-chain/serializer/Decoder#unpackString
+    (local.tee $1
+     (call $~lib/as-chain/serializer/Decoder#constructor
+      (local.get $1)
+     )
+    )
+   )
+  )
+  (call $~lib/rt/common/OBJECT#set:gcInfo
+   (local.get $0)
+   (call $~lib/as-chain/serializer/Decoder#unpackString
+    (local.get $1)
+   )
   )
   (i32.load offset=4
    (local.get $1)
@@ -8983,7 +9336,7 @@
      )
      (block
       (drop
-       (call $assembly/factory/factory.contract/initializeAction#unpack
+       (call $assembly/factory/factory.contract/getPairAction#unpack
         (block (result i32)
          (call $~lib/rt/common/BLOCK#set:mmInfo
           (local.tee $3
@@ -8992,44 +9345,26 @@
             (i32.const 55)
            )
           )
-          (i32.const 0)
+          (i32.const 3696)
          )
          (call $~lib/rt/common/OBJECT#set:gcInfo
           (local.get $3)
-          (i32.const 0)
+          (i32.const 3696)
          )
-         (local.tee $4
-          (local.get $3)
-         )
+         (local.get $3)
         )
         (local.get $6)
        )
       )
-      (if
-       (i32.eqz
-        (local.tee $3
-         (i32.load
-          (local.get $3)
-         )
-        )
-       )
-       (unreachable)
-      )
-      (if
-       (i32.eqz
-        (local.tee $4
-         (i32.load offset=4
-          (local.get $4)
-         )
-        )
-       )
-       (unreachable)
-      )
       (local.set $0
        (call $assembly/factory/factory.contract/Factory#getPair
         (local.get $7)
-        (local.get $3)
-        (local.get $4)
+        (i32.load
+         (local.get $3)
+        )
+        (i32.load offset=4
+         (local.get $3)
+        )
        )
       )
       (call $~lib/as-chain/serializer/Encoder#packNumber<u64>
@@ -9054,7 +9389,7 @@
      )
      (block
       (drop
-       (call $assembly/factory/factory.contract/initializeAction#unpack
+       (call $assembly/factory/factory.contract/getPairAction#unpack
         (block (result i32)
          (call $~lib/rt/common/BLOCK#set:mmInfo
           (local.tee $3
@@ -9063,43 +9398,25 @@
             (i32.const 56)
            )
           )
-          (i32.const 0)
+          (i32.const 3696)
          )
          (call $~lib/rt/common/OBJECT#set:gcInfo
           (local.get $3)
-          (i32.const 0)
+          (i32.const 3696)
          )
-         (local.tee $4
-          (local.get $3)
-         )
+         (local.get $3)
         )
         (local.get $6)
        )
       )
-      (if
-       (i32.eqz
-        (local.tee $3
-         (i32.load
-          (local.get $3)
-         )
-        )
-       )
-       (unreachable)
-      )
-      (if
-       (i32.eqz
-        (local.tee $4
-         (i32.load offset=4
-          (local.get $4)
-         )
-        )
-       )
-       (unreachable)
-      )
       (call $assembly/factory/factory.contract/Factory#removePair
        (local.get $7)
-       (local.get $3)
-       (local.get $4)
+       (i32.load
+        (local.get $3)
+       )
+       (i32.load offset=4
+        (local.get $3)
+       )
       )
      )
     )
@@ -9287,6 +9604,26 @@
        (call $~lib/as-chain/serializer/Encoder#getBytes
         (local.get $4)
        )
+      )
+     )
+    )
+    (if
+     (i64.eq
+      (local.get $2)
+      (i64.const 4931251629325287424)
+     )
+     (block
+      (drop
+       (call $assembly/factory/factory.contract/getFeeToAction#unpack
+        (call $~lib/rt/stub/__new
+         (i32.const 0)
+         (i32.const 62)
+        )
+        (local.get $6)
+       )
+      )
+      (call $assembly/factory/factory.contract/Factory#clearPair
+       (local.get $7)
       )
      )
     )
@@ -9660,65 +9997,88 @@
  (func $~lib/as-chain/serializer/Packer#unpack@virtual (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i64)
-  (block $folding-inner2
-   (block $folding-inner1
-    (block $folding-inner0
-     (block $default
-      (block $case20
-       (block $case19
-        (block $case18
-         (block $case17
-          (block $case16
-           (block $case15
-            (block $case14
-             (block $case13
-              (block $case12
-               (block $case11
-                (block $case10
-                 (block $case1
-                  (br_table $case14 $default $default $default $case17 $default $default $default $default $default $default $default $case18 $default $default $default $case19 $default $default $default $default $default $default $default $default $default $default $default $default $default $case20 $case16 $case15 $default $default $default $default $default $default $case11 $case10 $folding-inner0 $default $case12 $default $default $case13 $default $folding-inner0 $case1 $folding-inner0 $folding-inner0 $folding-inner1 $folding-inner1 $folding-inner2 $folding-inner1 $folding-inner2 $default
-                   (i32.sub
-                    (i32.load
-                     (i32.sub
-                      (local.get $0)
-                      (i32.const 8)
+  (block $folding-inner3
+   (block $folding-inner2
+    (block $folding-inner1
+     (block $folding-inner0
+      (block $default
+       (block $case21
+        (block $case20
+         (block $case19
+          (block $case18
+           (block $case17
+            (block $case16
+             (block $case15
+              (block $case14
+               (block $case13
+                (block $case12
+                 (block $case11
+                  (block $case1
+                   (br_table $case15 $default $default $default $case18 $default $default $default $default $default $default $default $case19 $default $default $default $case20 $default $default $default $default $default $default $default $default $default $default $default $default $default $case21 $case17 $case16 $default $default $default $default $default $default $case12 $case11 $folding-inner0 $default $case13 $default $default $case14 $default $folding-inner0 $case1 $folding-inner1 $folding-inner1 $folding-inner2 $folding-inner2 $folding-inner3 $folding-inner2 $folding-inner3 $folding-inner3 $default
+                    (i32.sub
+                     (i32.load
+                      (i32.sub
+                       (local.get $0)
+                       (i32.const 8)
+                      )
                      )
+                     (i32.const 5)
                     )
-                    (i32.const 5)
                    )
                   )
-                 )
-                 (return
-                  (call $assembly/factory/factory.contract/createPairAction#unpack
-                   (local.get $0)
-                   (local.get $1)
-                  )
-                 )
-                )
-                (call $~lib/as-chain/name/Name#set:N
-                 (local.get $0)
-                 (call $~lib/as-chain/serializer/Decoder#unpackNumber<u64>
-                  (local.tee $0
-                   (call $~lib/as-chain/serializer/Decoder#constructor
+                  (return
+                   (call $assembly/factory/factory.contract/createPairAction#unpack
+                    (local.get $0)
                     (local.get $1)
                    )
                   )
                  )
+                 (call $~lib/as-chain/name/Name#set:N
+                  (local.get $0)
+                  (call $~lib/as-chain/serializer/Decoder#unpackNumber<u64>
+                   (local.tee $0
+                    (call $~lib/as-chain/serializer/Decoder#constructor
+                     (local.get $1)
+                    )
+                   )
+                  )
+                 )
+                 (return
+                  (i32.load offset=4
+                   (local.get $0)
+                  )
+                 )
                 )
-                (return
-                 (i32.load offset=4
+                (call $~lib/as-chain/serializer/Decoder#unpack
+                 (local.tee $1
+                  (call $~lib/as-chain/serializer/Decoder#constructor
+                   (local.get $1)
+                  )
+                 )
+                 (i32.load
                   (local.get $0)
                  )
                 )
-               )
-               (call $~lib/as-chain/serializer/Decoder#unpack
-                (local.tee $1
-                 (call $~lib/as-chain/serializer/Decoder#constructor
+                (return
+                 (i32.load offset=4
                   (local.get $1)
                  )
                 )
-                (i32.load
-                 (local.get $0)
+               )
+               (call $~lib/rt/common/BLOCK#set:mmInfo
+                (local.get $0)
+                (call $~lib/as-chain/serializer/Decoder#unpackName
+                 (local.tee $1
+                  (call $~lib/as-chain/serializer/Decoder#constructor
+                   (local.get $1)
+                  )
+                 )
+                )
+               )
+               (call $~lib/rt/common/OBJECT#set:gcInfo
+                (local.get $0)
+                (call $~lib/as-chain/serializer/Decoder#unpackName
+                 (local.get $1)
                 )
                )
                (return
@@ -9727,167 +10087,152 @@
                 )
                )
               )
-              (call $~lib/rt/common/BLOCK#set:mmInfo
-               (local.get $0)
-               (call $~lib/as-chain/serializer/Decoder#unpackName
-                (local.tee $1
+              (return
+               (call $~lib/as-chain/action/Action#unpack
+                (local.get $0)
+                (local.get $1)
+               )
+              )
+             )
+             (call $~lib/as-chain/name/Name#set:N
+              (local.get $0)
+              (call $~lib/as-chain/serializer/Decoder#unpackNumber<u64>
+               (call $~lib/as-chain/serializer/Decoder#constructor
+                (local.get $1)
+               )
+              )
+             )
+             (return
+              (i32.const 8)
+             )
+            )
+            (call $~lib/as-chain/name/Name#set:N
+             (local.get $0)
+             (call $~lib/as-chain/serializer/Decoder#unpackNumber<u64>
+              (local.tee $1
+               (call $~lib/as-chain/serializer/Decoder#constructor
+                (local.get $1)
+               )
+              )
+             )
+            )
+            (call $~lib/as-chain/system/check
+             (call $~lib/as-chain/asset/Symbol#isValid
+              (local.get $0)
+             )
+             (i32.const 14400)
+            )
+            (return
+             (i32.load offset=4
+              (local.get $1)
+             )
+            )
+           )
+           (local.set $3
+            (i64.load
+             (i32.add
+              (i32.load offset=4
+               (i32.load
+                (local.tee $2
                  (call $~lib/as-chain/serializer/Decoder#constructor
                   (local.get $1)
                  )
                 )
                )
               )
-              (call $~lib/rt/common/OBJECT#set:gcInfo
-               (local.get $0)
-               (call $~lib/as-chain/serializer/Decoder#unpackName
-                (local.get $1)
-               )
-              )
-              (return
-               (i32.load offset=4
-                (local.get $1)
-               )
-              )
-             )
-             (return
-              (call $~lib/as-chain/action/Action#unpack
-               (local.get $0)
-               (local.get $1)
+              (i32.load offset=4
+               (local.get $2)
               )
              )
             )
-            (call $~lib/as-chain/name/Name#set:N
-             (local.get $0)
-             (call $~lib/as-chain/serializer/Decoder#unpackNumber<u64>
-              (call $~lib/as-chain/serializer/Decoder#constructor
-               (local.get $1)
-              )
-             )
-            )
-            (return
-             (i32.const 8)
-            )
+           )
+           (call $~lib/as-chain/serializer/Decoder#incPos
+            (local.get $2)
+            (i32.const 8)
            )
            (call $~lib/as-chain/name/Name#set:N
             (local.get $0)
-            (call $~lib/as-chain/serializer/Decoder#unpackNumber<u64>
-             (local.tee $1
-              (call $~lib/as-chain/serializer/Decoder#constructor
-               (local.get $1)
-              )
-             )
+            (local.get $3)
+           )
+           (call $~lib/as-chain/serializer/Decoder#unpack
+            (local.get $2)
+            (i32.load offset=8
+             (local.get $0)
             )
            )
            (call $~lib/as-chain/system/check
-            (call $~lib/as-chain/asset/Symbol#isValid
-             (local.get $0)
-            )
-            (i32.const 14160)
-           )
-           (return
-            (i32.load offset=4
-             (local.get $1)
-            )
-           )
-          )
-          (local.set $3
-           (i64.load
-            (i32.add
-             (i32.load offset=4
-              (i32.load
-               (local.tee $2
-                (call $~lib/as-chain/serializer/Decoder#constructor
-                 (local.get $1)
+            (if (result i32)
+             (if (result i32)
+              (i64.ge_s
+               (i64.load
+                (local.tee $1
+                 (local.get $0)
                 )
                )
+               (i64.const -4611686018427387903)
               )
-             )
-             (i32.load offset=4
-              (local.get $2)
-             )
-            )
-           )
-          )
-          (call $~lib/as-chain/serializer/Decoder#incPos
-           (local.get $2)
-           (i32.const 8)
-          )
-          (call $~lib/as-chain/name/Name#set:N
-           (local.get $0)
-           (local.get $3)
-          )
-          (call $~lib/as-chain/serializer/Decoder#unpack
-           (local.get $2)
-           (i32.load offset=8
-            (local.get $0)
-           )
-          )
-          (call $~lib/as-chain/system/check
-           (if (result i32)
-            (if (result i32)
-             (i64.ge_s
-              (i64.load
-               (local.tee $1
-                (local.get $0)
+              (i64.le_s
+               (i64.load
+                (local.get $1)
                )
+               (i64.const 4611686018427387903)
               )
-              (i64.const -4611686018427387903)
+              (i32.const 0)
              )
-             (i64.le_s
-              (i64.load
+             (call $~lib/as-chain/asset/Symbol#isValid
+              (i32.load offset=8
                (local.get $1)
               )
-              (i64.const 4611686018427387903)
              )
              (i32.const 0)
             )
-            (call $~lib/as-chain/asset/Symbol#isValid
-             (i32.load offset=8
-              (local.get $1)
-             )
-            )
-            (i32.const 0)
+            (i32.const 14448)
            )
-           (i32.const 14208)
+           (return
+            (i32.load offset=4
+             (local.get $2)
+            )
+           )
           )
           (return
-           (i32.load offset=4
-            (local.get $2)
+           (call $assembly/factory/tables/pairs.table/PairsTable#unpack
+            (local.get $0)
+            (local.get $1)
            )
           )
          )
          (return
-          (call $assembly/factory/tables/pairs.table/PairsTable#unpack
+          (call $assembly/factory/tables/feesettings.table/FeeSettingsTable#unpack
            (local.get $0)
            (local.get $1)
           )
          )
         )
         (return
-         (call $assembly/factory/tables/feesettings.table/FeeSettingsTable#unpack
+         (call $assembly/factory/tables/config.table/ConfigTable#unpack
           (local.get $0)
           (local.get $1)
          )
         )
        )
        (return
-        (call $assembly/factory/tables/config.table/ConfigTable#unpack
+        (call $assembly/factory/tables/stat.table/TokenStatTable#unpack
          (local.get $0)
          (local.get $1)
         )
        )
       )
-      (return
-       (call $assembly/factory/tables/stat.table/TokenStatTable#unpack
-        (local.get $0)
-        (local.get $1)
-       )
+      (unreachable)
+     )
+     (return
+      (call $assembly/factory/factory.contract/initializeAction#unpack
+       (local.get $0)
+       (local.get $1)
       )
      )
-     (unreachable)
     )
     (return
-     (call $assembly/factory/factory.contract/initializeAction#unpack
+     (call $assembly/factory/factory.contract/getPairAction#unpack
       (local.get $0)
       (local.get $1)
      )
@@ -10098,11 +10443,37 @@
    (local.get $1)
   )
  )
- (func $assembly/factory/factory.contract/getFeeToAction#pack (result i32)
-  (call $~lib/as-chain/serializer/Encoder#getBytes
-   (call $~lib/as-chain/serializer/Encoder#constructor
-    (i32.const 0)
+ (func $assembly/factory/factory.contract/getPairAction#pack (param $0 i32) (result i32)
+  (local $1 i32)
+  (call $~lib/as-chain/serializer/Encoder#packString
+   (local.tee $1
+    (call $~lib/as-chain/serializer/Encoder#constructor
+     (i32.add
+      (call $~lib/as-chain/utils/Utils.calcPackedStringLength
+       (i32.load
+        (local.get $0)
+       )
+      )
+      (call $~lib/as-chain/utils/Utils.calcPackedStringLength
+       (i32.load offset=4
+        (local.get $0)
+       )
+      )
+     )
+    )
    )
+   (i32.load
+    (local.get $0)
+   )
+  )
+  (call $~lib/as-chain/serializer/Encoder#packString
+   (local.get $1)
+   (i32.load offset=4
+    (local.get $0)
+   )
+  )
+  (call $~lib/as-chain/serializer/Encoder#getBytes
+   (local.get $1)
   )
  )
  (func $~lib/as-chain/serializer/Packer#pack@virtual (param $0 i32) (result i32)
@@ -10113,32 +10484,86 @@
     (block $folding-inner1
      (block $folding-inner0
       (block $default
-       (block $case20
-        (block $case19
-         (block $case18
-          (block $case17
-           (block $case16
-            (block $case15
-             (block $case14
-              (block $case13
-               (block $case12
-                (block $case11
-                 (block $case10
-                  (block $case9
-                   (block $case8
-                    (block $case6
+       (block $case21
+        (block $case20
+         (block $case19
+          (block $case18
+           (block $case17
+            (block $case16
+             (block $case15
+              (block $case14
+               (block $case13
+                (block $case12
+                 (block $case11
+                  (block $case10
+                   (block $case3
+                    (block $case2
                      (block $case1
-                      (br_table $case14 $default $default $default $case17 $default $default $default $default $default $default $default $case18 $default $default $default $case19 $default $default $default $default $default $default $default $default $default $default $default $default $default $case20 $case16 $case15 $default $default $default $default $default $default $case11 $case10 $case9 $default $case12 $default $default $case13 $default $folding-inner0 $case1 $folding-inner0 $folding-inner0 $folding-inner1 $folding-inner1 $case6 $folding-inner1 $case8 $default
-                       (i32.sub
-                        (i32.load
-                         (i32.sub
-                          (local.get $0)
-                          (i32.const 8)
+                      (block $case0
+                       (br_table $case15 $default $default $default $case18 $default $default $default $default $default $default $default $case19 $default $default $default $case20 $default $default $default $default $default $default $default $default $default $default $default $default $default $case21 $case17 $case16 $default $default $default $default $default $default $case12 $case11 $case10 $default $case13 $default $default $case14 $default $case0 $case1 $case2 $case3 $folding-inner0 $folding-inner0 $folding-inner1 $folding-inner0 $folding-inner1 $folding-inner1 $default
+                        (i32.sub
+                         (i32.load
+                          (i32.sub
+                           (local.get $0)
+                           (i32.const 8)
+                          )
                          )
+                         (i32.const 5)
                         )
-                        (i32.const 5)
                        )
                       )
+                      (if
+                       (i32.eqz
+                        (i32.load
+                         (local.tee $1
+                          (local.get $0)
+                         )
+                        )
+                       )
+                       (unreachable)
+                      )
+                      (if
+                       (i32.eqz
+                        (i32.load offset=4
+                         (local.get $1)
+                        )
+                       )
+                       (unreachable)
+                      )
+                      (local.set $1
+                       (call $~lib/as-chain/serializer/Encoder#constructor
+                        (i32.const 16)
+                       )
+                      )
+                      (if
+                       (i32.eqz
+                        (local.tee $2
+                         (i32.load
+                          (local.get $0)
+                         )
+                        )
+                       )
+                       (unreachable)
+                      )
+                      (call $~lib/as-chain/serializer/Encoder#pack
+                       (local.get $1)
+                       (local.get $2)
+                      )
+                      (if
+                       (i32.eqz
+                        (local.tee $0
+                         (i32.load offset=4
+                          (local.get $0)
+                         )
+                        )
+                       )
+                       (unreachable)
+                      )
+                      (call $~lib/as-chain/serializer/Encoder#pack
+                       (local.get $1)
+                       (local.get $0)
+                      )
+                      (br $folding-inner3)
                      )
                      (return
                       (call $assembly/factory/factory.contract/createPairAction#pack
@@ -10147,15 +10572,19 @@
                      )
                     )
                     (return
-                     (call $assembly/factory/factory.contract/getFeeToAction#pack)
+                     (call $assembly/factory/factory.contract/getPairAction#pack
+                      (local.get $0)
+                     )
                     )
                    )
                    (return
-                    (call $assembly/factory/factory.contract/getFeeToAction#pack)
+                    (call $assembly/factory/factory.contract/getPairAction#pack
+                     (local.get $0)
+                    )
                    )
                   )
                   (return
-                   (call $assembly/factory/factory.inline/AddPairParams#pack
+                   (call $assembly/factory/factory.inline/InlinePairParams#pack
                     (local.get $0)
                    )
                   )
@@ -10304,44 +10733,20 @@
      (if
       (i32.eqz
        (i32.load
-        (local.tee $1
-         (local.get $0)
-        )
-       )
-      )
-      (unreachable)
-     )
-     (if
-      (i32.eqz
-       (i32.load offset=4
-        (local.get $1)
+        (local.get $0)
        )
       )
       (unreachable)
      )
      (local.set $1
       (call $~lib/as-chain/serializer/Encoder#constructor
-       (i32.const 16)
+       (i32.const 8)
       )
-     )
-     (if
-      (i32.eqz
-       (local.tee $2
-        (i32.load
-         (local.get $0)
-        )
-       )
-      )
-      (unreachable)
-     )
-     (call $~lib/as-chain/serializer/Encoder#pack
-      (local.get $1)
-      (local.get $2)
      )
      (if
       (i32.eqz
        (local.tee $0
-        (i32.load offset=4
+        (i32.load
          (local.get $0)
         )
        )
@@ -10354,36 +10759,11 @@
      )
      (br $folding-inner3)
     )
-    (if
-     (i32.eqz
-      (i32.load
-       (local.get $0)
-      )
-     )
-     (unreachable)
-    )
-    (local.set $1
-     (call $~lib/as-chain/serializer/Encoder#constructor
-      (i32.const 8)
-     )
-    )
-    (if
-     (i32.eqz
-      (local.tee $0
-       (i32.load
-        (local.get $0)
-       )
-      )
-     )
-     (unreachable)
-    )
-    (call $~lib/as-chain/serializer/Encoder#pack
-     (local.get $1)
-     (local.get $0)
-    )
     (return
      (call $~lib/as-chain/serializer/Encoder#getBytes
-      (local.get $1)
+      (call $~lib/as-chain/serializer/Encoder#constructor
+       (i32.const 0)
+      )
      )
     )
    )
@@ -10453,7 +10833,7 @@
        (local.get $2)
       )
      )
-     (i32.const 14256)
+     (i32.const 14496)
     )
     (local.set $4
      (call $~lib/array/Array<u64>#__get
@@ -10588,7 +10968,7 @@
        (local.get $2)
       )
      )
-     (i32.const 14320)
+     (i32.const 14560)
     )
     (local.set $4
      (call $~lib/array/Array<u64>#__get
@@ -10620,7 +11000,7 @@
  (func $~start
   (local $0 i32)
   (global.set $~lib/rt/stub/offset
-   (i32.const 14364)
+   (i32.const 14604)
   )
   (call $~lib/as-chain/name/Name#set:N
    (local.tee $0

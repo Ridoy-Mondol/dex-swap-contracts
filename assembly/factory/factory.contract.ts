@@ -16,7 +16,7 @@ import {
   ConfigTable,
   TokenStatTable,
 } from "./tables";
-import { AddPairParams } from "./factory.inline";
+import { InlinePairParams } from "./factory.inline";
 
 @contract
 export class Factory extends Contract {
@@ -94,7 +94,7 @@ export class Factory extends Contract {
     }
 
     const existingPair = this.findPair(token0, token1);
-    check(existingPair == 0, "Factory: PAIR_EXISTS");
+    check(existingPair == -1, "Factory: PAIR_EXISTS");
 
     const newPair = new PairsTable(
       this.pairsTable.availablePrimaryKey,
@@ -108,48 +108,64 @@ export class Factory extends Contract {
 
     const config = this.configTable.requireGet(0, "Factory: CONFIG_NOT_FOUND");
 
-    const addPair = new InlineAction<AddPairParams>("addpair");
+    const addPair = new InlineAction<InlinePairParams>("addpair");
 
     const action = addPair.act(
       config.ammContract,
       new PermissionLevel(this.receiver)
     );
 
-    const params = new AddPairParams(token0, token1);
+    const params = new InlinePairParams(token0, token1);
 
     action.send(params);
   }
 
   @action("getpair")
-  getPair(tokenA: Name, tokenB: Name): u64 {
-    let token0: Name = tokenA;
-    let token1: Name = tokenB;
+  getPair(tokenA: string, tokenB: string): u64 {
+    let token0Name = Name.fromString(tokenA.toLowerCase());
+    let token1Name = Name.fromString(tokenB.toLowerCase());
 
-    if (tokenA.N > tokenB.N) {
-      token0 = tokenB;
-      token1 = tokenA;
+    let token0: Name = token0Name;
+    let token1: Name = token1Name;
+
+    if (token0Name.N > token1Name.N) {
+      token0 = token1Name;
+      token1 = token0Name;
     }
 
     return this.findPair(token0, token1);
   }
 
   @action("removepair")
-  removePair(tokenA: Name, tokenB: Name): void {
+  removePair(tokenA: string, tokenB: string): void {
     requireAuth(this.receiver);
 
-    let token0: Name = tokenA;
-    let token1: Name = tokenB;
+    const token0Name = Name.fromString(tokenA.toLowerCase());
+    const token1Name = Name.fromString(tokenB.toLowerCase());
 
-    if (tokenA.N > tokenB.N) {
-      token0 = tokenB;
-      token1 = tokenA;
+    let token0: Name = token0Name;
+    let token1: Name = token1Name;
+
+    if (token0Name.N > token1Name.N) {
+      token0 = token1Name;
+      token1 = token0Name;
     }
 
     const pairId = this.findPair(token0, token1);
-    check(pairId != 0, "Factory: PAIR_NOT_FOUND");
+    check(pairId != -1, "Factory: PAIR_NOT_FOUND");
 
     const pair = this.pairsTable.requireGet(pairId, "Factory: PAIR_NOT_FOUND");
     this.pairsTable.remove(pair);
+
+    const config = this.configTable.requireGet(0, "Factory: CONFIG_NOT_FOUND");
+
+    const removePairAction = new InlineAction<InlinePairParams>("removepair");
+    const action = removePairAction.act(
+      config.ammContract,
+      new PermissionLevel(this.receiver)
+    );
+    const params = new InlinePairParams(token0, token1);
+    action.send(params);
   }
 
   /// ============================================
@@ -163,6 +179,7 @@ export class Factory extends Contract {
       "Factory: NOT_INITIALIZED"
     );
     requireAuth(settings.feeToSetter);
+    check(isAccount(feeTo), "Factory: FEETO_ACCOUNT_NOT_EXIST");
 
     settings.feeTo = feeTo;
     this.feeSettingsTable.update(settings, this.receiver);
@@ -171,6 +188,7 @@ export class Factory extends Contract {
   @action("setfeesetter")
   setFeeToSetter(newSetter: Name): void {
     check(newSetter != EMPTY_NAME, "Factory: ZERO_ADDRESS");
+    check(isAccount(newSetter), "Factory: FEESETTER_ACCOUNT_NOT_EXIST");
 
     const settings = this.feeSettingsTable.requireGet(
       0,
@@ -219,6 +237,22 @@ export class Factory extends Contract {
     return config.ammContract;
   }
 
+  /// ============================================
+  // CLEAR TABLES
+  // ============================================
+
+  @action("clrpair")
+  clearPair(): void {
+    requireAuth(this.receiver);
+
+    let cursor1 = this.pairsTable.first();
+    while (cursor1 !== null) {
+      let nextCursor = this.pairsTable.next(cursor1);
+      this.pairsTable.remove(cursor1);
+      cursor1 = nextCursor;
+    }
+  }
+
   // ============================================
   // INTERNAL HELPERS
   // ============================================
@@ -231,7 +265,7 @@ export class Factory extends Contract {
       }
     }
 
-    return 0;
+    return -1;
   }
 
   private verifyTokenExist(

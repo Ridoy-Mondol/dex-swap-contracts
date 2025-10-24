@@ -3,7 +3,7 @@ import { ActionData, Name, EMPTY_NAME } from "proton-tsc";
 
 
 @packer(nocodegen)
-export class AddPairParams implements _chain.Packer {
+export class InlinePairParams implements _chain.Packer {
     
   constructor(
     public token0: Name = EMPTY_NAME,

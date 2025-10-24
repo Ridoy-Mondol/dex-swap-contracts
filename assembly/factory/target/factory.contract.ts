@@ -17,7 +17,7 @@ import {
   ConfigTable,
   TokenStatTable,
 } from "./tables";
-import { AddPairParams } from "./factory.inline";
+import { InlinePairParams } from "./factory.inline";
 
 @contract
 export class Factory extends Contract {
@@ -95,7 +95,7 @@ export class Factory extends Contract {
     }
 
     const existingPair = this.findPair(token0, token1);
-    check(existingPair == 0, "Factory: PAIR_EXISTS");
+    check(existingPair == -1, "Factory: PAIR_EXISTS");
 
     const newPair = new PairsTable(
       this.pairsTable.availablePrimaryKey,
@@ -109,48 +109,64 @@ export class Factory extends Contract {
 
     const config = this.configTable.requireGet(0, "Factory: CONFIG_NOT_FOUND");
 
-    const addPair = new InlineAction<AddPairParams>("addpair");
+    const addPair = new InlineAction<InlinePairParams>("addpair");
 
     const action = addPair.act(
       config.ammContract,
       new PermissionLevel(this.receiver)
     );
 
-    const params = new AddPairParams(token0, token1);
+    const params = new InlinePairParams(token0, token1);
 
     action.send(params);
   }
 
   @action("getpair")
-  getPair(tokenA: Name, tokenB: Name): u64 {
-    let token0: Name = tokenA;
-    let token1: Name = tokenB;
+  getPair(tokenA: string, tokenB: string): u64 {
+    let token0Name = Name.fromString(tokenA.toLowerCase());
+    let token1Name = Name.fromString(tokenB.toLowerCase());
 
-    if (tokenA.N > tokenB.N) {
-      token0 = tokenB;
-      token1 = tokenA;
+    let token0: Name = token0Name;
+    let token1: Name = token1Name;
+
+    if (token0Name.N > token1Name.N) {
+      token0 = token1Name;
+      token1 = token0Name;
     }
 
     return this.findPair(token0, token1);
   }
 
   @action("removepair")
-  removePair(tokenA: Name, tokenB: Name): void {
+  removePair(tokenA: string, tokenB: string): void {
     requireAuth(this.receiver);
 
-    let token0: Name = tokenA;
-    let token1: Name = tokenB;
+    const token0Name = Name.fromString(tokenA.toLowerCase());
+    const token1Name = Name.fromString(tokenB.toLowerCase());
 
-    if (tokenA.N > tokenB.N) {
-      token0 = tokenB;
-      token1 = tokenA;
+    let token0: Name = token0Name;
+    let token1: Name = token1Name;
+
+    if (token0Name.N > token1Name.N) {
+      token0 = token1Name;
+      token1 = token0Name;
     }
 
     const pairId = this.findPair(token0, token1);
-    check(pairId != 0, "Factory: PAIR_NOT_FOUND");
+    check(pairId != -1, "Factory: PAIR_NOT_FOUND");
 
     const pair = this.pairsTable.requireGet(pairId, "Factory: PAIR_NOT_FOUND");
     this.pairsTable.remove(pair);
+
+    const config = this.configTable.requireGet(0, "Factory: CONFIG_NOT_FOUND");
+
+    const removePairAction = new InlineAction<InlinePairParams>("removepair");
+    const action = removePairAction.act(
+      config.ammContract,
+      new PermissionLevel(this.receiver)
+    );
+    const params = new InlinePairParams(token0, token1);
+    action.send(params);
   }
 
   /// ============================================
@@ -164,6 +180,7 @@ export class Factory extends Contract {
       "Factory: NOT_INITIALIZED"
     );
     requireAuth(settings.feeToSetter);
+    check(isAccount(feeTo), "Factory: FEETO_ACCOUNT_NOT_EXIST");
 
     settings.feeTo = feeTo;
     this.feeSettingsTable.update(settings, this.receiver);
@@ -172,6 +189,7 @@ export class Factory extends Contract {
   @action("setfeesetter")
   setFeeToSetter(newSetter: Name): void {
     check(newSetter != EMPTY_NAME, "Factory: ZERO_ADDRESS");
+    check(isAccount(newSetter), "Factory: FEESETTER_ACCOUNT_NOT_EXIST");
 
     const settings = this.feeSettingsTable.requireGet(
       0,
@@ -220,6 +238,22 @@ export class Factory extends Contract {
     return config.ammContract;
   }
 
+  /// ============================================
+  // CLEAR TABLES
+  // ============================================
+
+  @action("clrpair")
+  clearPair(): void {
+    requireAuth(this.receiver);
+
+    let cursor1 = this.pairsTable.first();
+    while (cursor1 !== null) {
+      let nextCursor = this.pairsTable.next(cursor1);
+      this.pairsTable.remove(cursor1);
+      cursor1 = nextCursor;
+    }
+  }
+
   // ============================================
   // INTERNAL HELPERS
   // ============================================
@@ -232,7 +266,7 @@ export class Factory extends Contract {
       }
     }
 
-    return 0;
+    return -1;
   }
 
   private verifyTokenExist(
@@ -378,78 +412,58 @@ class createPairAction implements _chain.Packer {
 
 class getPairAction implements _chain.Packer {
     constructor (
-        public tokenA: _chain.Name | null = null,
-        public tokenB: _chain.Name | null = null,
+        public tokenA: string = "",
+        public tokenB: string = "",
     ) {
     }
 
     pack(): u8[] {
         let enc = new _chain.Encoder(this.getSize());
-        enc.pack(this.tokenA!);
-        enc.pack(this.tokenB!);
+        enc.packString(this.tokenA);
+        enc.packString(this.tokenB);
         return enc.getBytes();
     }
     
     unpack(data: u8[]): usize {
         let dec = new _chain.Decoder(data);
-        
-        {
-            let obj = new _chain.Name();
-            dec.unpack(obj);
-            this.tokenA! = obj;
-        }
-        
-        {
-            let obj = new _chain.Name();
-            dec.unpack(obj);
-            this.tokenB! = obj;
-        }
+        this.tokenA = dec.unpackString();
+        this.tokenB = dec.unpackString();
         return dec.getPos();
     }
 
     getSize(): usize {
         let size: usize = 0;
-        size += this.tokenA!.getSize();
-        size += this.tokenB!.getSize();
+        size += _chain.Utils.calcPackedStringLength(this.tokenA);
+        size += _chain.Utils.calcPackedStringLength(this.tokenB);
         return size;
     }
 }
 
 class removePairAction implements _chain.Packer {
     constructor (
-        public tokenA: _chain.Name | null = null,
-        public tokenB: _chain.Name | null = null,
+        public tokenA: string = "",
+        public tokenB: string = "",
     ) {
     }
 
     pack(): u8[] {
         let enc = new _chain.Encoder(this.getSize());
-        enc.pack(this.tokenA!);
-        enc.pack(this.tokenB!);
+        enc.packString(this.tokenA);
+        enc.packString(this.tokenB);
         return enc.getBytes();
     }
     
     unpack(data: u8[]): usize {
         let dec = new _chain.Decoder(data);
-        
-        {
-            let obj = new _chain.Name();
-            dec.unpack(obj);
-            this.tokenA! = obj;
-        }
-        
-        {
-            let obj = new _chain.Name();
-            dec.unpack(obj);
-            this.tokenB! = obj;
-        }
+        this.tokenA = dec.unpackString();
+        this.tokenB = dec.unpackString();
         return dec.getPos();
     }
 
     getSize(): usize {
         let size: usize = 0;
-        size += this.tokenA!.getSize();
-        size += this.tokenB!.getSize();
+        size += _chain.Utils.calcPackedStringLength(this.tokenA);
+        size += _chain.Utils.calcPackedStringLength(this.tokenB);
         return size;
     }
 }
@@ -586,6 +600,27 @@ class getAmmContractAction implements _chain.Packer {
     }
 }
 
+class clearPairAction implements _chain.Packer {
+    constructor (
+    ) {
+    }
+
+    pack(): u8[] {
+        let enc = new _chain.Encoder(this.getSize());
+        return enc.getBytes();
+    }
+    
+    unpack(data: u8[]): usize {
+        let dec = new _chain.Decoder(data);
+        return dec.getPos();
+    }
+
+    getSize(): usize {
+        let size: usize = 0;
+        return size;
+    }
+}
+
 export function apply(receiver: u64, firstReceiver: u64, action: u64): void {
 	const _receiver = new _chain.Name(receiver);
 	const _firstReceiver = new _chain.Name(firstReceiver);
@@ -608,7 +643,7 @@ export function apply(receiver: u64, firstReceiver: u64, action: u64): void {
 		if (action == 0x62B3533AE0000000) {//getpair
             const args = new getPairAction();
             args.unpack(actionData);
-            const ret_value = mycontract.getPair(args.tokenA!,args.tokenB!);
+            const ret_value = mycontract.getPair(args.tokenA,args.tokenB);
             let size = 0;
             size += sizeof<u64>();
             const enc = new _chain.Encoder(size);
@@ -618,7 +653,7 @@ export function apply(receiver: u64, firstReceiver: u64, action: u64): void {
 		if (action == 0xBAA54DAAA675C000) {//removepair
             const args = new removePairAction();
             args.unpack(actionData);
-            mycontract.removePair(args.tokenA!,args.tokenB!);
+            mycontract.removePair(args.tokenA,args.tokenB);
         }
 		if (action == 0xC2B2B52B34000000) {//setfeeto
             const args = new setFeeToAction();
@@ -654,6 +689,11 @@ export function apply(receiver: u64, firstReceiver: u64, action: u64): void {
             const enc = new _chain.Encoder(size);
             enc.pack(ret_value);
             _chain.setActionReturnValue(enc.getBytes());
+        }
+		if (action == 0x446F533AE0000000) {//clrpair
+            const args = new clearPairAction();
+            args.unpack(actionData);
+            mycontract.clearPair();
         }
 	}
   
