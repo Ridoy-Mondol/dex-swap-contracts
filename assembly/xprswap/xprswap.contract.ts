@@ -20,7 +20,7 @@ import {
   TokenStatTable,
   DepositTable,
 } from "./tables";
-import { TokenTransfer } from "./ammswap.inline";
+import { TokenTransfer } from "./xprswap.inline";
 
 class TokenSymbolParam {
   constructor(public contract: Name, public sym: string) {}
@@ -30,7 +30,7 @@ class TokenAmount {
   constructor(public quantity: string, public contract: Name) {}
 }
 
-export class AMMSwap extends Contract {
+export class XPRSwap extends Contract {
   private poolsTable: TableStore<PoolsTable> = new TableStore<PoolsTable>(
     this.receiver,
     this.receiver
@@ -224,11 +224,11 @@ export class AMMSwap extends Contract {
     const asset2Min = Asset.fromString(add_token2_min.quantity);
 
     check(
-      prep.token1_received >= asset1.amount,
+      prep.token1_received >= <u64>asset1.amount,
       `Insufficient token1 deposited. Have: ${prep.token1_received}, Need: ${asset1.amount}`
     );
     check(
-      prep.token2_received >= asset2.amount,
+      prep.token2_received >= <u64>asset2.amount,
       `Insufficient token2 deposited. Have: ${prep.token2_received}, Need: ${asset2.amount}`
     );
 
@@ -444,104 +444,6 @@ export class AMMSwap extends Contract {
       "Remove liquidity: token1"
     );
   }
-
-  // @action("swap")
-  // swap(
-  //   tokenIn: Name,
-  //   tokenOut: Name,
-  //   tokenInContract: Name,
-  //   tokenOutContract: Name,
-  //   amountIn: u64,
-  //   amountOutMin: u64,
-  //   tokenInSymbol: string,
-  //   tokenOutSymbol: string,
-  //   tokenInPrecision: u8,
-  //   tokenOutPrecision: u8,
-  //   to: Name
-  // ): void {
-  //   requireAuth(to);
-
-  //   const config = this.configTable.requireGet(0, "Contract not initialized");
-  //   check(!config.paused, "Contract is paused");
-
-  //   check(amountIn > 0, "INSUFFICIENT_INPUT_AMOUNT");
-  //   check(tokenIn.N != tokenOut.N, "IDENTICAL_ADDRESSES");
-
-  //   const sorted = this.sortTokens(tokenIn, tokenOut);
-  //   const t0: Name = sorted[0];
-  //   const t1: Name = sorted[1];
-  //   const poolId = this.findPoolId(t0, t1);
-  //   const pool = this.poolsTable.requireGet(poolId, "PAIR_NOT_FOUND");
-
-  //   check(pool.reserve0 > 0 && pool.reserve1 > 0, "INSUFFICIENT_LIQUIDITY");
-
-  //   let reserveIn: u64;
-  //   let reserveOut: u64;
-  //   let isToken0Input: bool = tokenIn.N == pool.token0.N;
-
-  //   if (isToken0Input) {
-  //     reserveIn = pool.reserve0;
-  //     reserveOut = pool.reserve1;
-  //   } else {
-  //     reserveIn = pool.reserve1;
-  //     reserveOut = pool.reserve0;
-  //   }
-
-  //   const amountOut = this.computeAmountOut(
-  //     amountIn,
-  //     reserveIn,
-  //     reserveOut,
-  //     config.swap_fee
-  //   );
-
-  //   check(amountOut >= amountOutMin, "INSUFFICIENT_OUTPUT_AMOUNT");
-  //   check(amountOut < reserveOut, "INSUFFICIENT_LIQUIDITY");
-
-  //   // Transfer input tokens from user to contract
-  //   const assetIn = this.createAsset(amountIn, tokenInSymbol, tokenInPrecision);
-  //   this.transferFrom(
-  //     tokenInContract,
-  //     to,
-  //     this.receiver,
-  //     assetIn,
-  //     "Swap: input"
-  //   );
-
-  //   // Transfer output tokens from user to contract
-  //   const assetOut = this.createAsset(
-  //     amountOut,
-  //     tokenOutSymbol,
-  //     tokenOutPrecision
-  //   );
-  //   this.transfer(
-  //     tokenOutContract,
-  //     this.receiver,
-  //     to,
-  //     assetOut,
-  //     "Swap: output"
-  //   );
-
-  //   if (isToken0Input) {
-  //     pool.reserve0 += amountIn;
-  //     pool.reserve1 -= amountOut;
-  //   } else {
-  //     pool.reserve1 += amountIn;
-  //     pool.reserve0 -= amountOut;
-  //   }
-
-  //   check(
-  //     U128.ge(
-  //       U128.mul(new U128(pool.reserve0), new U128(pool.reserve1)),
-  //       U128.mul(new U128(reserveIn), new U128(reserveOut))
-  //     ),
-  //     "AMM: K_INVARIANT_VIOLATED"
-  //   );
-
-  //   this.updatePriceAccumulators(pool);
-
-  //   pool.blockTimestampLast = currentTimeSec();
-  //   this.poolsTable.update(pool, this.receiver);
-  // }
 
   @action("pause")
   togglePause(paused: boolean): void {

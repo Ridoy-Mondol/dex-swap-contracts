@@ -7,7 +7,7 @@ export class ConfigTable extends Table {
     public paused: boolean = false,
     public min_liquidity: u64 = 1000,
     public admin: Name = EMPTY_NAME,
-    public swap_fee: u64 = 30,
+    public swap_fee: u32 = 30,
   ) {
     super();
   }

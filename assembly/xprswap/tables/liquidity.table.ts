@@ -19,13 +19,13 @@ export class LiquidityTable extends Table {
     return this.id;
   }
 
-  @secondary
-  get byProvider(): u64 {
-    return this.provider.N;
-  }
+  // @secondary
+  // get byprovider(): u64 {
+  //   return this.provider.N;
+  // }
 
-  @secondary
-  get byPool(): u64 {
-    return this.pool_id;
-  }
+  // @secondary
+  // get bypool(): u64 {
+  //   return this.pool_id;
+  // }
 }
