@@ -5,16 +5,17 @@
  (type $i32_i32_i32_=>_none (func (param i32 i32 i32)))
  (type $i32_i64_=>_none (func (param i32 i64)))
  (type $none_=>_i32 (func (result i32)))
- (type $i32_=>_none (func (param i32)))
  (type $i32_i32_i32_i32_=>_none (func (param i32 i32 i32 i32)))
+ (type $i32_=>_none (func (param i32)))
  (type $i32_i32_i32_=>_i32 (func (param i32 i32 i32) (result i32)))
- (type $i32_i64_=>_i32 (func (param i32 i64) (result i32)))
+ (type $i32_i64_i32_=>_i32 (func (param i32 i64 i32) (result i32)))
  (type $i32_i32_i32_i32_=>_i32 (func (param i32 i32 i32 i32) (result i32)))
  (type $i32_i32_i64_i32_=>_i32 (func (param i32 i32 i64 i32) (result i32)))
- (type $i32_i64_i32_=>_i32 (func (param i32 i64 i32) (result i32)))
+ (type $i32_i64_=>_i32 (func (param i32 i64) (result i32)))
  (type $i32_=>_i64 (func (param i32) (result i64)))
  (type $i64_i64_i64_i64_=>_i64 (func (param i64 i64 i64 i64) (result i64)))
  (type $i32_i32_i32_i64_=>_none (func (param i32 i32 i32 i64)))
+ (type $i64_=>_i32 (func (param i64) (result i32)))
  (type $i64_i64_i64_i64_=>_i32 (func (param i64 i64 i64 i64) (result i32)))
  (type $none_=>_i64 (func (result i64)))
  (type $none_=>_none (func))
@@ -27,7 +28,6 @@
  (type $i32_i64_i32_i32_=>_none (func (param i32 i64 i32 i32)))
  (type $i32_i64_i32_i64_=>_none (func (param i32 i64 i32 i64)))
  (type $i64_i64_i64_=>_none (func (param i64 i64 i64)))
- (type $i64_=>_i32 (func (param i64) (result i32)))
  (type $i64_i32_=>_i32 (func (param i64 i32) (result i32)))
  (type $i64_i32_i32_=>_i32 (func (param i64 i32 i32) (result i32)))
  (type $i64_i32_i32_i32_i32_i32_i32_=>_i32 (func (param i64 i32 i32 i32 i32 i32 i32) (result i32)))
@@ -109,76 +109,118 @@
  (data (i32.const 3240) "\01\00\00\00.\00\00\00A\00M\00M\00:\00 \00P\00A\00I\00R\00_\00H\00A\00S\00_\00L\00I\00Q\00U\00I\00D\00I\00T\00Y")
  (data (i32.const 3308) "L")
  (data (i32.const 3320) "\01\00\00\000\00\00\00p\00r\00i\00m\00a\00r\00y\00 \00v\00a\00l\00u\00e\00 \00n\00o\00t\00 \00f\00o\00u\00n\00d\00!")
- (data (i32.const 3388) "L")
- (data (i32.const 3400) "\01\00\00\002\00\00\00A\00M\00M\00:\00 \00I\00N\00S\00U\00F\00F\00I\00C\00I\00E\00N\00T\00_\00A\00M\00O\00U\00N\00T\00S")
- (data (i32.const 3468) "L")
- (data (i32.const 3480) "\01\00\00\000\00\00\00A\00M\00M\00:\00 \00I\00N\00S\00U\00F\00F\00I\00C\00I\00E\00N\00T\00_\00A\00M\00O\00U\00N\00T")
- (data (i32.const 3548) "L")
- (data (i32.const 3560) "\01\00\00\006\00\00\00A\00M\00M\00:\00 \00I\00N\00S\00U\00F\00F\00I\00C\00I\00E\00N\00T\00_\00L\00I\00Q\00U\00I\00D\00I\00T\00Y")
- (data (i32.const 3628) "L")
- (data (i32.const 3640) "\01\00\00\004\00\00\00A\00M\00M\00:\00 \00I\00N\00S\00U\00F\00F\00I\00C\00I\00E\00N\00T\00_\001\00_\00A\00M\00O\00U\00N\00T")
- (data (i32.const 3708) "<")
- (data (i32.const 3720) "\01\00\00\00(\00\00\00A\00M\00M\00:\00 \00I\00N\00V\00A\00L\00I\00D\00_\00A\00M\00O\00U\00N\00T\00S")
- (data (i32.const 3772) "L")
- (data (i32.const 3784) "\01\00\00\004\00\00\00A\00M\00M\00:\00 \00I\00N\00S\00U\00F\00F\00I\00C\00I\00E\00N\00T\00_\000\00_\00A\00M\00O\00U\00N\00T")
- (data (i32.const 3852) "\\")
- (data (i32.const 3864) "\01\00\00\00D\00\00\00A\00M\00M\00:\00 \00I\00N\00S\00U\00F\00F\00I\00C\00I\00E\00N\00T\00_\00L\00I\00Q\00U\00I\00D\00I\00T\00Y\00_\00M\00I\00N\00T\00E\00D")
- (data (i32.const 3948) "<")
- (data (i32.const 3960) "\01\00\00\00\1e\00\00\00b\00a\00d\00 \00s\00y\00m\00b\00o\00l\00 \00n\00a\00m\00e")
- (data (i32.const 4012) "<")
- (data (i32.const 4024) "\01\00\00\00\"\00\00\00I\00n\00v\00a\00l\00i\00d\00 \00c\00h\00a\00r\00a\00c\00t\00e\00r")
- (data (i32.const 4076) "<")
- (data (i32.const 4088) "\01\00\00\00*\00\00\00A\00d\00d\00 \00l\00i\00q\00u\00i\00d\00i\00t\00y\00:\00 \00t\00o\00k\00e\00n\000")
- (data (i32.const 4140) ",")
- (data (i32.const 4152) "\01\00\00\00\1c\00\00\00I\00n\00v\00a\00l\00i\00d\00 \00n\00a\00m\00e\00:\00 ")
- (data (i32.const 4188) "\1c")
- (data (i32.const 4200) "\01")
- (data (i32.const 4220) "\1c")
- (data (i32.const 4232) "+\00\00\00\0c\00\00\00@\10\00\00\00\00\00\00p\10")
- (data (i32.const 4252) ",")
- (data (i32.const 4264) "\01\00\00\00\1a\00\00\00i\00n\00v\00a\00l\00i\00d\00 \00n\00a\00m\00e\00 ")
- (data (i32.const 4300) "\1c")
- (data (i32.const 4312) "+\00\00\00\0c\00\00\00\b0\10\00\00\00\00\00\00p\10")
- (data (i32.const 4332) ",")
- (data (i32.const 4344) "\01\00\00\00\10\00\00\00t\00r\00a\00n\00s\00f\00e\00r")
- (data (i32.const 4380) "<")
- (data (i32.const 4392) "\01\00\00\00*\00\00\00A\00d\00d\00 \00l\00i\00q\00u\00i\00d\00i\00t\00y\00:\00 \00t\00o\00k\00e\00n\001")
- (data (i32.const 4444) "<")
- (data (i32.const 4456) "\01\00\00\00&\00\00\00u\00p\00d\00a\00t\00e\00:\00b\00a\00d\00 \00i\00t\00e\00r\00a\00t\00o\00r")
+ (data (i32.const 3388) "\ac")
+ (data (i32.const 3400) "\01\00\00\00\8e\00\00\00A\00d\00d\00 \00L\00i\00q\00u\00i\00d\00i\00t\00y\00 \00F\00a\00i\00l\00e\00d\00:\00 \00O\00n\00e\00 \00o\00r\00 \00b\00o\00t\00h\00 \00t\00o\00k\00e\00n\00 \00a\00d\00d\00r\00e\00s\00s\00e\00s\00 \00a\00r\00e\00 \00i\00n\00v\00a\00l\00i\00d\00 \00o\00r\00 \00e\00m\00p\00t\00y\00.")
+ (data (i32.const 3564) "\ac")
+ (data (i32.const 3576) "\01\00\00\00\92\00\00\00A\00d\00d\00 \00L\00i\00q\00u\00i\00d\00i\00t\00y\00 \00F\00a\00i\00l\00e\00d\00:\00 \00Y\00o\00u\00 \00c\00a\00n\00n\00o\00t\00 \00c\00r\00e\00a\00t\00e\00 \00a\00 \00p\00o\00o\00l\00 \00w\00i\00t\00h\00 \00t\00w\00o\00 \00i\00d\00e\00n\00t\00i\00c\00a\00l\00 \00t\00o\00k\00e\00n\00s\00.")
+ (data (i32.const 3740) "\ac")
+ (data (i32.const 3752) "\01\00\00\00\92\00\00\00A\00d\00d\00 \00L\00i\00q\00u\00i\00d\00i\00t\00y\00 \00F\00a\00i\00l\00e\00d\00:\00 \00Y\00o\00u\00 \00m\00u\00s\00t\00 \00p\00r\00o\00v\00i\00d\00e\00 \00a\00 \00p\00o\00s\00i\00t\00i\00v\00e\00 \00a\00m\00o\00u\00n\00t\00 \00f\00o\00r\00 \00b\00o\00t\00h\00 \00t\00o\00k\00e\00n\00s\00.")
+ (data (i32.const 3916) "|")
+ (data (i32.const 3928) "\01\00\00\00j\00\00\00A\00d\00d\00 \00L\00i\00q\00u\00i\00d\00i\00t\00y\00 \00F\00a\00i\00l\00e\00d\00:\00 \00T\00h\00i\00s\00 \00t\00o\00k\00e\00n\00 \00p\00a\00i\00r\00 \00d\00o\00e\00s\00 \00n\00o\00t\00 \00e\00x\00i\00s\00t\00.")
+ (data (i32.const 4044) "L")
+ (data (i32.const 4056) "\01\00\00\000\00\00\00A\00M\00M\00:\00 \00I\00N\00S\00U\00F\00F\00I\00C\00I\00E\00N\00T\00_\00A\00M\00O\00U\00N\00T")
+ (data (i32.const 4124) "L")
+ (data (i32.const 4136) "\01\00\00\006\00\00\00A\00M\00M\00:\00 \00I\00N\00S\00U\00F\00F\00I\00C\00I\00E\00N\00T\00_\00L\00I\00Q\00U\00I\00D\00I\00T\00Y")
+ (data (i32.const 4204) "l")
+ (data (i32.const 4216) "\01\00\00\00Z\00\00\00A\00d\00d\00 \00L\00i\00q\00u\00i\00d\00i\00t\00y\00 \00F\00a\00i\00l\00e\00d\00:\00 \00T\00h\00e\00 \00r\00e\00q\00u\00i\00r\00e\00d\00 \00a\00m\00o\00u\00n\00t\00 \00o\00f\00 ")
+ (data (i32.const 4316) "\1c")
+ (data (i32.const 4328) "\01\00\00\00\04\00\00\00 \00(")
+ (data (i32.const 4348) "L")
+ (data (i32.const 4360) "\01\00\00\002\00\00\00)\00 \00i\00s\00 \00b\00e\00l\00o\00w\00 \00y\00o\00u\00r\00 \00m\00i\00n\00i\00m\00u\00m\00 \00(")
+ (data (i32.const 4428) "L")
+ (data (i32.const 4440) "\01\00\00\00.\00\00\00)\00.\00 \00T\00r\00y\00 \00i\00n\00c\00r\00e\00a\00s\00i\00n\00g\00 \00y\00o\00u\00r\00 ")
  (data (i32.const 4508) "L")
- (data (i32.const 4520) "\01\00\00\00:\00\00\00g\00e\00t\00 \00p\00r\00i\00m\00a\00r\00y\00:\00 \00i\00n\00v\00a\00l\00i\00d\00 \00i\00t\00e\00r\00a\00t\00o\00r")
+ (data (i32.const 4520) "\01\00\00\008\00\00\00 \00i\00n\00p\00u\00t\00 \00o\00r\00 \00l\00o\00w\00e\00r\00i\00n\00g\00 \00s\00l\00i\00p\00p\00a\00g\00e\00.")
  (data (i32.const 4588) "<")
- (data (i32.const 4600) "\01\00\00\00\1e\00\00\00u\00n\00e\00x\00p\00e\00c\00t\00e\00d\00 \00n\00u\00l\00l")
- (data (i32.const 4652) "l")
- (data (i32.const 4664) "\01\00\00\00V\00\00\00p\00r\00i\00m\00a\00r\00y\00 \00k\00e\00y\00 \00c\00a\00n\00\'\00t\00 \00b\00e\00 \00c\00h\00a\00n\00g\00e\00d\00 \00d\00u\00r\00i\00n\00g\00 \00u\00p\00d\00a\00t\00e\00!")
- (data (i32.const 4764) "\\")
- (data (i32.const 4776) "\01\00\00\00D\00\00\00A\00M\00M\00:\00 \00I\00N\00S\00U\00F\00F\00I\00C\00I\00E\00N\00T\00_\00L\00I\00Q\00U\00I\00D\00I\00T\00Y\00_\00B\00U\00R\00N\00E\00D")
- (data (i32.const 4860) "<")
- (data (i32.const 4872) "\01\00\00\00\"\00\00\00A\00M\00M\00:\00 \00N\00O\00_\00L\00I\00Q\00U\00I\00D\00I\00T\00Y")
- (data (i32.const 4924) "L")
- (data (i32.const 4936) "\01\00\00\002\00\00\00A\00M\00M\00:\00 \00I\00N\00S\00U\00F\00F\00I\00C\00I\00E\00N\00T\00_\00B\00A\00L\00A\00N\00C\00E")
- (data (i32.const 5004) "L")
- (data (i32.const 5016) "\01\00\00\002\00\00\00A\00M\00M\00:\00 \00N\00O\00_\00L\00I\00Q\00U\00I\00D\00I\00T\00Y\00_\00I\00N\00_\00P\00A\00I\00R")
- (data (i32.const 5084) "L")
- (data (i32.const 5096) "\01\00\00\000\00\00\00R\00e\00m\00o\00v\00e\00 \00l\00i\00q\00u\00i\00d\00i\00t\00y\00:\00 \00t\00o\00k\00e\00n\000")
- (data (i32.const 5164) "L")
- (data (i32.const 5176) "\01\00\00\000\00\00\00R\00e\00m\00o\00v\00e\00 \00l\00i\00q\00u\00i\00d\00i\00t\00y\00:\00 \00t\00o\00k\00e\00n\001")
- (data (i32.const 5244) "L")
- (data (i32.const 5256) "\01\00\00\00<\00\00\00A\00M\00M\00:\00 \00I\00N\00S\00U\00F\00F\00I\00C\00I\00E\00N\00T\00_\00I\00N\00P\00U\00T\00_\00A\00M\00O\00U\00N\00T")
- (data (i32.const 5324) "\\")
- (data (i32.const 5336) "\01\00\00\00>\00\00\00A\00M\00M\00:\00 \00I\00N\00S\00U\00F\00F\00I\00C\00I\00E\00N\00T\00_\00O\00U\00T\00P\00U\00T\00_\00A\00M\00O\00U\00N\00T")
- (data (i32.const 5420) ",")
- (data (i32.const 5432) "\01\00\00\00\16\00\00\00S\00w\00a\00p\00:\00 \00i\00n\00p\00u\00t")
- (data (i32.const 5468) ",")
- (data (i32.const 5480) "\01\00\00\00\18\00\00\00S\00w\00a\00p\00:\00 \00o\00u\00t\00p\00u\00t")
- (data (i32.const 5516) "L")
- (data (i32.const 5528) "\01\00\00\002\00\00\00A\00M\00M\00:\00 \00K\00_\00I\00N\00V\00A\00R\00I\00A\00N\00T\00_\00V\00I\00O\00L\00A\00T\00E\00D")
- (data (i32.const 5596) "<")
- (data (i32.const 5608) "\01\00\00\00 \00\00\00A\00M\00M\00:\00 \00I\00N\00V\00A\00L\00I\00D\00_\00F\00E\00E")
- (data (i32.const 5660) ",")
- (data (i32.const 5672) "\01\00\00\00\1c\00\00\00i\00n\00v\00a\00l\00i\00d\00 \00s\00y\00m\00b\00o\00l")
- (data (i32.const 5708) ",")
- (data (i32.const 5720) "\01\00\00\00\1a\00\00\00i\00n\00v\00a\00l\00i\00d\00 \00a\00s\00s\00e\00t")
+ (data (i32.const 4600) "\'\00\00\00$\00\00\00\80\10\00\00\00\00\00\00\f0\10\00\00\00\00\00\00\10\11\00\00\00\00\00\00`\11\00\00\00\00\00\00\b0\11")
+ (data (i32.const 4652) "\1c")
+ (data (i32.const 4664) "\01\00\00\00\02\00\00\000")
+ (data (i32.const 4684) "\\")
+ (data (i32.const 4696) "\01\00\00\00H\00\00\000\001\002\003\004\005\006\007\008\009\00a\00b\00c\00d\00e\00f\00g\00h\00i\00j\00k\00l\00m\00n\00o\00p\00q\00r\00s\00t\00u\00v\00w\00x\00y\00z")
+ (data (i32.const 4780) "\1c")
+ (data (i32.const 4792) "\01")
+ (data (i32.const 4812) "\\")
+ (data (i32.const 4824) "\01\00\00\00D\00\00\00A\00d\00d\00 \00L\00i\00q\00u\00i\00d\00i\00t\00y\00 \00F\00a\00i\00l\00e\00d\00:\00 \00T\00h\00e\00 \00o\00p\00t\00i\00m\00a\00l\00 ")
+ (data (i32.const 4908) ",")
+ (data (i32.const 4920) "\01\00\00\00\12\00\00\00 \00a\00m\00o\00u\00n\00t\00 \00(")
+ (data (i32.const 4956) "\\")
+ (data (i32.const 4968) "\01\00\00\00@\00\00\00)\00 \00e\00x\00c\00e\00e\00d\00s\00 \00y\00o\00u\00r\00 \00p\00r\00o\00v\00i\00d\00e\00d\00 \00a\00m\00o\00u\00n\00t\00 \00(")
+ (data (i32.const 5052) "<")
+ (data (i32.const 5064) "\01\00\00\00&\00\00\00)\00.\00 \00P\00l\00e\00a\00s\00e\00 \00i\00n\00c\00r\00e\00a\00s\00e\00 ")
+ (data (i32.const 5116) ",")
+ (data (i32.const 5128) "\01\00\00\00\14\00\00\00 \00o\00r\00 \00l\00o\00w\00e\00r\00 ")
+ (data (i32.const 5164) "\1c")
+ (data (i32.const 5176) "\01\00\00\00\02\00\00\00.")
+ (data (i32.const 5196) "<")
+ (data (i32.const 5208) "\'\00\00\00,\00\00\00\e0\12\00\00\00\00\00\00@\13\00\00\00\00\00\00p\13\00\00\00\00\00\00\d0\13\00\00\00\00\00\00\10\14\00\00\00\00\00\00@\14")
+ (data (i32.const 5260) "<")
+ (data (i32.const 5272) "\'\00\00\00$\00\00\00\80\10\00\00\00\00\00\00\f0\10\00\00\00\00\00\00\10\11\00\00\00\00\00\00`\11\00\00\00\00\00\00\b0\11")
+ (data (i32.const 5324) "\0c\01")
+ (data (i32.const 5336) "\01\00\00\00\fa\00\00\00A\00d\00d\00 \00L\00i\00q\00u\00i\00d\00i\00t\00y\00 \00F\00a\00i\00l\00e\00d\00:\00 \00T\00h\00e\00 \00p\00r\00o\00v\00i\00d\00e\00d\00 \00t\00o\00k\00e\00n\00 \00a\00m\00o\00u\00n\00t\00s\00 \00a\00r\00e\00 \00t\00o\00o\00 \00s\00m\00a\00l\00l\00 \00t\00o\00 \00m\00i\00n\00t\00 \00i\00n\00i\00t\00i\00a\00l\00 \00l\00i\00q\00u\00i\00d\00i\00t\00y\00.\00 \00P\00l\00e\00a\00s\00e\00 \00i\00n\00c\00r\00e\00a\00s\00e\00 \00y\00o\00u\00r\00 \00i\00n\00p\00u\00t\00 \00a\00m\00o\00u\00n\00t\00s\00.")
+ (data (i32.const 5596) "\1c\01")
+ (data (i32.const 5608) "\01\00\00\00\04\01\00\00A\00d\00d\00 \00L\00i\00q\00u\00i\00d\00i\00t\00y\00 \00F\00a\00i\00l\00e\00d\00:\00 \00I\00n\00s\00u\00f\00f\00i\00c\00i\00e\00n\00t\00 \00l\00i\00q\00u\00i\00d\00i\00t\00y\00 \00g\00e\00n\00e\00r\00a\00t\00e\00d\00 \00f\00r\00o\00m\00 \00y\00o\00u\00r\00 \00t\00o\00k\00e\00n\00 \00a\00m\00o\00u\00n\00t\00s\00.\00 \00T\00r\00y\00 \00p\00r\00o\00v\00i\00d\00i\00n\00g\00 \00l\00a\00r\00g\00e\00r\00 \00a\00m\00o\00u\00n\00t\00s\00 \00o\00r\00 \00c\00h\00e\00c\00k\00 \00p\00o\00o\00l\00 \00r\00a\00t\00i\00o\00s\00.")
+ (data (i32.const 5884) "<")
+ (data (i32.const 5896) "\01\00\00\00\1e\00\00\00b\00a\00d\00 \00s\00y\00m\00b\00o\00l\00 \00n\00a\00m\00e")
+ (data (i32.const 5948) "<")
+ (data (i32.const 5960) "\01\00\00\00\"\00\00\00I\00n\00v\00a\00l\00i\00d\00 \00c\00h\00a\00r\00a\00c\00t\00e\00r")
+ (data (i32.const 6012) "L")
+ (data (i32.const 6024) "\01\00\00\008\00\00\00A\00d\00d\00 \00l\00i\00q\00u\00i\00d\00i\00t\00y\00:\00 \00t\00r\00a\00n\00s\00f\00e\00r\00r\00i\00n\00g\00 ")
+ (data (i32.const 6092) "\1c")
+ (data (i32.const 6104) "\01\00\00\00\02\00\00\00 ")
+ (data (i32.const 6124) ",")
+ (data (i32.const 6136) "\'\00\00\00\14\00\00\00\90\17\00\00\00\00\00\00\e0\17\00\00\00\00\00\00\c0\12")
+ (data (i32.const 6172) ",")
+ (data (i32.const 6184) "\01\00\00\00\1c\00\00\00I\00n\00v\00a\00l\00i\00d\00 \00n\00a\00m\00e\00:\00 ")
+ (data (i32.const 6220) "\1c")
+ (data (i32.const 6232) "\'\00\00\00\0c\00\00\000\18\00\00\00\00\00\00\c0\12")
+ (data (i32.const 6252) ",")
+ (data (i32.const 6264) "\01\00\00\00\1a\00\00\00i\00n\00v\00a\00l\00i\00d\00 \00n\00a\00m\00e\00 ")
+ (data (i32.const 6300) "\1c")
+ (data (i32.const 6312) "\'\00\00\00\0c\00\00\00\80\18\00\00\00\00\00\00\c0\12")
+ (data (i32.const 6332) ",")
+ (data (i32.const 6344) "\01\00\00\00\10\00\00\00t\00r\00a\00n\00s\00f\00e\00r")
+ (data (i32.const 6380) ",")
+ (data (i32.const 6392) "\'\00\00\00\14\00\00\00\90\17\00\00\00\00\00\00\e0\17\00\00\00\00\00\00\c0\12")
+ (data (i32.const 6428) "<")
+ (data (i32.const 6440) "\01\00\00\00&\00\00\00u\00p\00d\00a\00t\00e\00:\00b\00a\00d\00 \00i\00t\00e\00r\00a\00t\00o\00r")
+ (data (i32.const 6492) "L")
+ (data (i32.const 6504) "\01\00\00\00:\00\00\00g\00e\00t\00 \00p\00r\00i\00m\00a\00r\00y\00:\00 \00i\00n\00v\00a\00l\00i\00d\00 \00i\00t\00e\00r\00a\00t\00o\00r")
+ (data (i32.const 6572) "<")
+ (data (i32.const 6584) "\01\00\00\00\1e\00\00\00u\00n\00e\00x\00p\00e\00c\00t\00e\00d\00 \00n\00u\00l\00l")
+ (data (i32.const 6636) "l")
+ (data (i32.const 6648) "\01\00\00\00V\00\00\00p\00r\00i\00m\00a\00r\00y\00 \00k\00e\00y\00 \00c\00a\00n\00\'\00t\00 \00b\00e\00 \00c\00h\00a\00n\00g\00e\00d\00 \00d\00u\00r\00i\00n\00g\00 \00u\00p\00d\00a\00t\00e\00!")
+ (data (i32.const 6748) "\\")
+ (data (i32.const 6760) "\01\00\00\00D\00\00\00A\00M\00M\00:\00 \00I\00N\00S\00U\00F\00F\00I\00C\00I\00E\00N\00T\00_\00L\00I\00Q\00U\00I\00D\00I\00T\00Y\00_\00B\00U\00R\00N\00E\00D")
+ (data (i32.const 6844) "<")
+ (data (i32.const 6856) "\01\00\00\00\"\00\00\00A\00M\00M\00:\00 \00N\00O\00_\00L\00I\00Q\00U\00I\00D\00I\00T\00Y")
+ (data (i32.const 6908) "L")
+ (data (i32.const 6920) "\01\00\00\002\00\00\00A\00M\00M\00:\00 \00I\00N\00S\00U\00F\00F\00I\00C\00I\00E\00N\00T\00_\00B\00A\00L\00A\00N\00C\00E")
+ (data (i32.const 6988) "L")
+ (data (i32.const 7000) "\01\00\00\002\00\00\00A\00M\00M\00:\00 \00N\00O\00_\00L\00I\00Q\00U\00I\00D\00I\00T\00Y\00_\00I\00N\00_\00P\00A\00I\00R")
+ (data (i32.const 7068) "L")
+ (data (i32.const 7080) "\01\00\00\004\00\00\00A\00M\00M\00:\00 \00I\00N\00S\00U\00F\00F\00I\00C\00I\00E\00N\00T\00_\000\00_\00A\00M\00O\00U\00N\00T")
+ (data (i32.const 7148) "L")
+ (data (i32.const 7160) "\01\00\00\004\00\00\00A\00M\00M\00:\00 \00I\00N\00S\00U\00F\00F\00I\00C\00I\00E\00N\00T\00_\001\00_\00A\00M\00O\00U\00N\00T")
+ (data (i32.const 7228) "L")
+ (data (i32.const 7240) "\01\00\00\000\00\00\00R\00e\00m\00o\00v\00e\00 \00l\00i\00q\00u\00i\00d\00i\00t\00y\00:\00 \00t\00o\00k\00e\00n\000")
+ (data (i32.const 7308) "L")
+ (data (i32.const 7320) "\01\00\00\000\00\00\00R\00e\00m\00o\00v\00e\00 \00l\00i\00q\00u\00i\00d\00i\00t\00y\00:\00 \00t\00o\00k\00e\00n\001")
+ (data (i32.const 7388) "L")
+ (data (i32.const 7400) "\01\00\00\00<\00\00\00A\00M\00M\00:\00 \00I\00N\00S\00U\00F\00F\00I\00C\00I\00E\00N\00T\00_\00I\00N\00P\00U\00T\00_\00A\00M\00O\00U\00N\00T")
+ (data (i32.const 7468) "\\")
+ (data (i32.const 7480) "\01\00\00\00>\00\00\00A\00M\00M\00:\00 \00I\00N\00S\00U\00F\00F\00I\00C\00I\00E\00N\00T\00_\00O\00U\00T\00P\00U\00T\00_\00A\00M\00O\00U\00N\00T")
+ (data (i32.const 7564) ",")
+ (data (i32.const 7576) "\01\00\00\00\16\00\00\00S\00w\00a\00p\00:\00 \00i\00n\00p\00u\00t")
+ (data (i32.const 7612) ",")
+ (data (i32.const 7624) "\01\00\00\00\18\00\00\00S\00w\00a\00p\00:\00 \00o\00u\00t\00p\00u\00t")
+ (data (i32.const 7660) "L")
+ (data (i32.const 7672) "\01\00\00\002\00\00\00A\00M\00M\00:\00 \00K\00_\00I\00N\00V\00A\00R\00I\00A\00N\00T\00_\00V\00I\00O\00L\00A\00T\00E\00D")
+ (data (i32.const 7740) "<")
+ (data (i32.const 7752) "\01\00\00\00 \00\00\00A\00M\00M\00:\00 \00I\00N\00V\00A\00L\00I\00D\00_\00F\00E\00E")
+ (data (i32.const 7804) ",")
+ (data (i32.const 7816) "\01\00\00\00\1c\00\00\00i\00n\00v\00a\00l\00i\00d\00 \00s\00y\00m\00b\00o\00l")
+ (data (i32.const 7852) ",")
+ (data (i32.const 7864) "\01\00\00\00\1a\00\00\00i\00n\00v\00a\00l\00i\00d\00 \00a\00s\00s\00e\00t")
  (table $0 2 funcref)
  (elem $0 (i32.const 1) $start:~lib/as-chain/name~anonymous|0)
  (export "ammContract" (global $assembly/amm/amm.contract/ammContract))
@@ -3635,11 +3677,11 @@
    )
   )
  )
- (func $~lib/proton-tsc/modules/store/store/TableStore<assembly/amm/tables/pairData.table/PairDataTable>#requireGet (param $0 i32) (param $1 i64) (result i32)
-  (local $2 i32)
+ (func $~lib/proton-tsc/modules/store/store/TableStore<assembly/amm/tables/pairData.table/PairDataTable>#requireGet (param $0 i32) (param $1 i64) (param $2 i32) (result i32)
+  (local $3 i32)
   (call $~lib/as-chain/system/check
    (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/amm/tables/ammConfig.table/AmmConfigTable>#isOk
-    (local.tee $2
+    (local.tee $3
      (call $~lib/as-chain/mi/MultiIndex<assembly/amm/tables/pairData.table/PairDataTable>#find
       (i32.load
        (local.get $0)
@@ -3648,28 +3690,30 @@
      )
     )
    )
-   (i32.const 3184)
+   (local.get $2)
   )
-  (if (result i32)
-   (local.tee $0
-    (call $~lib/as-chain/dbi64/DBI64<assembly/amm/tables/pairData.table/PairDataTable>#get
-     (i32.load
+  (block $__inlined_func$~lib/as-chain/mi/MultiIndex<assembly/amm/tables/pairData.table/PairDataTable>#get (result i32)
+   (if
+    (local.tee $0
+     (call $~lib/as-chain/dbi64/DBI64<assembly/amm/tables/pairData.table/PairDataTable>#get
       (i32.load
-       (local.get $0)
+       (i32.load
+        (local.get $0)
+       )
       )
+      (local.get $3)
      )
-     (local.get $2)
+    )
+    (br $__inlined_func$~lib/as-chain/mi/MultiIndex<assembly/amm/tables/pairData.table/PairDataTable>#get
+     (local.get $0)
     )
    )
-   (local.get $0)
-   (block (result i32)
-    (global.set $~argumentsLength
-     (i32.const 0)
-    )
-    (call $assembly/amm/tables/pairData.table/PairDataTable#constructor@varargs
-     (global.get $~lib/as-chain/name/EMPTY_NAME)
-     (global.get $~lib/as-chain/name/EMPTY_NAME)
-    )
+   (global.set $~argumentsLength
+    (i32.const 0)
+   )
+   (call $assembly/amm/tables/pairData.table/PairDataTable#constructor@varargs
+    (global.get $~lib/as-chain/name/EMPTY_NAME)
+    (global.get $~lib/as-chain/name/EMPTY_NAME)
    )
   )
  )
@@ -3740,6 +3784,7 @@
         (local.get $0)
        )
        (local.get $3)
+       (i32.const 3184)
       )
      )
     )
@@ -3857,7 +3902,7 @@
     (local.get $0)
     (i64.const 0)
    )
-   (i32.const 3488)
+   (i32.const 4064)
   )
   (call $~lib/as-chain/system/check
    (select
@@ -3871,7 +3916,7 @@
      (i64.const 0)
     )
    )
-   (i32.const 3568)
+   (i32.const 4144)
   )
   (i64.div_u
    (i64.mul
@@ -3879,6 +3924,436 @@
     (local.get $2)
    )
    (local.get $1)
+  )
+ )
+ (func $~lib/staticarray/StaticArray<~lib/string/String>#__uset (param $0 i32) (param $1 i32) (param $2 i32)
+  (i32.store
+   (i32.add
+    (local.get $0)
+    (i32.shl
+     (local.get $1)
+     (i32.const 2)
+    )
+   )
+   (local.get $2)
+  )
+ )
+ (func $~lib/util/number/utoa64 (param $0 i64) (result i32)
+  (local $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  (if
+   (i64.eqz
+    (local.get $0)
+   )
+   (return
+    (i32.const 4672)
+   )
+  )
+  (if
+   (i64.le_u
+    (local.get $0)
+    (i64.const 4294967295)
+   )
+   (block
+    (local.set $4
+     (local.tee $3
+      (call $~lib/rt/stub/__new
+       (i32.shl
+        (local.tee $2
+         (select
+          (select
+           (i32.add
+            (i32.ge_u
+             (local.tee $1
+              (i32.wrap_i64
+               (local.get $0)
+              )
+             )
+             (i32.const 10)
+            )
+            (i32.const 1)
+           )
+           (i32.add
+            (i32.add
+             (i32.ge_u
+              (local.get $1)
+              (i32.const 10000)
+             )
+             (i32.const 3)
+            )
+            (i32.ge_u
+             (local.get $1)
+             (i32.const 1000)
+            )
+           )
+           (i32.lt_u
+            (local.get $1)
+            (i32.const 100)
+           )
+          )
+          (select
+           (i32.add
+            (i32.ge_u
+             (local.get $1)
+             (i32.const 1000000)
+            )
+            (i32.const 6)
+           )
+           (i32.add
+            (i32.add
+             (i32.ge_u
+              (local.get $1)
+              (i32.const 1000000000)
+             )
+             (i32.const 8)
+            )
+            (i32.ge_u
+             (local.get $1)
+             (i32.const 100000000)
+            )
+           )
+           (i32.lt_u
+            (local.get $1)
+            (i32.const 10000000)
+           )
+          )
+          (i32.lt_u
+           (local.get $1)
+           (i32.const 100000)
+          )
+         )
+        )
+        (i32.const 1)
+       )
+       (i32.const 1)
+      )
+     )
+    )
+    (loop $do-continue|0
+     (i32.store16
+      (i32.add
+       (local.get $4)
+       (i32.shl
+        (local.tee $2
+         (i32.sub
+          (local.get $2)
+          (i32.const 1)
+         )
+        )
+        (i32.const 1)
+       )
+      )
+      (i32.add
+       (i32.rem_u
+        (local.get $1)
+        (i32.const 10)
+       )
+       (i32.const 48)
+      )
+     )
+     (br_if $do-continue|0
+      (local.tee $1
+       (i32.div_u
+        (local.get $1)
+        (i32.const 10)
+       )
+      )
+     )
+    )
+   )
+   (block
+    (local.set $2
+     (local.tee $3
+      (call $~lib/rt/stub/__new
+       (i32.shl
+        (local.tee $1
+         (select
+          (select
+           (i32.add
+            (i32.add
+             (i64.ge_u
+              (local.get $0)
+              (i64.const 100000000000)
+             )
+             (i32.const 10)
+            )
+            (i64.ge_u
+             (local.get $0)
+             (i64.const 10000000000)
+            )
+           )
+           (i32.add
+            (i32.add
+             (i64.ge_u
+              (local.get $0)
+              (i64.const 100000000000000)
+             )
+             (i32.const 13)
+            )
+            (i64.ge_u
+             (local.get $0)
+             (i64.const 10000000000000)
+            )
+           )
+           (i64.lt_u
+            (local.get $0)
+            (i64.const 1000000000000)
+           )
+          )
+          (select
+           (i32.add
+            (i64.ge_u
+             (local.get $0)
+             (i64.const 10000000000000000)
+            )
+            (i32.const 16)
+           )
+           (i32.add
+            (i32.add
+             (i64.ge_u
+              (local.get $0)
+              (i64.const -8446744073709551616)
+             )
+             (i32.const 18)
+            )
+            (i64.ge_u
+             (local.get $0)
+             (i64.const 1000000000000000000)
+            )
+           )
+           (i64.lt_u
+            (local.get $0)
+            (i64.const 100000000000000000)
+           )
+          )
+          (i64.lt_u
+           (local.get $0)
+           (i64.const 1000000000000000)
+          )
+         )
+        )
+        (i32.const 1)
+       )
+       (i32.const 1)
+      )
+     )
+    )
+    (loop $do-continue|00
+     (i32.store16
+      (i32.add
+       (local.get $2)
+       (i32.shl
+        (local.tee $1
+         (i32.sub
+          (local.get $1)
+          (i32.const 1)
+         )
+        )
+        (i32.const 1)
+       )
+      )
+      (i32.add
+       (i32.wrap_i64
+        (i64.rem_u
+         (local.get $0)
+         (i64.const 10)
+        )
+       )
+       (i32.const 48)
+      )
+     )
+     (br_if $do-continue|00
+      (i64.ne
+       (local.tee $0
+        (i64.div_u
+         (local.get $0)
+         (i64.const 10)
+        )
+       )
+       (i64.const 0)
+      )
+     )
+    )
+   )
+  )
+  (local.get $3)
+ )
+ (func $~lib/string/String.__concat (param $0 i32) (param $1 i32) (result i32)
+  (local $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  (block $__inlined_func$~lib/string/String#concat
+   (if
+    (i32.eqz
+     (local.tee $2
+      (i32.add
+       (local.tee $3
+        (i32.shl
+         (call $~lib/string/String#get:length
+          (local.get $0)
+         )
+         (i32.const 1)
+        )
+       )
+       (local.tee $4
+        (i32.shl
+         (call $~lib/string/String#get:length
+          (local.get $1)
+         )
+         (i32.const 1)
+        )
+       )
+      )
+     )
+    )
+    (block
+     (local.set $2
+      (i32.const 4800)
+     )
+     (br $__inlined_func$~lib/string/String#concat)
+    )
+   )
+   (call $~lib/memory/memory.copy
+    (local.tee $2
+     (call $~lib/rt/stub/__new
+      (local.get $2)
+      (i32.const 1)
+     )
+    )
+    (local.get $0)
+    (local.get $3)
+   )
+   (call $~lib/memory/memory.copy
+    (i32.add
+     (local.get $2)
+     (local.get $3)
+    )
+    (local.get $1)
+    (local.get $4)
+   )
+  )
+  (local.get $2)
+ )
+ (func $~lib/staticarray/StaticArray<~lib/string/String>#join (param $0 i32) (result i32)
+  (local $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  (local $5 i32)
+  (block $__inlined_func$~lib/util/string/joinReferenceArray<~lib/string/String> (result i32)
+   (drop
+    (br_if $__inlined_func$~lib/util/string/joinReferenceArray<~lib/string/String>
+     (i32.const 4800)
+     (i32.lt_s
+      (local.tee $3
+       (i32.sub
+        (i32.shr_u
+         (i32.load offset=16
+          (i32.sub
+           (local.tee $1
+            (local.get $0)
+           )
+           (i32.const 20)
+          )
+         )
+         (i32.const 2)
+        )
+        (i32.const 1)
+       )
+      )
+      (i32.const 0)
+     )
+    )
+   )
+   (if
+    (i32.eqz
+     (local.get $3)
+    )
+    (br $__inlined_func$~lib/util/string/joinReferenceArray<~lib/string/String>
+     (if (result i32)
+      (local.tee $0
+       (i32.load
+        (local.get $1)
+       )
+      )
+      (local.get $0)
+      (i32.const 4800)
+     )
+    )
+   )
+   (local.set $0
+    (i32.const 4800)
+   )
+   (local.set $4
+    (call $~lib/string/String#get:length
+     (i32.const 4800)
+    )
+   )
+   (loop $for-loop|0
+    (if
+     (i32.lt_s
+      (local.get $2)
+      (local.get $3)
+     )
+     (block
+      (if
+       (local.tee $5
+        (i32.load
+         (i32.add
+          (local.get $1)
+          (i32.shl
+           (local.get $2)
+           (i32.const 2)
+          )
+         )
+        )
+       )
+       (local.set $0
+        (call $~lib/string/String.__concat
+         (local.get $0)
+         (local.get $5)
+        )
+       )
+      )
+      (if
+       (local.get $4)
+       (local.set $0
+        (call $~lib/string/String.__concat
+         (local.get $0)
+         (i32.const 4800)
+        )
+       )
+      )
+      (local.set $2
+       (i32.add
+        (local.get $2)
+        (i32.const 1)
+       )
+      )
+      (br $for-loop|0)
+     )
+    )
+   )
+   (if (result i32)
+    (local.tee $1
+     (i32.load
+      (i32.add
+       (local.get $1)
+       (i32.shl
+        (local.get $3)
+        (i32.const 2)
+       )
+      )
+     )
+    )
+    (call $~lib/string/String.__concat
+     (local.get $0)
+     (local.get $1)
+    )
+    (local.get $0)
+   )
   )
  )
  (func $~lib/as-chain/bignum/globals/__multi3 (param $0 i64) (param $1 i64) (param $2 i64) (param $3 i64) (result i64)
@@ -5231,7 +5706,7 @@
    (local.tee $2
     (call $~lib/rt/stub/__new
      (i32.const 8)
-     (i32.const 40)
+     (i32.const 41)
     )
    )
    (i64.const 0)
@@ -5243,7 +5718,7 @@
     )
     (i32.const 7)
    )
-   (i32.const 3968)
+   (i32.const 5904)
   )
   (call $~lib/as-chain/name/Name#set:N
    (local.get $2)
@@ -5285,7 +5760,7 @@
         (i64.const 65)
        )
       )
-      (i32.const 4032)
+      (i32.const 5968)
      )
      (call $~lib/as-chain/name/Name#set:N
       (local.get $2)
@@ -5337,7 +5812,7 @@
    (local.tee $2
     (call $~lib/rt/stub/__new
      (i32.const 12)
-     (i32.const 39)
+     (i32.const 40)
     )
    )
    (local.get $0)
@@ -5357,188 +5832,6 @@
    )
   )
  )
- (func $~lib/staticarray/StaticArray<~lib/string/String>#__uset (param $0 i32)
-  (i32.store offset=4
-   (local.get $0)
-   (i32.const 4352)
-  )
- )
- (func $~lib/string/String.__concat (param $0 i32) (param $1 i32) (result i32)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  (block $__inlined_func$~lib/string/String#concat
-   (if
-    (i32.eqz
-     (local.tee $2
-      (i32.add
-       (local.tee $3
-        (i32.shl
-         (call $~lib/string/String#get:length
-          (local.get $0)
-         )
-         (i32.const 1)
-        )
-       )
-       (local.tee $4
-        (i32.shl
-         (call $~lib/string/String#get:length
-          (local.get $1)
-         )
-         (i32.const 1)
-        )
-       )
-      )
-     )
-    )
-    (block
-     (local.set $2
-      (i32.const 4208)
-     )
-     (br $__inlined_func$~lib/string/String#concat)
-    )
-   )
-   (call $~lib/memory/memory.copy
-    (local.tee $2
-     (call $~lib/rt/stub/__new
-      (local.get $2)
-      (i32.const 1)
-     )
-    )
-    (local.get $0)
-    (local.get $3)
-   )
-   (call $~lib/memory/memory.copy
-    (i32.add
-     (local.get $2)
-     (local.get $3)
-    )
-    (local.get $1)
-    (local.get $4)
-   )
-  )
-  (local.get $2)
- )
- (func $~lib/staticarray/StaticArray<~lib/string/String>#join (param $0 i32) (result i32)
-  (local $1 i32)
-  (local $2 i32)
-  (local $3 i32)
-  (local $4 i32)
-  (local $5 i32)
-  (block $__inlined_func$~lib/util/string/joinReferenceArray<~lib/string/String> (result i32)
-   (drop
-    (br_if $__inlined_func$~lib/util/string/joinReferenceArray<~lib/string/String>
-     (i32.const 4208)
-     (i32.lt_s
-      (local.tee $3
-       (i32.sub
-        (i32.shr_u
-         (i32.load offset=16
-          (i32.sub
-           (local.tee $1
-            (local.get $0)
-           )
-           (i32.const 20)
-          )
-         )
-         (i32.const 2)
-        )
-        (i32.const 1)
-       )
-      )
-      (i32.const 0)
-     )
-    )
-   )
-   (if
-    (i32.eqz
-     (local.get $3)
-    )
-    (br $__inlined_func$~lib/util/string/joinReferenceArray<~lib/string/String>
-     (if (result i32)
-      (local.tee $0
-       (i32.load
-        (local.get $1)
-       )
-      )
-      (local.get $0)
-      (i32.const 4208)
-     )
-    )
-   )
-   (local.set $0
-    (i32.const 4208)
-   )
-   (local.set $4
-    (call $~lib/string/String#get:length
-     (i32.const 4208)
-    )
-   )
-   (loop $for-loop|0
-    (if
-     (i32.lt_s
-      (local.get $2)
-      (local.get $3)
-     )
-     (block
-      (if
-       (local.tee $5
-        (i32.load
-         (i32.add
-          (local.get $1)
-          (i32.shl
-           (local.get $2)
-           (i32.const 2)
-          )
-         )
-        )
-       )
-       (local.set $0
-        (call $~lib/string/String.__concat
-         (local.get $0)
-         (local.get $5)
-        )
-       )
-      )
-      (if
-       (local.get $4)
-       (local.set $0
-        (call $~lib/string/String.__concat
-         (local.get $0)
-         (i32.const 4208)
-        )
-       )
-      )
-      (local.set $2
-       (i32.add
-        (local.get $2)
-        (i32.const 1)
-       )
-      )
-      (br $for-loop|0)
-     )
-    )
-   )
-   (if (result i32)
-    (local.tee $1
-     (i32.load
-      (i32.add
-       (local.get $1)
-       (i32.shl
-        (local.get $3)
-        (i32.const 2)
-       )
-      )
-     )
-    )
-    (call $~lib/string/String.__concat
-     (local.get $0)
-     (local.get $1)
-    )
-    (local.get $0)
-   )
-  )
- )
  (func $~lib/as-chain/name/S2N (result i64)
   (local $0 i32)
   (local $1 i32)
@@ -5547,18 +5840,20 @@
   (local.set $1
    (i32.le_s
     (call $~lib/string/String#get:length
-     (i32.const 4352)
+     (i32.const 6352)
     )
     (i32.const 13)
    )
   )
   (call $~lib/staticarray/StaticArray<~lib/string/String>#__uset
-   (i32.const 4240)
+   (i32.const 6240)
+   (i32.const 1)
+   (i32.const 6352)
   )
   (call $~lib/as-chain/system/check
    (local.get $1)
    (call $~lib/staticarray/StaticArray<~lib/string/String>#join
-    (i32.const 4240)
+    (i32.const 6240)
    )
   )
   (loop $for-loop|0
@@ -5580,7 +5875,7 @@
        (i32.const 0)
        (i32.gt_s
         (call $~lib/string/String#get:length
-         (i32.const 4352)
+         (i32.const 6352)
         )
         (local.get $0)
        )
@@ -5588,7 +5883,7 @@
       (block
        (local.set $1
         (call $~lib/string/String#charCodeAt
-         (i32.const 4352)
+         (i32.const 6352)
          (local.get $0)
         )
        )
@@ -5614,12 +5909,14 @@
         )
         (block
          (call $~lib/staticarray/StaticArray<~lib/string/String>#__uset
-          (i32.const 4320)
+          (i32.const 6320)
+          (i32.const 1)
+          (i32.const 6352)
          )
          (call $~lib/as-chain/system/check
           (i32.const 0)
           (call $~lib/staticarray/StaticArray<~lib/string/String>#join
-           (i32.const 4320)
+           (i32.const 6320)
           )
          )
          (return
@@ -5681,7 +5978,7 @@
    (local.tee $0
     (call $~lib/rt/stub/__new
      (i32.const 4)
-     (i32.const 42)
+     (i32.const 43)
     )
    )
    (i32.const 0)
@@ -5757,7 +6054,7 @@
    (local.tee $4
     (call $~lib/rt/stub/__new
      (i32.const 16)
-     (i32.const 41)
+     (i32.const 42)
     )
    )
    (local.get $0)
@@ -6243,7 +6540,7 @@
    (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/amm/tables/ammConfig.table/AmmConfigTable>#isOk
     (local.get $1)
    )
-   (i32.const 4464)
+   (i32.const 6448)
   )
   (call $~lib/as-chain/system/check
    (i64.eq
@@ -6257,7 +6554,7 @@
       (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/amm/tables/ammConfig.table/AmmConfigTable>#isOk
        (local.get $1)
       )
-      (i32.const 4528)
+      (i32.const 6512)
      )
      (if
       (i32.load8_u offset=8
@@ -6311,7 +6608,7 @@
      )
     )
    )
-   (i32.const 4672)
+   (i32.const 6656)
   )
   (drop
    (i32.load
@@ -6976,7 +7273,7 @@
    (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/amm/tables/ammConfig.table/AmmConfigTable>#isOk
     (local.get $1)
    )
-   (i32.const 4464)
+   (i32.const 6448)
   )
   (call $~lib/as-chain/system/check
    (i64.eq
@@ -6990,7 +7287,7 @@
       (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/amm/tables/ammConfig.table/AmmConfigTable>#isOk
        (local.get $1)
       )
-      (i32.const 4528)
+      (i32.const 6512)
      )
      (if
       (i32.load8_u offset=8
@@ -7044,7 +7341,7 @@
      )
     )
    )
-   (i32.const 4672)
+   (i32.const 6656)
   )
   (drop
    (i32.load
@@ -7364,6 +7661,39 @@
    (local.get $13)
   )
   (call $~lib/as-chain/system/check
+   (if (result i32)
+    (i64.ne
+     (i64.load
+      (local.get $1)
+     )
+     (i64.load
+      (global.get $~lib/as-chain/name/EMPTY_NAME)
+     )
+    )
+    (i64.ne
+     (i64.load
+      (local.get $2)
+     )
+     (i64.load
+      (global.get $~lib/as-chain/name/EMPTY_NAME)
+     )
+    )
+    (i32.const 0)
+   )
+   (i32.const 3408)
+  )
+  (call $~lib/as-chain/system/check
+   (i64.ne
+    (i64.load
+     (local.get $1)
+    )
+    (i64.load
+     (local.get $2)
+    )
+   )
+   (i32.const 3584)
+  )
+  (call $~lib/as-chain/system/check
    (select
     (i64.ne
      (local.get $6)
@@ -7375,7 +7705,7 @@
      (i64.const 0)
     )
    )
-   (i32.const 3408)
+   (i32.const 3760)
   )
   (local.set $15
    (call $assembly/amm/amm.contract/ammContract#computePairId
@@ -7405,6 +7735,7 @@
           (local.get $0)
          )
          (local.get $15)
+         (i32.const 3936)
         )
        )
       )
@@ -7433,41 +7764,128 @@
      )
     )
     (block
+     (call $~lib/staticarray/StaticArray<~lib/string/String>#__uset
+      (i32.const 4608)
+      (i32.const 1)
+      (local.get $10)
+     )
+     (call $~lib/staticarray/StaticArray<~lib/string/String>#__uset
+      (i32.const 4608)
+      (i32.const 3)
+      (call $~lib/util/number/utoa64
+       (local.get $14)
+      )
+     )
+     (call $~lib/staticarray/StaticArray<~lib/string/String>#__uset
+      (i32.const 4608)
+      (i32.const 5)
+      (call $~lib/util/number/utoa64
+       (local.get $8)
+      )
+     )
+     (call $~lib/staticarray/StaticArray<~lib/string/String>#__uset
+      (i32.const 4608)
+      (i32.const 7)
+      (local.get $10)
+     )
      (call $~lib/as-chain/system/check
       (i64.le_u
        (local.get $8)
        (local.get $14)
       )
-      (i32.const 3648)
+      (call $~lib/staticarray/StaticArray<~lib/string/String>#join
+       (i32.const 4608)
+      )
      )
      (local.set $6
       (local.get $14)
      )
     )
     (block
-     (call $~lib/as-chain/system/check
-      (i64.ge_u
-       (local.get $5)
-       (local.tee $5
-        (call $assembly/amm/amm.contract/ammContract#quote
-         (local.get $6)
-         (i64.load offset=24
-          (local.get $1)
-         )
-         (i64.load offset=16
-          (local.get $1)
-         )
-        )
+     (local.set $8
+      (call $assembly/amm/amm.contract/ammContract#quote
+       (local.get $6)
+       (i64.load offset=24
+        (local.get $1)
+       )
+       (i64.load offset=16
+        (local.get $1)
        )
       )
-      (i32.const 3728)
+     )
+     (call $~lib/staticarray/StaticArray<~lib/string/String>#__uset
+      (i32.const 5216)
+      (i32.const 1)
+      (local.get $9)
+     )
+     (call $~lib/staticarray/StaticArray<~lib/string/String>#__uset
+      (i32.const 5216)
+      (i32.const 3)
+      (call $~lib/util/number/utoa64
+       (local.get $8)
+      )
+     )
+     (call $~lib/staticarray/StaticArray<~lib/string/String>#__uset
+      (i32.const 5216)
+      (i32.const 5)
+      (call $~lib/util/number/utoa64
+       (local.get $5)
+      )
+     )
+     (call $~lib/staticarray/StaticArray<~lib/string/String>#__uset
+      (i32.const 5216)
+      (i32.const 7)
+      (local.get $9)
+     )
+     (call $~lib/staticarray/StaticArray<~lib/string/String>#__uset
+      (i32.const 5216)
+      (i32.const 9)
+      (local.get $10)
      )
      (call $~lib/as-chain/system/check
       (i64.ge_u
        (local.get $5)
+       (local.get $8)
+      )
+      (call $~lib/staticarray/StaticArray<~lib/string/String>#join
+       (i32.const 5216)
+      )
+     )
+     (call $~lib/staticarray/StaticArray<~lib/string/String>#__uset
+      (i32.const 5280)
+      (i32.const 1)
+      (local.get $9)
+     )
+     (call $~lib/staticarray/StaticArray<~lib/string/String>#__uset
+      (i32.const 5280)
+      (i32.const 3)
+      (call $~lib/util/number/utoa64
+       (local.get $8)
+      )
+     )
+     (call $~lib/staticarray/StaticArray<~lib/string/String>#__uset
+      (i32.const 5280)
+      (i32.const 5)
+      (call $~lib/util/number/utoa64
        (local.get $7)
       )
-      (i32.const 3792)
+     )
+     (call $~lib/staticarray/StaticArray<~lib/string/String>#__uset
+      (i32.const 5280)
+      (i32.const 7)
+      (local.get $9)
+     )
+     (call $~lib/as-chain/system/check
+      (i64.le_u
+       (local.get $7)
+       (local.get $8)
+      )
+      (call $~lib/staticarray/StaticArray<~lib/string/String>#join
+       (i32.const 5280)
+      )
+     )
+     (local.set $5
+      (local.get $8)
      )
     )
    )
@@ -7521,7 +7939,7 @@
           (local.get $0)
          )
         )
-        (i32.const 3872)
+        (i32.const 5344)
        )
        (i64.sub
         (local.get $7)
@@ -7566,7 +7984,7 @@
     )
     (i64.const 0)
    )
-   (i32.const 3872)
+   (i32.const 5616)
   )
   (local.set $2
    (call $assembly/amm/amm.contract/ammContract#createAsset
@@ -7575,14 +7993,31 @@
     (local.get $11)
    )
   )
-  (call $assembly/amm/amm.contract/ammContract#transferFrom
-   (local.get $3)
-   (local.get $13)
+  (local.set $11
    (i32.load
     (local.get $0)
    )
+  )
+  (call $~lib/staticarray/StaticArray<~lib/string/String>#__uset
+   (i32.const 6144)
+   (i32.const 1)
+   (call $~lib/util/number/utoa64
+    (local.get $5)
+   )
+  )
+  (call $~lib/staticarray/StaticArray<~lib/string/String>#__uset
+   (i32.const 6144)
+   (i32.const 3)
+   (local.get $9)
+  )
+  (call $assembly/amm/amm.contract/ammContract#transferFrom
+   (local.get $3)
+   (local.get $13)
+   (local.get $11)
    (local.get $2)
-   (i32.const 4096)
+   (call $~lib/staticarray/StaticArray<~lib/string/String>#join
+    (i32.const 6144)
+   )
   )
   (local.set $2
    (call $assembly/amm/amm.contract/ammContract#createAsset
@@ -7591,14 +8026,31 @@
     (local.get $12)
    )
   )
-  (call $assembly/amm/amm.contract/ammContract#transferFrom
-   (local.get $4)
-   (local.get $13)
+  (local.set $3
    (i32.load
     (local.get $0)
    )
+  )
+  (call $~lib/staticarray/StaticArray<~lib/string/String>#__uset
+   (i32.const 6400)
+   (i32.const 1)
+   (call $~lib/util/number/utoa64
+    (local.get $6)
+   )
+  )
+  (call $~lib/staticarray/StaticArray<~lib/string/String>#__uset
+   (i32.const 6400)
+   (i32.const 3)
+   (local.get $10)
+  )
+  (call $assembly/amm/amm.contract/ammContract#transferFrom
+   (local.get $4)
+   (local.get $13)
+   (local.get $3)
    (local.get $2)
-   (i32.const 4400)
+   (call $~lib/staticarray/StaticArray<~lib/string/String>#join
+    (i32.const 6400)
+   )
   )
   (call $assembly/amm/tables/pairData.table/PairDataTable#set:reserve0
    (local.get $1)
@@ -7800,7 +8252,7 @@
     (local.get $5)
     (i64.const 0)
    )
-   (i32.const 4784)
+   (i32.const 6768)
   )
   (local.set $14
    (call $assembly/amm/amm.contract/ammContract#computePairId
@@ -7825,6 +8277,7 @@
      (local.get $0)
     )
     (local.get $14)
+    (i32.const 3184)
    )
   )
   (call $~lib/as-chain/system/check
@@ -7838,7 +8291,7 @@
     )
     (i32.const 0)
    )
-   (i32.const 4880)
+   (i32.const 6864)
   )
   (call $~lib/as-chain/system/check
    (i64.le_u
@@ -7853,7 +8306,7 @@
      )
     )
    )
-   (i32.const 4944)
+   (i32.const 6928)
   )
   (call $~lib/as-chain/system/check
    (i64.ne
@@ -7862,7 +8315,7 @@
     )
     (i64.const 0)
    )
-   (i32.const 5024)
+   (i32.const 7008)
   )
   (call $~lib/as-chain/system/check
    (select
@@ -7900,21 +8353,21 @@
      (i64.const 0)
     )
    )
-   (i32.const 4784)
+   (i32.const 6768)
   )
   (call $~lib/as-chain/system/check
    (i64.le_u
     (local.get $6)
     (local.get $16)
    )
-   (i32.const 3792)
+   (i32.const 7088)
   )
   (call $~lib/as-chain/system/check
    (i64.le_u
     (local.get $7)
     (local.get $14)
    )
-   (i32.const 3648)
+   (i32.const 7168)
   )
   (if
    (i32.eqz
@@ -8174,7 +8627,7 @@
    )
    (local.get $12)
    (local.get $1)
-   (i32.const 5104)
+   (i32.const 7248)
   )
   (local.set $1
    (call $assembly/amm/amm.contract/ammContract#createAsset
@@ -8191,7 +8644,7 @@
    )
    (local.get $12)
    (local.get $1)
-   (i32.const 5184)
+   (i32.const 7328)
   )
  )
  (func $assembly/amm/amm.contract/ammContract#computeAmountOut (param $0 i32) (param $1 i64) (param $2 i64) (param $3 i64) (param $4 i32) (result i64)
@@ -8203,7 +8656,7 @@
     (local.get $1)
     (i64.const 0)
    )
-   (i32.const 5264)
+   (i32.const 7408)
   )
   (call $~lib/as-chain/system/check
    (select
@@ -8217,7 +8670,7 @@
      (i64.const 0)
     )
    )
-   (i32.const 3568)
+   (i32.const 4144)
   )
   (local.set $4
    (i32.sub
@@ -8661,7 +9114,7 @@
     (local.get $5)
     (i64.const 0)
    )
-   (i32.const 5264)
+   (i32.const 7408)
   )
   (call $~lib/as-chain/system/check
    (i64.ne
@@ -8701,6 +9154,7 @@
          (local.get $0)
         )
         (local.get $12)
+        (i32.const 3184)
        )
       )
      )
@@ -8714,7 +9168,7 @@
     )
     (i32.const 0)
    )
-   (i32.const 3568)
+   (i32.const 4144)
   )
   (local.set $12
    (if (result i64)
@@ -8771,14 +9225,14 @@
      )
     )
    )
-   (i32.const 5344)
+   (i32.const 7488)
   )
   (call $~lib/as-chain/system/check
    (i64.lt_u
     (local.get $6)
     (local.get $12)
    )
-   (i32.const 3568)
+   (i32.const 4144)
   )
   (local.set $7
    (call $assembly/amm/amm.contract/ammContract#createAsset
@@ -8794,7 +9248,7 @@
     (local.get $0)
    )
    (local.get $7)
-   (i32.const 5440)
+   (i32.const 7584)
   )
   (local.set $3
    (call $assembly/amm/amm.contract/ammContract#createAsset
@@ -8811,7 +9265,7 @@
    )
    (local.get $11)
    (local.get $3)
-   (i32.const 5488)
+   (i32.const 7632)
   )
   (if
    (local.get $1)
@@ -8953,7 +9407,7 @@
      )
     )
    )
-   (i32.const 5536)
+   (i32.const 7680)
   )
   (call $assembly/amm/amm.contract/ammContract#updatePriceAccumulators
    (local.get $2)
@@ -8997,6 +9451,7 @@
      (local.get $0)
     )
     (local.get $3)
+    (i32.const 3184)
    )
   )
  )
@@ -9007,7 +9462,7 @@
     (local.get $3)
     (i64.const 0)
    )
-   (i32.const 5264)
+   (i32.const 7408)
   )
   (local.set $4
    (call $assembly/amm/amm.contract/ammContract#computePairId
@@ -9032,6 +9487,7 @@
      (local.get $0)
     )
     (local.get $4)
+    (i32.const 3184)
    )
   )
   (drop
@@ -9113,7 +9569,7 @@
    (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/amm/tables/ammConfig.table/AmmConfigTable>#isOk
     (local.get $1)
    )
-   (i32.const 4464)
+   (i32.const 6448)
   )
   (call $~lib/as-chain/system/check
    (i64.eq
@@ -9127,7 +9583,7 @@
       (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/amm/tables/ammConfig.table/AmmConfigTable>#isOk
        (local.get $1)
       )
-      (i32.const 4528)
+      (i32.const 6512)
      )
      (if
       (i32.load8_u offset=8
@@ -9181,7 +9637,7 @@
      )
     )
    )
-   (i32.const 4672)
+   (i32.const 6656)
   )
   (drop
    (i32.load
@@ -9328,7 +9784,7 @@
     (i32.const 0)
     (local.get $1)
    )
-   (i32.const 5616)
+   (i32.const 7760)
   )
   (call $~lib/rt/common/OBJECT#set:rtId
    (local.tee $2
@@ -10930,11 +11386,11 @@
       )
       (call $assembly/amm/tables/pairData.table/PairDataTable#set:price0CumulativeLast
        (local.get $3)
-       (i32.const 4208)
+       (i32.const 4800)
       )
       (call $assembly/amm/tables/pairData.table/PairDataTable#set:price1CumulativeLast
        (local.get $3)
-       (i32.const 4208)
+       (i32.const 4800)
       )
       (call $assembly/amm/amm.contract/addLiquidityAction#set:token0Precision
        (local.get $3)
@@ -11103,11 +11559,11 @@
       )
       (call $assembly/amm/tables/pairData.table/PairDataTable#set:kLast
        (local.get $3)
-       (i32.const 4208)
+       (i32.const 4800)
       )
       (call $assembly/amm/tables/pairData.table/PairDataTable#set:blockTimestampLast
        (local.get $3)
-       (i32.const 4208)
+       (i32.const 4800)
       )
       (call $assembly/amm/amm.contract/removeLiquidityAction#set:token0Precision
        (local.get $3)
@@ -11266,11 +11722,11 @@
       )
       (call $assembly/amm/amm.contract/swapAction#set:tokenInSymbol
        (local.get $3)
-       (i32.const 4208)
+       (i32.const 4800)
       )
       (call $assembly/amm/amm.contract/swapAction#set:tokenOutSymbol
        (local.get $3)
-       (i32.const 4208)
+       (i32.const 4800)
       )
       (call $assembly/amm/amm.contract/swapAction#set:tokenInPrecision
        (local.get $3)
@@ -12082,7 +12538,7 @@
                      (block $case4
                       (block $case3
                        (block $case0
-                        (br_table $case15 $default $default $default $case18 $default $default $case21 $default $default $default $default $default $case19 $default $default $default $case20 $default $default $default $default $default $default $default $default $default $default $default $default $default $case12 $case11 $default $case17 $case16 $case10 $default $default $case13 $default $default $case14 $default $case0 $folding-inner0 $folding-inner0 $case3 $case4 $case5 $folding-inner0 $case7 $case8 $case9 $default
+                        (br_table $case15 $default $default $default $case18 $default $default $case21 $default $default $default $default $default $case19 $default $default $default $case20 $default $default $default $default $default $default $default $default $default $default $default $default $default $case12 $case11 $default $default $case17 $case16 $case10 $default $case13 $default $default $case14 $default $case0 $folding-inner0 $folding-inner0 $case3 $case4 $case5 $folding-inner0 $case7 $case8 $case9 $default
                          (i32.sub
                           (i32.load
                            (i32.sub
@@ -12199,7 +12655,7 @@
                   (call $~lib/as-chain/asset/Asset#constructor
                    (i64.const 0)
                    (call $~lib/as-chain/asset/Symbol#constructor
-                    (i32.const 4208)
+                    (i32.const 4800)
                     (i32.const 0)
                    )
                   )
@@ -12296,7 +12752,7 @@
            (call $~lib/as-chain/asset/Symbol#isValid
             (local.get $0)
            )
-           (i32.const 5680)
+           (i32.const 7824)
           )
           (br $folding-inner1)
          )
@@ -12358,7 +12814,7 @@
            )
            (i32.const 0)
           )
-          (i32.const 5728)
+          (i32.const 7872)
          )
          (return
           (i32.load offset=4
@@ -13000,7 +13456,7 @@
                         (block $case4
                          (block $case3
                           (block $case0
-                           (br_table $case15 $default $default $default $case18 $default $default $case21 $default $default $default $default $default $case19 $default $default $default $case20 $default $default $default $default $default $default $default $default $default $default $default $default $default $case12 $case11 $default $case17 $case16 $case10 $default $default $case13 $default $default $case14 $default $case0 $folding-inner0 $folding-inner0 $case3 $case4 $case5 $folding-inner0 $case7 $case8 $case9 $default
+                           (br_table $case15 $default $default $default $case18 $default $default $case21 $default $default $default $default $default $case19 $default $default $default $case20 $default $default $default $default $default $default $default $default $default $default $default $default $default $case12 $case11 $default $default $case17 $case16 $case10 $default $case13 $default $default $case14 $default $case0 $folding-inner0 $folding-inner0 $case3 $case4 $case5 $folding-inner0 $case7 $case8 $case9 $default
                             (i32.sub
                              (i32.load
                               (i32.sub
@@ -13449,7 +13905,7 @@
  (func $~start
   (local $0 i32)
   (global.set $~lib/rt/stub/offset
-   (i32.const 5756)
+   (i32.const 7900)
   )
   (call $~lib/as-chain/name/Name#set:N
    (local.tee $0

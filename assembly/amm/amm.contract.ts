@@ -111,8 +111,18 @@ export class ammContract extends Contract {
     requireAuth(provider);
 
     check(
+      token0 != EMPTY_NAME && token1 != EMPTY_NAME,
+      "Add Liquidity Failed: One or both token addresses are invalid or empty."
+    );
+
+    check(
+      token0.N != token1.N,
+      "Add Liquidity Failed: You cannot create a pool with two identical tokens."
+    );
+
+    check(
       amount0Desired > 0 && amount1Desired > 0,
-      "AMM: INSUFFICIENT_AMOUNTS"
+      "Add Liquidity Failed: You must provide a positive amount for both tokens."
     );
 
     const sorted = this.sortTokens(token0, token1);
@@ -120,7 +130,10 @@ export class ammContract extends Contract {
     const t1 = sorted[1];
 
     const pairId = this.computePairId(t0, t1);
-    const pair = this.pairDataTable.requireGet(pairId, "AMM: PAIR_NOT_FOUND");
+    const pair = this.pairDataTable.requireGet(
+      pairId,
+      "Add Liquidity Failed: This token pair does not exist."
+    );
 
     let amount0: u64;
     let amount1: u64;
@@ -137,7 +150,10 @@ export class ammContract extends Contract {
       );
 
       if (amount1Optimal <= amount1Desired) {
-        check(amount1Optimal >= amount1Min, "AMM: INSUFFICIENT_1_AMOUNT");
+        check(
+          amount1Optimal >= amount1Min,
+          `Add Liquidity Failed: The required amount of ${token1Symbol} (${amount1Optimal}) is below your minimum (${amount1Min}). Try increasing your ${token1Symbol} input or lowering slippage.`
+        );
         amount0 = amount0Desired;
         amount1 = amount1Optimal;
       } else {
@@ -146,8 +162,15 @@ export class ammContract extends Contract {
           pair.reserve1,
           pair.reserve0
         );
-        check(amount0Optimal <= amount0Desired, "AMM: INVALID_AMOUNTS");
-        check(amount0Optimal >= amount0Min, "AMM: INSUFFICIENT_0_AMOUNT");
+        check(
+          amount0Optimal <= amount0Desired,
+          `Add Liquidity Failed: The optimal ${token0Symbol} amount (${amount0Optimal}) exceeds your provided amount (${amount0Desired}). Please increase ${token0Symbol} or lower ${token1Symbol}.`
+        );
+
+        check(
+          amount0Optimal >= amount0Min,
+          `Add Liquidity Failed: The required amount of ${token0Symbol} (${amount0Optimal}) is below your minimum (${amount0Min}). Try increasing your ${token0Symbol} input or lowering slippage.`
+        );
         amount0 = amount0Optimal;
         amount1 = amount1Desired;
       }
@@ -162,7 +185,7 @@ export class ammContract extends Contract {
       liquidity = this.sqrtU128(product);
       check(
         liquidity > this.MINIMUM_LIQUIDITY,
-        "AMM: INSUFFICIENT_LIQUIDITY_MINTED"
+        "Add Liquidity Failed: The provided token amounts are too small to mint initial liquidity. Please increase your input amounts."
       );
       liquidity -= this.MINIMUM_LIQUIDITY;
     } else {
@@ -172,7 +195,10 @@ export class ammContract extends Contract {
       );
     }
 
-    check(liquidity > 0, "AMM: INSUFFICIENT_LIQUIDITY_MINTED");
+    check(
+      liquidity > 0,
+      "Add Liquidity Failed: Insufficient liquidity generated from your token amounts. Try providing larger amounts or check pool ratios."
+    );
 
     // Transfer token0 from provider to AMM
     const asset0 = this.createAsset(amount0, token0Symbol, token0Precision);
@@ -181,7 +207,7 @@ export class ammContract extends Contract {
       provider,
       this.receiver,
       asset0,
-      "Add liquidity: token0"
+      `Add liquidity: transferring ${amount0} ${token0Symbol}`
     );
 
     // Transfer token1 from provider to AMM
@@ -191,7 +217,7 @@ export class ammContract extends Contract {
       provider,
       this.receiver,
       asset1,
-      "Add liquidity: token1"
+      `Add liquidity: transferring ${amount1} ${token1Symbol}`
     );
 
     pair.reserve0 += amount0;
