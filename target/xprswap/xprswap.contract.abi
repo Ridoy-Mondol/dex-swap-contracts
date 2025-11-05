@@ -1,0 +1,488 @@
+{
+  "version": "eosio::abi/1.2",
+  "structs": [
+    {
+      "name": "ConfigTable",
+      "base": "",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uint64"
+        },
+        {
+          "name": "paused",
+          "type": "bool"
+        },
+        {
+          "name": "min_liquidity",
+          "type": "uint64"
+        },
+        {
+          "name": "admin",
+          "type": "name"
+        },
+        {
+          "name": "swap_fee",
+          "type": "uint32"
+        }
+      ]
+    },
+    {
+      "name": "DepositTable",
+      "base": "",
+      "fields": [
+        {
+          "name": "owner",
+          "type": "name"
+        },
+        {
+          "name": "token1_contract",
+          "type": "name"
+        },
+        {
+          "name": "token1_symbol",
+          "type": "symbol"
+        },
+        {
+          "name": "token2_contract",
+          "type": "name"
+        },
+        {
+          "name": "token2_symbol",
+          "type": "symbol"
+        },
+        {
+          "name": "token1_received",
+          "type": "uint64"
+        },
+        {
+          "name": "token2_received",
+          "type": "uint64"
+        },
+        {
+          "name": "prepared_at",
+          "type": "uint64"
+        },
+        {
+          "name": "expires_at",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
+      "name": "LiquidityTable",
+      "base": "",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uint64"
+        },
+        {
+          "name": "pool_id",
+          "type": "uint64"
+        },
+        {
+          "name": "provider",
+          "type": "name"
+        },
+        {
+          "name": "lp_balance",
+          "type": "uint64"
+        },
+        {
+          "name": "token0_contributed",
+          "type": "uint64"
+        },
+        {
+          "name": "token1_contributed",
+          "type": "uint64"
+        },
+        {
+          "name": "updated_at",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
+      "name": "PoolsTable",
+      "base": "",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uint64"
+        },
+        {
+          "name": "token0",
+          "type": "name"
+        },
+        {
+          "name": "token1",
+          "type": "name"
+        },
+        {
+          "name": "token0_contract",
+          "type": "name"
+        },
+        {
+          "name": "token1_contract",
+          "type": "name"
+        },
+        {
+          "name": "token0_symbol",
+          "type": "symbol"
+        },
+        {
+          "name": "token1_symbol",
+          "type": "symbol"
+        },
+        {
+          "name": "reserve0",
+          "type": "uint64"
+        },
+        {
+          "name": "reserve1",
+          "type": "uint64"
+        },
+        {
+          "name": "lp_supply",
+          "type": "uint64"
+        },
+        {
+          "name": "kLast",
+          "type": "uint128"
+        },
+        {
+          "name": "blockTimestampLast",
+          "type": "uint32"
+        },
+        {
+          "name": "created_at",
+          "type": "uint64"
+        },
+        {
+          "name": "price0CumulativeLast",
+          "type": "uint128"
+        },
+        {
+          "name": "price1CumulativeLast",
+          "type": "uint128"
+        },
+        {
+          "name": "creator",
+          "type": "name"
+        }
+      ]
+    },
+    {
+      "name": "TokenAmount",
+      "base": "",
+      "fields": [
+        {
+          "name": "quantity",
+          "type": "string"
+        },
+        {
+          "name": "contract",
+          "type": "name"
+        }
+      ]
+    },
+    {
+      "name": "TokenStatTable",
+      "base": "",
+      "fields": [
+        {
+          "name": "supply",
+          "type": "asset"
+        },
+        {
+          "name": "maxSupply",
+          "type": "asset"
+        },
+        {
+          "name": "issuer",
+          "type": "name"
+        }
+      ]
+    },
+    {
+      "name": "TokenSymbolParam",
+      "base": "",
+      "fields": [
+        {
+          "name": "contract",
+          "type": "name"
+        },
+        {
+          "name": "sym",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "createpool",
+      "base": "",
+      "fields": [
+        {
+          "name": "token0",
+          "type": "name"
+        },
+        {
+          "name": "token1",
+          "type": "name"
+        },
+        {
+          "name": "token0Contract",
+          "type": "name"
+        },
+        {
+          "name": "token1Contract",
+          "type": "name"
+        },
+        {
+          "name": "token0Symbol",
+          "type": "string"
+        },
+        {
+          "name": "token1Symbol",
+          "type": "string"
+        },
+        {
+          "name": "token0Precision",
+          "type": "uint8"
+        },
+        {
+          "name": "token1Precision",
+          "type": "uint8"
+        }
+      ]
+    },
+    {
+      "name": "depositprep",
+      "base": "",
+      "fields": [
+        {
+          "name": "owner",
+          "type": "name"
+        },
+        {
+          "name": "symbols",
+          "type": "TokenSymbolParam[]"
+        }
+      ]
+    },
+    {
+      "name": "getquote",
+      "base": "",
+      "fields": [
+        {
+          "name": "tokenIn",
+          "type": "name"
+        },
+        {
+          "name": "tokenOut",
+          "type": "name"
+        },
+        {
+          "name": "amountIn",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
+      "name": "init",
+      "base": "",
+      "fields": [
+        {
+          "name": "admin",
+          "type": "name"
+        }
+      ]
+    },
+    {
+      "name": "liquidityadd",
+      "base": "",
+      "fields": [
+        {
+          "name": "owner",
+          "type": "name"
+        },
+        {
+          "name": "add_token1",
+          "type": "TokenAmount"
+        },
+        {
+          "name": "add_token2",
+          "type": "TokenAmount"
+        },
+        {
+          "name": "add_token1_min",
+          "type": "TokenAmount"
+        },
+        {
+          "name": "add_token2_min",
+          "type": "TokenAmount"
+        }
+      ]
+    },
+    {
+      "name": "pause",
+      "base": "",
+      "fields": [
+        {
+          "name": "paused",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "remliquidity",
+      "base": "",
+      "fields": [
+        {
+          "name": "token0",
+          "type": "name"
+        },
+        {
+          "name": "token1",
+          "type": "name"
+        },
+        {
+          "name": "token0Contract",
+          "type": "name"
+        },
+        {
+          "name": "token1Contract",
+          "type": "name"
+        },
+        {
+          "name": "liquidity",
+          "type": "uint64"
+        },
+        {
+          "name": "amount0Min",
+          "type": "uint64"
+        },
+        {
+          "name": "amount1Min",
+          "type": "uint64"
+        },
+        {
+          "name": "token0Symbol",
+          "type": "string"
+        },
+        {
+          "name": "token1Symbol",
+          "type": "string"
+        },
+        {
+          "name": "token0Precision",
+          "type": "uint8"
+        },
+        {
+          "name": "token1Precision",
+          "type": "uint8"
+        },
+        {
+          "name": "provider",
+          "type": "name"
+        }
+      ]
+    },
+    {
+      "name": "withdrawall",
+      "base": "",
+      "fields": [
+        {
+          "name": "owner",
+          "type": "name"
+        }
+      ]
+    }
+  ],
+  "types": [],
+  "actions": [
+    {
+      "name": "createpool",
+      "type": "createpool",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "depositprep",
+      "type": "depositprep",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "getquote",
+      "type": "getquote",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "init",
+      "type": "init",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "liquidityadd",
+      "type": "liquidityadd",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "pause",
+      "type": "pause",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "remliquidity",
+      "type": "remliquidity",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "withdrawall",
+      "type": "withdrawall",
+      "ricardian_contract": ""
+    }
+  ],
+  "tables": [
+    {
+      "name": "config",
+      "type": "ConfigTable",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": []
+    },
+    {
+      "name": "deposits",
+      "type": "DepositTable",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": []
+    },
+    {
+      "name": "liquidity",
+      "type": "LiquidityTable",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": []
+    },
+    {
+      "name": "pools",
+      "type": "PoolsTable",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": []
+    },
+    {
+      "name": "stat",
+      "type": "TokenStatTable",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": []
+    }
+  ],
+  "ricardian_clauses": [],
+  "variants": [],
+  "action_results": [],
+  "abi_extensions": [],
+  "error_messages": []
+}

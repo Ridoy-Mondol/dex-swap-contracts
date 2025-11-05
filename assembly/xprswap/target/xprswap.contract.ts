@@ -1,3 +1,4 @@
+import * as _chain from "as-chain";
 import {
   Asset,
   check,
@@ -22,15 +23,71 @@ import {
 } from "./tables";
 import { TokenTransfer } from "./xprswap.inline";
 
-class TokenSymbolParam {
+
+
+class TokenSymbolParam implements _chain.Packer {
+    
   constructor(public contract: Name = EMPTY_NAME, public sym: string = "0,") {}
+    pack(): u8[] {
+        let enc = new _chain.Encoder(this.getSize());
+        enc.pack(this.contract);
+        enc.packString(this.sym);
+        return enc.getBytes();
+    }
+    
+    unpack(data: u8[]): usize {
+        let dec = new _chain.Decoder(data);
+        
+        {
+            let obj = new Name();
+            dec.unpack(obj);
+            this.contract = obj;
+        }
+        this.sym = dec.unpackString();
+        return dec.getPos();
+    }
+
+    getSize(): usize {
+        let size: usize = 0;
+        size += this.contract.getSize();
+        size += _chain.Utils.calcPackedStringLength(this.sym);
+        return size;
+    }
 }
 
-class TokenAmount {
+
+
+class TokenAmount implements _chain.Packer {
+    
   constructor(
     public quantity: string = "0",
     public contract: Name = EMPTY_NAME
   ) {}
+    pack(): u8[] {
+        let enc = new _chain.Encoder(this.getSize());
+        enc.packString(this.quantity);
+        enc.pack(this.contract);
+        return enc.getBytes();
+    }
+    
+    unpack(data: u8[]): usize {
+        let dec = new _chain.Decoder(data);
+        this.quantity = dec.unpackString();
+        
+        {
+            let obj = new Name();
+            dec.unpack(obj);
+            this.contract = obj;
+        }
+        return dec.getPos();
+    }
+
+    getSize(): usize {
+        let size: usize = 0;
+        size += _chain.Utils.calcPackedStringLength(this.quantity);
+        size += this.contract.getSize();
+        return size;
+    }
 }
 
 @contract
@@ -622,7 +679,7 @@ export class XPRSwap extends Contract {
 
     const action = transfer.act(
       tokenContract,
-      new PermissionLevel(this.receiver, Name.fromString("active"))
+      new PermissionLevel(this.receiver, Name.fromU64(0x3232EDA800000000))
     );
 
     const transferParams = new TokenTransfer(from, to, quantity, memo);
@@ -824,4 +881,528 @@ export class XPRSwap extends Contract {
       `Swap output`
     );
   }
+}
+
+
+class initAction implements _chain.Packer {
+    constructor (
+        public admin: _chain.Name | null = null,
+    ) {
+    }
+
+    pack(): u8[] {
+        let enc = new _chain.Encoder(this.getSize());
+        enc.pack(this.admin!);
+        return enc.getBytes();
+    }
+    
+    unpack(data: u8[]): usize {
+        let dec = new _chain.Decoder(data);
+        
+        {
+            let obj = new _chain.Name();
+            dec.unpack(obj);
+            this.admin! = obj;
+        }
+        return dec.getPos();
+    }
+
+    getSize(): usize {
+        let size: usize = 0;
+        size += this.admin!.getSize();
+        return size;
+    }
+}
+
+class createPoolAction implements _chain.Packer {
+    constructor (
+        public token0: _chain.Name | null = null,
+        public token1: _chain.Name | null = null,
+        public token0Contract: _chain.Name | null = null,
+        public token1Contract: _chain.Name | null = null,
+        public token0Symbol: string = "",
+        public token1Symbol: string = "",
+        public token0Precision: u8 = 0,
+        public token1Precision: u8 = 0,
+    ) {
+    }
+
+    pack(): u8[] {
+        let enc = new _chain.Encoder(this.getSize());
+        enc.pack(this.token0!);
+        enc.pack(this.token1!);
+        enc.pack(this.token0Contract!);
+        enc.pack(this.token1Contract!);
+        enc.packString(this.token0Symbol);
+        enc.packString(this.token1Symbol);
+        enc.packNumber<u8>(this.token0Precision);
+        enc.packNumber<u8>(this.token1Precision);
+        return enc.getBytes();
+    }
+    
+    unpack(data: u8[]): usize {
+        let dec = new _chain.Decoder(data);
+        
+        {
+            let obj = new _chain.Name();
+            dec.unpack(obj);
+            this.token0! = obj;
+        }
+        
+        {
+            let obj = new _chain.Name();
+            dec.unpack(obj);
+            this.token1! = obj;
+        }
+        
+        {
+            let obj = new _chain.Name();
+            dec.unpack(obj);
+            this.token0Contract! = obj;
+        }
+        
+        {
+            let obj = new _chain.Name();
+            dec.unpack(obj);
+            this.token1Contract! = obj;
+        }
+        this.token0Symbol = dec.unpackString();
+        this.token1Symbol = dec.unpackString();
+        this.token0Precision = dec.unpackNumber<u8>();
+        this.token1Precision = dec.unpackNumber<u8>();
+        return dec.getPos();
+    }
+
+    getSize(): usize {
+        let size: usize = 0;
+        size += this.token0!.getSize();
+        size += this.token1!.getSize();
+        size += this.token0Contract!.getSize();
+        size += this.token1Contract!.getSize();
+        size += _chain.Utils.calcPackedStringLength(this.token0Symbol);
+        size += _chain.Utils.calcPackedStringLength(this.token1Symbol);
+        size += sizeof<u8>();
+        size += sizeof<u8>();
+        return size;
+    }
+}
+
+class depositPrepAction implements _chain.Packer {
+    constructor (
+        public owner: _chain.Name | null = null,
+        public symbols: Array<TokenSymbolParam> | null = null,
+    ) {
+    }
+
+    pack(): u8[] {
+        let enc = new _chain.Encoder(this.getSize());
+        enc.pack(this.owner!);
+        enc.packObjectArray(this.symbols!);
+        return enc.getBytes();
+    }
+    
+    unpack(data: u8[]): usize {
+        let dec = new _chain.Decoder(data);
+        
+        {
+            let obj = new _chain.Name();
+            dec.unpack(obj);
+            this.owner! = obj;
+        }
+        
+    {
+        let length = <i32>dec.unpackLength();
+        this.symbols! = new Array<TokenSymbolParam>(length)
+        for (let i=0; i<length; i++) {
+            let obj = new TokenSymbolParam();
+            this.symbols![i] = obj;
+            dec.unpack(obj);
+        }
+    }
+
+        return dec.getPos();
+    }
+
+    getSize(): usize {
+        let size: usize = 0;
+        size += this.owner!.getSize();
+        size += _chain.calcPackedVarUint32Length(this.symbols!.length);
+        for (let i=0; i<this.symbols!.length; i++) {
+            size += this.symbols![i].getSize();
+        }
+
+        return size;
+    }
+}
+
+class onTransferAction implements _chain.Packer {
+    constructor (
+        public from: _chain.Name | null = null,
+        public to: _chain.Name | null = null,
+        public quantity: _chain.Asset | null = null,
+        public memo: string = "",
+    ) {
+    }
+
+    pack(): u8[] {
+        let enc = new _chain.Encoder(this.getSize());
+        enc.pack(this.from!);
+        enc.pack(this.to!);
+        enc.pack(this.quantity!);
+        enc.packString(this.memo);
+        return enc.getBytes();
+    }
+    
+    unpack(data: u8[]): usize {
+        let dec = new _chain.Decoder(data);
+        
+        {
+            let obj = new _chain.Name();
+            dec.unpack(obj);
+            this.from! = obj;
+        }
+        
+        {
+            let obj = new _chain.Name();
+            dec.unpack(obj);
+            this.to! = obj;
+        }
+        
+        {
+            let obj = new _chain.Asset();
+            dec.unpack(obj);
+            this.quantity! = obj;
+        }
+        this.memo = dec.unpackString();
+        return dec.getPos();
+    }
+
+    getSize(): usize {
+        let size: usize = 0;
+        size += this.from!.getSize();
+        size += this.to!.getSize();
+        size += this.quantity!.getSize();
+        size += _chain.Utils.calcPackedStringLength(this.memo);
+        return size;
+    }
+}
+
+class liquidityAddAction implements _chain.Packer {
+    constructor (
+        public owner: _chain.Name | null = null,
+        public add_token1: TokenAmount | null = null,
+        public add_token2: TokenAmount | null = null,
+        public add_token1_min: TokenAmount | null = null,
+        public add_token2_min: TokenAmount | null = null,
+    ) {
+    }
+
+    pack(): u8[] {
+        let enc = new _chain.Encoder(this.getSize());
+        enc.pack(this.owner!);
+        enc.pack(this.add_token1!);
+        enc.pack(this.add_token2!);
+        enc.pack(this.add_token1_min!);
+        enc.pack(this.add_token2_min!);
+        return enc.getBytes();
+    }
+    
+    unpack(data: u8[]): usize {
+        let dec = new _chain.Decoder(data);
+        
+        {
+            let obj = new _chain.Name();
+            dec.unpack(obj);
+            this.owner! = obj;
+        }
+        
+        {
+            let obj = new TokenAmount();
+            dec.unpack(obj);
+            this.add_token1! = obj;
+        }
+        
+        {
+            let obj = new TokenAmount();
+            dec.unpack(obj);
+            this.add_token2! = obj;
+        }
+        
+        {
+            let obj = new TokenAmount();
+            dec.unpack(obj);
+            this.add_token1_min! = obj;
+        }
+        
+        {
+            let obj = new TokenAmount();
+            dec.unpack(obj);
+            this.add_token2_min! = obj;
+        }
+        return dec.getPos();
+    }
+
+    getSize(): usize {
+        let size: usize = 0;
+        size += this.owner!.getSize();
+        size += this.add_token1!.getSize();
+        size += this.add_token2!.getSize();
+        size += this.add_token1_min!.getSize();
+        size += this.add_token2_min!.getSize();
+        return size;
+    }
+}
+
+class withdrawAllAction implements _chain.Packer {
+    constructor (
+        public owner: _chain.Name | null = null,
+    ) {
+    }
+
+    pack(): u8[] {
+        let enc = new _chain.Encoder(this.getSize());
+        enc.pack(this.owner!);
+        return enc.getBytes();
+    }
+    
+    unpack(data: u8[]): usize {
+        let dec = new _chain.Decoder(data);
+        
+        {
+            let obj = new _chain.Name();
+            dec.unpack(obj);
+            this.owner! = obj;
+        }
+        return dec.getPos();
+    }
+
+    getSize(): usize {
+        let size: usize = 0;
+        size += this.owner!.getSize();
+        return size;
+    }
+}
+
+class removeLiquidityAction implements _chain.Packer {
+    constructor (
+        public token0: _chain.Name | null = null,
+        public token1: _chain.Name | null = null,
+        public token0Contract: _chain.Name | null = null,
+        public token1Contract: _chain.Name | null = null,
+        public liquidity: u64 = 0,
+        public amount0Min: u64 = 0,
+        public amount1Min: u64 = 0,
+        public token0Symbol: string = "",
+        public token1Symbol: string = "",
+        public token0Precision: u8 = 0,
+        public token1Precision: u8 = 0,
+        public provider: _chain.Name | null = null,
+    ) {
+    }
+
+    pack(): u8[] {
+        let enc = new _chain.Encoder(this.getSize());
+        enc.pack(this.token0!);
+        enc.pack(this.token1!);
+        enc.pack(this.token0Contract!);
+        enc.pack(this.token1Contract!);
+        enc.packNumber<u64>(this.liquidity);
+        enc.packNumber<u64>(this.amount0Min);
+        enc.packNumber<u64>(this.amount1Min);
+        enc.packString(this.token0Symbol);
+        enc.packString(this.token1Symbol);
+        enc.packNumber<u8>(this.token0Precision);
+        enc.packNumber<u8>(this.token1Precision);
+        enc.pack(this.provider!);
+        return enc.getBytes();
+    }
+    
+    unpack(data: u8[]): usize {
+        let dec = new _chain.Decoder(data);
+        
+        {
+            let obj = new _chain.Name();
+            dec.unpack(obj);
+            this.token0! = obj;
+        }
+        
+        {
+            let obj = new _chain.Name();
+            dec.unpack(obj);
+            this.token1! = obj;
+        }
+        
+        {
+            let obj = new _chain.Name();
+            dec.unpack(obj);
+            this.token0Contract! = obj;
+        }
+        
+        {
+            let obj = new _chain.Name();
+            dec.unpack(obj);
+            this.token1Contract! = obj;
+        }
+        this.liquidity = dec.unpackNumber<u64>();
+        this.amount0Min = dec.unpackNumber<u64>();
+        this.amount1Min = dec.unpackNumber<u64>();
+        this.token0Symbol = dec.unpackString();
+        this.token1Symbol = dec.unpackString();
+        this.token0Precision = dec.unpackNumber<u8>();
+        this.token1Precision = dec.unpackNumber<u8>();
+        
+        {
+            let obj = new _chain.Name();
+            dec.unpack(obj);
+            this.provider! = obj;
+        }
+        return dec.getPos();
+    }
+
+    getSize(): usize {
+        let size: usize = 0;
+        size += this.token0!.getSize();
+        size += this.token1!.getSize();
+        size += this.token0Contract!.getSize();
+        size += this.token1Contract!.getSize();
+        size += sizeof<u64>();
+        size += sizeof<u64>();
+        size += sizeof<u64>();
+        size += _chain.Utils.calcPackedStringLength(this.token0Symbol);
+        size += _chain.Utils.calcPackedStringLength(this.token1Symbol);
+        size += sizeof<u8>();
+        size += sizeof<u8>();
+        size += this.provider!.getSize();
+        return size;
+    }
+}
+
+class togglePauseAction implements _chain.Packer {
+    constructor (
+        public paused: boolean = 0,
+    ) {
+    }
+
+    pack(): u8[] {
+        let enc = new _chain.Encoder(this.getSize());
+        enc.packNumber<boolean>(this.paused);
+        return enc.getBytes();
+    }
+    
+    unpack(data: u8[]): usize {
+        let dec = new _chain.Decoder(data);
+        this.paused = dec.unpackNumber<boolean>();
+        return dec.getPos();
+    }
+
+    getSize(): usize {
+        let size: usize = 0;
+        size += sizeof<boolean>();
+        return size;
+    }
+}
+
+class getSwapQuoteAction implements _chain.Packer {
+    constructor (
+        public tokenIn: _chain.Name | null = null,
+        public tokenOut: _chain.Name | null = null,
+        public amountIn: u64 = 0,
+    ) {
+    }
+
+    pack(): u8[] {
+        let enc = new _chain.Encoder(this.getSize());
+        enc.pack(this.tokenIn!);
+        enc.pack(this.tokenOut!);
+        enc.packNumber<u64>(this.amountIn);
+        return enc.getBytes();
+    }
+    
+    unpack(data: u8[]): usize {
+        let dec = new _chain.Decoder(data);
+        
+        {
+            let obj = new _chain.Name();
+            dec.unpack(obj);
+            this.tokenIn! = obj;
+        }
+        
+        {
+            let obj = new _chain.Name();
+            dec.unpack(obj);
+            this.tokenOut! = obj;
+        }
+        this.amountIn = dec.unpackNumber<u64>();
+        return dec.getPos();
+    }
+
+    getSize(): usize {
+        let size: usize = 0;
+        size += this.tokenIn!.getSize();
+        size += this.tokenOut!.getSize();
+        size += sizeof<u64>();
+        return size;
+    }
+}
+
+export function apply(receiver: u64, firstReceiver: u64, action: u64): void {
+	const _receiver = new _chain.Name(receiver);
+	const _firstReceiver = new _chain.Name(firstReceiver);
+	const _action = new _chain.Name(action);
+
+	const mycontract = new XPRSwap(_receiver, _firstReceiver, _action);
+	const actionData = _chain.readActionData();
+
+	if (receiver == firstReceiver) {
+		if (action == 0x74DD900000000000) {//init
+            const args = new initAction();
+            args.unpack(actionData);
+            mycontract.init(args.admin!);
+        }
+		if (action == 0x45D46CAAB4A44000) {//createpool
+            const args = new createPoolAction();
+            args.unpack(actionData);
+            mycontract.createPool(args.token0!,args.token1!,args.token0Contract!,args.token1Contract!,args.token0Symbol,args.token1Symbol,args.token0Precision,args.token1Precision);
+        }
+		if (action == 0x4AAB4C3B35BAAA00) {//depositprep
+            const args = new depositPrepAction();
+            args.unpack(actionData);
+            mycontract.depositPrep(args.owner!,args.symbols!);
+        }
+		
+		if (action == 0x8BADA725D9F19290) {//liquidityadd
+            const args = new liquidityAddAction();
+            args.unpack(actionData);
+            mycontract.liquidityAdd(args.owner!,args.add_token1!,args.add_token2!,args.add_token1_min!,args.add_token2_min!);
+        }
+		if (action == 0xE3B2D4DCDC346200) {//withdrawall
+            const args = new withdrawAllAction();
+            args.unpack(actionData);
+            mycontract.withdrawAll(args.owner!);
+        }
+		if (action == 0xBAA5175B4E4BB3E0) {//remliquidity
+            const args = new removeLiquidityAction();
+            args.unpack(actionData);
+            mycontract.removeLiquidity(args.token0!,args.token1!,args.token0Contract!,args.token1Contract!,args.liquidity,args.amount0Min,args.amount1Min,args.token0Symbol,args.token1Symbol,args.token0Precision,args.token1Precision,args.provider!);
+        }
+		if (action == 0xA9B5850000000000) {//pause
+            const args = new togglePauseAction();
+            args.unpack(actionData);
+            mycontract.togglePause(args.paused);
+        }
+		if (action == 0x62B36D532A000000) {//getquote
+            const args = new getSwapQuoteAction();
+            args.unpack(actionData);
+            mycontract.getSwapQuote(args.tokenIn!,args.tokenOut!,args.amountIn);
+        }
+	}
+  
+	if (receiver != firstReceiver) {
+		if (action == 0xCDCD3C2D57000000) {//transfer
+            const args = new onTransferAction();
+            args.unpack(actionData);
+            mycontract.onTransfer(args.from!,args.to!,args.quantity!,args.memo);
+        }
+	}
+	return;
 }
