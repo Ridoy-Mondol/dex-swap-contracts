@@ -158,11 +158,14 @@ export class XPRSwap extends Contract {
 
     const token1Contract = symbols[0].contract;
     const token1Symbol = this.parseSymbol(symbols[0].sym);
+    const token1Info = this.parseSymbolInfo(symbols[0].sym);
+
     const token2Contract = symbols[1].contract;
     const token2Symbol = this.parseSymbol(symbols[1].sym);
+    const token2Info = this.parseSymbolInfo(symbols[1].sym);
 
-    const token1Name = Name.fromU64(token1Symbol.code());
-    const token2Name = Name.fromU64(token2Symbol.code());
+    const token1Name = Name.fromString(token1Info.toLowerCase());
+    const token2Name = Name.fromString(token2Info.toLowerCase());
 
     const sorted = this.sortTokens(token1Name, token2Name);
     const poolId = this.findPoolId(sorted[0], sorted[1]);
@@ -245,8 +248,11 @@ export class XPRSwap extends Contract {
       `Insufficient token2 deposited. Have: ${prep.token2_received}, Need: ${asset2.amount}`
     );
 
-    const token1Name = Name.fromU64(asset1.symbol.code());
-    const token2Name = Name.fromU64(asset2.symbol.code());
+    const token1Symbol = this.extractSymbolFromQuantity(add_token1.quantity);
+    const token2Symbol = this.extractSymbolFromQuantity(add_token2.quantity);
+
+    const token1Name = Name.fromString(token1Symbol.toLowerCase());
+    const token2Name = Name.fromString(token2Symbol.toLowerCase());
 
     const sorted = this.sortTokens(token1Name, token2Name);
     const poolId = this.findPoolId(sorted[0], sorted[1]);
@@ -489,6 +495,22 @@ export class XPRSwap extends Contract {
     );
   }
 
+  /// ============================================
+  // CLEAR TABLES
+  // ============================================
+
+  @action("clrpair")
+  clearPair(): void {
+    requireAuth(this.receiver);
+
+    let cursor1 = this.poolsTable.first();
+    while (cursor1 !== null) {
+      let nextCursor = this.poolsTable.next(cursor1);
+      this.poolsTable.remove(cursor1);
+      cursor1 = nextCursor;
+    }
+  }
+
   // ============================================
   // INTERNAL HELPERS
   // ============================================
@@ -589,6 +611,46 @@ export class XPRSwap extends Contract {
     const code = parts[1].trim();
 
     return new Symbol(code, precision);
+  }
+
+  private parseSymbolInfo(symbolStr: string): string {
+    const parts = symbolStr.split(",");
+    check(
+      parts.length == 2,
+      "Invalid symbol format. Expected: 'precision,CODE'"
+    );
+
+    const code = parts[1].trim();
+    return code;
+  }
+
+  private extractSymbolFromQuantity(quantity: string): string {
+    check(quantity.length > 0, "Quantity cannot be empty");
+
+    const parts = quantity.trim().split(" ");
+    check(
+      parts.length == 2,
+      "Invalid quantity format, expected 'amount SYMBOL'"
+    );
+
+    const symbol = parts[1].trim();
+
+    check(symbol.length > 0, "Symbol cannot be empty");
+
+    for (let i = 0; i < symbol.length; i++) {
+      const char = symbol.charCodeAt(i);
+      check(
+        char >= 65 && char <= 90,
+        `Invalid symbol character at position ${i}: expected uppercase A-Z`
+      );
+    }
+
+    check(
+      symbol.length >= 1 && symbol.length <= 7,
+      `Symbol length must be between 1 and 7 characters, got ${symbol.length}`
+    );
+
+    return symbol;
   }
 
   private findLiquidityPosition(

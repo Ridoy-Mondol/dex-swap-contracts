@@ -220,6 +220,11 @@
       ]
     },
     {
+      "name": "clrpair",
+      "base": "",
+      "fields": []
+    },
+    {
       "name": "createpool",
       "base": "",
       "fields": [
@@ -402,6 +407,11 @@
   ],
   "types": [],
   "actions": [
+    {
+      "name": "clrpair",
+      "type": "clrpair",
+      "ricardian_contract": ""
+    },
     {
       "name": "createpool",
       "type": "createpool",
