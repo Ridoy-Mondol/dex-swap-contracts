@@ -305,9 +305,6 @@ export class XPRSwap extends Contract {
       `Insufficient token2 deposited. Have: ${prep.token2_received}, Need: ${asset2.amount}`
     );
 
-    // const token1Name = Name.fromU64(asset1.symbol.code());
-    // const token2Name = Name.fromU64(asset2.symbol.code());
-
     const token1Symbol = this.extractSymbolFromQuantity(add_token1.quantity);
     const token2Symbol = this.extractSymbolFromQuantity(add_token2.quantity);
 
@@ -684,21 +681,7 @@ export class XPRSwap extends Contract {
     return code;
   }
 
-  //   private getTokenSymbolAsName(quantity: string): Name {
-  //   const parts = quantity.trim().split(" ");
-  //   check(
-  //     parts.length === 2,
-  //     "Invalid quantity format, expected 'amount SYMBOL'"
-  //   );
-
-  //   const symbol = parts[1].toLowerCase();
-  //   check(symbol.length <= 12, "Token symbol too long for Name");
-
-  //   return Name.fromString(symbol);
-  // }
-
   private extractSymbolFromQuantity(quantity: string): string {
-    // Verify quantity is not empty
     check(quantity.length > 0, "Quantity cannot be empty");
 
     const parts = quantity.trim().split(" ");
@@ -709,10 +692,8 @@ export class XPRSwap extends Contract {
 
     const symbol = parts[1].trim();
 
-    // Verify symbol is not empty
     check(symbol.length > 0, "Symbol cannot be empty");
 
-    // Verify symbol contains only valid characters (A-Z)
     for (let i = 0; i < symbol.length; i++) {
       const char = symbol.charCodeAt(i);
       check(
@@ -721,13 +702,11 @@ export class XPRSwap extends Contract {
       );
     }
 
-    // Verify symbol length is reasonable (1-7 characters as per EOSIO standard)
     check(
       symbol.length >= 1 && symbol.length <= 7,
       `Symbol length must be between 1 and 7 characters, got ${symbol.length}`
     );
 
-    // Return the symbol as-is (e.g., "XPR", "XBTC", "XUSDT")
     return symbol;
   }
 
@@ -750,6 +729,7 @@ export class XPRSwap extends Contract {
 
     return null;
   }
+
 
   private transfer(
     tokenContract: Name,
@@ -868,31 +848,46 @@ export class XPRSwap extends Contract {
   private handleSwap(from: Name, quantityIn: Asset, memo: string): void {
     const config = this.configTable.requireGet(0, "Contract not initialized");
     check(!config.paused, "Contract is paused");
-
+    
+    // Memo format: FROM>TO,SLIPPAGE
     const parts = memo.split(",");
     check(parts.length == 2, "Invalid swap memo format.");
 
-    const poolPair = parts[0].trim();
-    const minOutStr = parts[1].trim();
-    const amountOutMin = U64.parseInt(minOutStr) as u64;
+    // const poolPair = parts[0].trim();
+    // const minOutStr = parts[1].trim();
+    // const amountOutMin = U64.parseInt(minOutStr) as u64;
 
-    const tokens = poolPair.split(">");
+    const pairPart = parts[0].trim();  // XUSDT>XUST
+    const slippageStr = parts[1].trim();  // "1"
+
+    // slippage is percent
+    // const slippage = U64.parseInt(slippageStr) as u64;
+    // check(slippage <= 100, "Invalid slippage value");
+    
+    // Parse decimal slippage safely
+    const slippageFloat = F64.parseFloat(slippageStr);
+    check(!isNaN(slippageFloat) && slippageFloat >= 0 && slippageFloat <= 100, "Invalid slippage value");
+
+    // Convert to basis points (1% = 100 bps)
+    const slippageBps = <u64>Math.ceil(slippageFloat * 100.0);
+
+    const tokens = pairPart.split(">");
     check(tokens.length == 2, "Invalid pool pair format");
 
-    const tokenInStr = tokens[0].trim().toLowerCase();
-    const tokenOutStr = tokens[1].trim().toLowerCase();
+    const memoTokenIn = tokens[0].trim().toLowerCase();
+    const memoTokenOut = tokens[1].trim().toLowerCase();
 
-    // Get token names from input
-    const tokenInCode = quantityIn.symbol.code();
-    const tokenInName = Name.fromU64(tokenInCode);
+    // Extract symbol from input Asset
+    const tokenInSym = this.extractSymbolFromQuantity(quantityIn.toString());
+    const tokenInName = Name.fromString(tokenInSym.toLowerCase());
 
-    const tokenInNameFromMemo = Name.fromString(tokenInStr);
+    const memoTokenInName = Name.fromString(memoTokenIn);
     check(
-      tokenInName.N == tokenInNameFromMemo.N,
+      tokenInName.N == memoTokenInName.N,
       "Token mismatch: memo specifies different input token than received"
     );
 
-    const tokenOutName = Name.fromString(tokenOutStr);
+    const tokenOutName = Name.fromString(memoTokenOut);
 
     const sorted = this.sortTokens(tokenInName, tokenOutName);
     const poolId = this.findPoolId(sorted[0], sorted[1]);
@@ -931,8 +926,9 @@ export class XPRSwap extends Contract {
       reserveOut,
       config.swap_fee
     );
-
-    check(amountOut >= amountOutMin, "Insufficient output amount");
+    
+    const minOut = (amountOut * (10000 - slippageBps)) / 10000;
+    check(amountOut >= minOut, "Insufficient output amount after slippage");
     check(amountOut < reserveOut, "Insufficient liquidity");
 
     if (isToken0Input) {
@@ -961,7 +957,7 @@ export class XPRSwap extends Contract {
       this.receiver,
       from,
       assetOut,
-      `Swap output`
+      memo
     );
   }
 }
