@@ -419,15 +419,24 @@ export class XPRSwap extends Contract {
     const t1 = sorted[1];
 
     const poolId = this.findPoolId(t0, t1);
-    const pool = this.poolsTable.requireGet(poolId, "PAIR_NOT_FOUND");
+    const pool = this.poolsTable.requireGet(poolId, "POOL_NOT_FOUND");
+
+    this.distributeFees(pool);
 
     const lpPosition = this.findLiquidityPosition(poolId, provider);
     check(lpPosition != null, "NO_LIQUIDITY");
     check(lpPosition!.lp_balance >= liquidity, "INSUFFICIENT_BALANCE");
     check(pool.lp_supply > 0, "NO_LIQUIDITY_IN_PAIR");
 
-    const amount0 = (liquidity * pool.reserve0) / pool.lp_supply;
-    const amount1 = (liquidity * pool.reserve1) / pool.lp_supply;
+    const amount0 = U128.div(
+      U128.mul(new U128(liquidity), new U128(pool.reserve0)),
+      new U128(pool.lp_supply)
+    ).lo;
+
+    const amount1 = U128.div(
+      U128.mul(new U128(liquidity), new U128(pool.reserve1)),
+      new U128(pool.lp_supply)
+    ).lo;
 
     check(amount0 > 0 && amount1 > 0, "INSUFFICIENT_LIQUIDITY_BURNED");
     check(amount0 >= amount0Min, "INSUFFICIENT_0_AMOUNT");
@@ -444,6 +453,7 @@ export class XPRSwap extends Contract {
     pool.reserve0 -= amount0;
     pool.reserve1 -= amount1;
     pool.lp_supply -= liquidity;
+
     pool.kLast = U128.mul(new U128(pool.reserve0), new U128(pool.reserve1));
     pool.blockTimestampLast = currentTimeSec();
 
@@ -456,7 +466,7 @@ export class XPRSwap extends Contract {
       this.receiver,
       provider,
       asset0,
-      "Remove liquidity: token0"
+      "XPRSwap: Remove liquidity"
     );
 
     // Transfer token1 from contract back to provider
@@ -466,7 +476,7 @@ export class XPRSwap extends Contract {
       this.receiver,
       provider,
       asset1,
-      "Remove liquidity: token1"
+      "XPRSwap: Remove liquidity"
     );
   }
 
@@ -657,6 +667,39 @@ export class XPRSwap extends Contract {
     );
 
     return symbol;
+  }
+
+  private distributeFees(pool: PoolsTable): void {
+    if (pool.kLast.lo == 0 && pool.kLast.hi == 0) {
+      return;
+    }
+
+    const currentK = U128.mul(new U128(pool.reserve0), new U128(pool.reserve1));
+
+    // If K has grown, there are fees to distribute
+    if (currentK > pool.kLast) {
+      const rootK = this.sqrtU128(currentK);
+      const rootKLast = this.sqrtU128(pool.kLast);
+
+      if (rootK > rootKLast) {
+        const numerator = U128.mul(
+          new U128(pool.lp_supply),
+          new U128(rootK - rootKLast)
+        );
+        const denominator = U128.add(
+          U128.mul(new U128(rootK), new U128(5)),
+          new U128(rootKLast)
+        );
+
+        const feeLiquidity = U128.div(numerator, denominator).lo;
+
+        if (feeLiquidity > 0) {
+          // Distribute this fee liquidity proportionally to all LP holders
+          // by increasing the lp_supply (all existing LP tokens now represent more value)
+          pool.lp_supply += feeLiquidity;
+        }
+      }
+    }
   }
 
   private findLiquidityPosition(

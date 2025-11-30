@@ -6,8 +6,8 @@
  (type $i32_i64_=>_none (func (param i32 i64)))
  (type $none_=>_i32 (func (result i32)))
  (type $i32_=>_i64 (func (param i32) (result i64)))
- (type $i64_=>_i32 (func (param i64) (result i32)))
  (type $i32_=>_none (func (param i32)))
+ (type $i64_=>_i32 (func (param i64) (result i32)))
  (type $i32_i32_i32_i32_=>_none (func (param i32 i32 i32 i32)))
  (type $i32_i32_i32_=>_i32 (func (param i32 i32 i32) (result i32)))
  (type $i32_i32_i64_i32_=>_i32 (func (param i32 i32 i64 i32) (result i32)))
@@ -391,7 +391,7 @@
  (data (i32.const 17580) "L")
  (data (i32.const 17592) "\01\00\00\00:\00\00\00I\00N\00S\00U\00F\00F\00I\00C\00I\00E\00N\00T\00_\00L\00I\00Q\00U\00I\00D\00I\00T\00Y\00_\00B\00U\00R\00N\00E\00D")
  (data (i32.const 17660) ",")
- (data (i32.const 17672) "\01\00\00\00\1c\00\00\00P\00A\00I\00R\00_\00N\00O\00T\00_\00F\00O\00U\00N\00D")
+ (data (i32.const 17672) "\01\00\00\00\1c\00\00\00P\00O\00O\00L\00_\00N\00O\00T\00_\00F\00O\00U\00N\00D")
  (data (i32.const 17708) ",")
  (data (i32.const 17720) "\01\00\00\00\18\00\00\00N\00O\00_\00L\00I\00Q\00U\00I\00D\00I\00T\00Y")
  (data (i32.const 17756) "<")
@@ -403,19 +403,17 @@
  (data (i32.const 17948) "<")
  (data (i32.const 17960) "\01\00\00\00*\00\00\00I\00N\00S\00U\00F\00F\00I\00C\00I\00E\00N\00T\00_\001\00_\00A\00M\00O\00U\00N\00T")
  (data (i32.const 18012) "L")
- (data (i32.const 18024) "\01\00\00\000\00\00\00R\00e\00m\00o\00v\00e\00 \00l\00i\00q\00u\00i\00d\00i\00t\00y\00:\00 \00t\00o\00k\00e\00n\000")
- (data (i32.const 18092) "L")
- (data (i32.const 18104) "\01\00\00\000\00\00\00R\00e\00m\00o\00v\00e\00 \00l\00i\00q\00u\00i\00d\00i\00t\00y\00:\00 \00t\00o\00k\00e\00n\001")
- (data (i32.const 18172) "<")
- (data (i32.const 18184) "\01\00\00\00\1e\00\00\00N\00o\00t\00 \00i\00n\00i\00t\00i\00a\00l\00i\00z\00e\00d")
- (data (i32.const 18236) "\1c")
- (data (i32.const 18248) "\01\00\00\00\04\00\00\000\00,")
- (data (i32.const 18268) ",")
- (data (i32.const 18280) "\01\00\00\00\1c\00\00\00i\00n\00v\00a\00l\00i\00d\00 \00s\00y\00m\00b\00o\00l")
- (data (i32.const 18316) "<")
- (data (i32.const 18328) "\01\00\00\00 \00\00\00i\00d\00x\006\004\00:\00 \00b\00a\00d\00 \00v\00a\00l\00u\00e")
- (data (i32.const 18380) "<")
- (data (i32.const 18392) "\01\00\00\00\1e\00\00\00i\00d\00x\006\004\00:\00 \00b\00a\00d\00 \00t\00y\00p\00e")
+ (data (i32.const 18024) "\01\00\00\002\00\00\00X\00P\00R\00S\00w\00a\00p\00:\00 \00R\00e\00m\00o\00v\00e\00 \00l\00i\00q\00u\00i\00d\00i\00t\00y")
+ (data (i32.const 18092) "<")
+ (data (i32.const 18104) "\01\00\00\00\1e\00\00\00N\00o\00t\00 \00i\00n\00i\00t\00i\00a\00l\00i\00z\00e\00d")
+ (data (i32.const 18156) "\1c")
+ (data (i32.const 18168) "\01\00\00\00\04\00\00\000\00,")
+ (data (i32.const 18188) ",")
+ (data (i32.const 18200) "\01\00\00\00\1c\00\00\00i\00n\00v\00a\00l\00i\00d\00 \00s\00y\00m\00b\00o\00l")
+ (data (i32.const 18236) "<")
+ (data (i32.const 18248) "\01\00\00\00 \00\00\00i\00d\00x\006\004\00:\00 \00b\00a\00d\00 \00v\00a\00l\00u\00e")
+ (data (i32.const 18300) "<")
+ (data (i32.const 18312) "\01\00\00\00\1e\00\00\00i\00d\00x\006\004\00:\00 \00b\00a\00d\00 \00t\00y\00p\00e")
  (table $0 2 funcref)
  (elem $0 (i32.const 1) $start:~lib/as-chain/name~anonymous|0)
  (export "XPRSwap" (global $assembly/xprswap/xprswap.contract/XPRSwap))
@@ -19025,6 +19023,257 @@
    )
   )
  )
+ (func $assembly/xprswap/xprswap.contract/XPRSwap#distributeFees (param $0 i32)
+  (local $1 i32)
+  (local $2 i32)
+  (local $3 i64)
+  (local $4 i64)
+  (local $5 i32)
+  (if
+   (if (result i32)
+    (i64.eqz
+     (i64.load
+      (i32.load offset=56
+       (local.get $0)
+      )
+     )
+    )
+    (i64.eqz
+     (i64.load offset=8
+      (i32.load offset=56
+       (local.get $0)
+      )
+     )
+    )
+    (i32.const 0)
+   )
+   (return)
+  )
+  (local.set $2
+   (call $~lib/as-chain/bignum/integer/u128/u128#constructor
+    (i64.load offset=32
+     (local.get $0)
+    )
+    (i64.const 0)
+   )
+  )
+  (local.set $1
+   (call $~lib/as-chain/bignum/integer/u128/u128#constructor
+    (i64.load offset=40
+     (local.get $0)
+    )
+    (i64.const 0)
+   )
+  )
+  (if
+   (if (result i32)
+    (i64.eq
+     (local.tee $3
+      (i64.load offset=8
+       (local.tee $2
+        (call $~lib/as-chain/bignum/integer/u128/u128#constructor
+         (call $~lib/as-chain/bignum/globals/__multi3
+          (i64.load
+           (local.get $2)
+          )
+          (i64.load offset=8
+           (local.get $2)
+          )
+          (i64.load
+           (local.get $1)
+          )
+          (i64.load offset=8
+           (local.get $1)
+          )
+         )
+         (global.get $~lib/as-chain/bignum/globals/__res128_hi)
+        )
+       )
+      )
+     )
+     (local.tee $4
+      (i64.load offset=8
+       (local.tee $1
+        (i32.load offset=56
+         (local.get $0)
+        )
+       )
+      )
+     )
+    )
+    (i64.gt_u
+     (i64.load
+      (local.get $2)
+     )
+     (i64.load
+      (local.get $1)
+     )
+    )
+    (i64.gt_u
+     (local.get $3)
+     (local.get $4)
+    )
+   )
+   (if
+    (i64.gt_u
+     (local.tee $3
+      (call $assembly/xprswap/xprswap.contract/XPRSwap#sqrtU128
+       (local.get $2)
+      )
+     )
+     (local.tee $4
+      (call $assembly/xprswap/xprswap.contract/XPRSwap#sqrtU128
+       (i32.load offset=56
+        (local.get $0)
+       )
+      )
+     )
+    )
+    (block
+     (local.set $2
+      (call $~lib/as-chain/bignum/integer/u128/u128#constructor
+       (i64.load offset=48
+        (local.get $0)
+       )
+       (i64.const 0)
+      )
+     )
+     (local.set $1
+      (call $~lib/as-chain/bignum/integer/u128/u128#constructor
+       (i64.sub
+        (local.get $3)
+        (local.get $4)
+       )
+       (i64.const 0)
+      )
+     )
+     (local.set $2
+      (call $~lib/as-chain/bignum/integer/u128/u128#constructor
+       (call $~lib/as-chain/bignum/globals/__multi3
+        (i64.load
+         (local.get $2)
+        )
+        (i64.load offset=8
+         (local.get $2)
+        )
+        (i64.load
+         (local.get $1)
+        )
+        (i64.load offset=8
+         (local.get $1)
+        )
+       )
+       (global.get $~lib/as-chain/bignum/globals/__res128_hi)
+      )
+     )
+     (local.set $1
+      (call $~lib/as-chain/bignum/integer/u128/u128#constructor
+       (local.get $3)
+       (i64.const 0)
+      )
+     )
+     (local.set $5
+      (call $~lib/as-chain/bignum/integer/u128/u128#constructor
+       (i64.const 5)
+       (i64.const 0)
+      )
+     )
+     (local.set $1
+      (call $~lib/as-chain/bignum/integer/u128/u128#constructor
+       (call $~lib/as-chain/bignum/globals/__multi3
+        (i64.load
+         (local.get $1)
+        )
+        (i64.load offset=8
+         (local.get $1)
+        )
+        (i64.load
+         (local.get $5)
+        )
+        (i64.load offset=8
+         (local.get $5)
+        )
+       )
+       (global.get $~lib/as-chain/bignum/globals/__res128_hi)
+      )
+     )
+     (local.set $5
+      (call $~lib/as-chain/bignum/integer/u128/u128#constructor
+       (local.get $4)
+       (i64.const 0)
+      )
+     )
+     (local.set $1
+      (call $~lib/as-chain/bignum/integer/u128/u128#constructor
+       (local.tee $4
+        (i64.add
+         (local.tee $3
+          (i64.load
+           (local.get $1)
+          )
+         )
+         (i64.load
+          (local.get $5)
+         )
+        )
+       )
+       (i64.add
+        (i64.extend_i32_u
+         (i64.gt_u
+          (local.get $3)
+          (local.get $4)
+         )
+        )
+        (i64.add
+         (i64.load offset=8
+          (local.get $1)
+         )
+         (i64.load offset=8
+          (local.get $5)
+         )
+        )
+       )
+      )
+     )
+     (if
+      (i64.ne
+       (local.tee $3
+        (i64.load
+         (call $~lib/as-chain/bignum/integer/u128/u128#constructor
+          (call $~lib/as-chain/bignum/globals/__udivmod128
+           (i64.load
+            (local.get $2)
+           )
+           (i64.load offset=8
+            (local.get $2)
+           )
+           (i64.load
+            (local.get $1)
+           )
+           (i64.load offset=8
+            (local.get $1)
+           )
+          )
+          (global.get $~lib/as-chain/bignum/globals/__divmod_quot_hi)
+         )
+        )
+       )
+       (i64.const 0)
+      )
+      (call $assembly/xprswap/tables/pools.table/PoolsTable#set:lp_supply
+       (local.get $0)
+       (i64.add
+        (local.get $3)
+        (i64.load offset=48
+         (local.get $0)
+        )
+       )
+      )
+     )
+    )
+   )
+  )
+ )
  (func $assembly/xprswap/xprswap.contract/XPRSwap#createAsset (param $0 i64) (param $1 i32) (param $2 i32) (result i32)
   (call $~lib/as-chain/asset/Asset#constructor
    (local.get $0)
@@ -19036,8 +19285,8 @@
  )
  (func $assembly/xprswap/xprswap.contract/XPRSwap#removeLiquidity (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (param $4 i32) (param $5 i64) (param $6 i64) (param $7 i64) (param $8 i32) (param $9 i32) (param $10 i32) (param $11 i32) (param $12 i32)
   (local $13 i32)
-  (local $14 i64)
-  (local $15 i32)
+  (local $14 i32)
+  (local $15 i64)
   (local $16 i64)
   (local $17 i32)
   (call $~lib/as-chain/action/requireAuth
@@ -19063,7 +19312,7 @@
    )
    (i32.const 17600)
   )
-  (local.set $14
+  (local.set $15
    (call $assembly/xprswap/xprswap.contract/XPRSwap#findPoolId
     (local.get $0)
     (call $~lib/array/Array<~lib/as-chain/idxdb/IDXDB>#__get
@@ -19081,13 +19330,15 @@
     )
    )
   )
-  (local.set $13
-   (call $~lib/proton-tsc/modules/store/store/TableStore<assembly/xprswap/tables/pools.table/PoolsTable>#requireGet
-    (i32.load offset=12
-     (local.get $0)
+  (call $assembly/xprswap/xprswap.contract/XPRSwap#distributeFees
+   (local.tee $13
+    (call $~lib/proton-tsc/modules/store/store/TableStore<assembly/xprswap/tables/pools.table/PoolsTable>#requireGet
+     (i32.load offset=12
+      (local.get $0)
+     )
+     (local.get $15)
+     (i32.const 17680)
     )
-    (local.get $14)
-    (i32.const 17680)
    )
   )
   (call $~lib/as-chain/system/check
@@ -19095,7 +19346,7 @@
     (local.tee $2
      (call $assembly/xprswap/xprswap.contract/XPRSwap#findLiquidityPosition
       (local.get $0)
-      (local.get $14)
+      (local.get $15)
       (local.get $12)
      )
     )
@@ -19103,17 +19354,17 @@
    )
    (i32.const 17728)
   )
+  (if
+   (i32.eqz
+    (local.get $2)
+   )
+   (unreachable)
+  )
   (call $~lib/as-chain/system/check
    (i64.le_u
     (local.get $5)
     (i64.load offset=24
-     (local.tee $1
-      (if (result i32)
-       (local.get $2)
-       (local.get $2)
-       (unreachable)
-      )
-     )
+     (local.get $2)
     )
    )
    (i32.const 17776)
@@ -19127,19 +19378,130 @@
    )
    (i32.const 17840)
   )
+  (local.set $1
+   (call $~lib/as-chain/bignum/integer/u128/u128#constructor
+    (local.get $5)
+    (i64.const 0)
+   )
+  )
+  (local.set $14
+   (call $~lib/as-chain/bignum/integer/u128/u128#constructor
+    (i64.load offset=32
+     (local.get $13)
+    )
+    (i64.const 0)
+   )
+  )
+  (local.set $1
+   (call $~lib/as-chain/bignum/integer/u128/u128#constructor
+    (call $~lib/as-chain/bignum/globals/__multi3
+     (i64.load
+      (local.get $1)
+     )
+     (i64.load offset=8
+      (local.get $1)
+     )
+     (i64.load
+      (local.get $14)
+     )
+     (i64.load offset=8
+      (local.get $14)
+     )
+    )
+    (global.get $~lib/as-chain/bignum/globals/__res128_hi)
+   )
+  )
+  (local.set $14
+   (call $~lib/as-chain/bignum/integer/u128/u128#constructor
+    (i64.load offset=48
+     (local.get $13)
+    )
+    (i64.const 0)
+   )
+  )
+  (local.set $15
+   (i64.load
+    (call $~lib/as-chain/bignum/integer/u128/u128#constructor
+     (call $~lib/as-chain/bignum/globals/__udivmod128
+      (i64.load
+       (local.get $1)
+      )
+      (i64.load offset=8
+       (local.get $1)
+      )
+      (i64.load
+       (local.get $14)
+      )
+      (i64.load offset=8
+       (local.get $14)
+      )
+     )
+     (global.get $~lib/as-chain/bignum/globals/__divmod_quot_hi)
+    )
+   )
+  )
+  (local.set $1
+   (call $~lib/as-chain/bignum/integer/u128/u128#constructor
+    (local.get $5)
+    (i64.const 0)
+   )
+  )
+  (local.set $14
+   (call $~lib/as-chain/bignum/integer/u128/u128#constructor
+    (i64.load offset=40
+     (local.get $13)
+    )
+    (i64.const 0)
+   )
+  )
+  (local.set $1
+   (call $~lib/as-chain/bignum/integer/u128/u128#constructor
+    (call $~lib/as-chain/bignum/globals/__multi3
+     (i64.load
+      (local.get $1)
+     )
+     (i64.load offset=8
+      (local.get $1)
+     )
+     (i64.load
+      (local.get $14)
+     )
+     (i64.load offset=8
+      (local.get $14)
+     )
+    )
+    (global.get $~lib/as-chain/bignum/globals/__res128_hi)
+   )
+  )
+  (local.set $14
+   (call $~lib/as-chain/bignum/integer/u128/u128#constructor
+    (i64.load offset=48
+     (local.get $13)
+    )
+    (i64.const 0)
+   )
+  )
   (call $~lib/as-chain/system/check
    (select
     (i64.ne
-     (local.tee $14
-      (i64.div_u
-       (i64.mul
-        (local.get $5)
-        (i64.load offset=40
-         (local.get $13)
+     (local.tee $16
+      (i64.load
+       (call $~lib/as-chain/bignum/integer/u128/u128#constructor
+        (call $~lib/as-chain/bignum/globals/__udivmod128
+         (i64.load
+          (local.get $1)
+         )
+         (i64.load offset=8
+          (local.get $1)
+         )
+         (i64.load
+          (local.get $14)
+         )
+         (i64.load offset=8
+          (local.get $14)
+         )
         )
-       )
-       (i64.load offset=48
-        (local.get $13)
+        (global.get $~lib/as-chain/bignum/globals/__divmod_quot_hi)
        )
       )
      )
@@ -19147,19 +19509,7 @@
     )
     (i32.const 0)
     (i64.ne
-     (local.tee $16
-      (i64.div_u
-       (i64.mul
-        (local.get $5)
-        (i64.load offset=32
-         (local.get $13)
-        )
-       )
-       (i64.load offset=48
-        (local.get $13)
-       )
-      )
-     )
+     (local.get $15)
      (i64.const 0)
     )
    )
@@ -19168,22 +19518,23 @@
   (call $~lib/as-chain/system/check
    (i64.le_u
     (local.get $6)
-    (local.get $16)
+    (local.get $15)
    )
    (i32.const 17904)
   )
   (call $~lib/as-chain/system/check
    (i64.le_u
     (local.get $7)
-    (local.get $14)
+    (local.get $16)
    )
    (i32.const 17968)
   )
-  (if
-   (i32.eqz
+  (local.set $1
+   (if (result i32)
     (local.get $2)
+    (local.get $2)
+    (unreachable)
    )
-   (unreachable)
   )
   (if
    (i32.eqz
@@ -19213,7 +19564,7 @@
     )
    )
    (block
-    (local.set $15
+    (local.set $14
      (i32.load offset=16
       (local.get $0)
      )
@@ -19227,7 +19578,7 @@
     (drop
      (call $~lib/as-chain/mi/MultiIndex<assembly/xprswap/tables/liquidity.table/LiquidityTable>#requireFind
       (i32.load
-       (local.get $15)
+       (local.get $14)
       )
       (local.tee $6
        (i64.load
@@ -19246,7 +19597,7 @@
        (call $~lib/as-chain/mi/MultiIndex<assembly/xprswap/tables/liquidity.table/LiquidityTable>#find
         (local.tee $2
          (i32.load
-          (local.get $15)
+          (local.get $14)
          )
         )
         (local.get $6)
@@ -19315,13 +19666,13 @@
       (local.get $6)
       (i64.sub
        (i64.load offset=8
-        (local.get $15)
+        (local.get $14)
        )
        (i64.const 1)
       )
      )
      (call $~lib/as-chain/bignum/integer/u128/u128#set:hi
-      (local.get $15)
+      (local.get $14)
       (i64.const -1)
      )
     )
@@ -19353,7 +19704,7 @@
     (i64.load offset=32
      (local.get $13)
     )
-    (local.get $16)
+    (local.get $15)
    )
   )
   (call $assembly/xprswap/tables/pools.table/PoolsTable#set:reserve1
@@ -19362,7 +19713,7 @@
     (i64.load offset=40
      (local.get $13)
     )
-    (local.get $14)
+    (local.get $16)
    )
   )
   (call $assembly/xprswap/tables/pools.table/PoolsTable#set:lp_supply
@@ -19425,7 +19776,7 @@
   )
   (local.set $1
    (call $assembly/xprswap/xprswap.contract/XPRSwap#createAsset
-    (local.get $16)
+    (local.get $15)
     (local.get $8)
     (local.get $10)
    )
@@ -19442,7 +19793,7 @@
   )
   (local.set $1
    (call $assembly/xprswap/xprswap.contract/XPRSwap#createAsset
-    (local.get $14)
+    (local.get $16)
     (local.get $9)
     (local.get $11)
    )
@@ -19455,7 +19806,7 @@
    )
    (local.get $12)
    (local.get $1)
-   (i32.const 18112)
+   (i32.const 18032)
   )
  )
  (func $assembly/xprswap/xprswap.contract/XPRSwap#togglePause (param $0 i32) (param $1 i32)
@@ -19559,7 +19910,7 @@
       (i32.load offset=20
        (local.get $0)
       )
-      (i32.const 18192)
+      (i32.const 18112)
      )
     )
    )
@@ -20158,7 +20509,7 @@
      )
      (call $~lib/rt/common/OBJECT#set:gcInfo
       (local.get $1)
-      (i32.const 18256)
+      (i32.const 18176)
      )
      (if
       (i32.eqz
@@ -21849,7 +22200,7 @@
                (call $~lib/as-chain/asset/Symbol#isValid
                 (local.get $0)
                )
-               (i32.const 18288)
+               (i32.const 18208)
               )
               (br $folding-inner2)
              )
@@ -23294,7 +23645,7 @@
        (local.get $2)
       )
      )
-     (i32.const 18336)
+     (i32.const 18256)
     )
     (local.set $4
      (call $~lib/array/Array<u64>#__get
@@ -23342,7 +23693,7 @@
        (local.get $2)
       )
      )
-     (i32.const 18400)
+     (i32.const 18320)
     )
     (local.set $4
      (call $~lib/array/Array<u64>#__get
@@ -23408,7 +23759,7 @@
  (func $~start
   (local $0 i32)
   (global.set $~lib/rt/stub/offset
-   (i32.const 18444)
+   (i32.const 18364)
   )
   (call $~lib/as-chain/name/Name#set:N
    (local.tee $0
