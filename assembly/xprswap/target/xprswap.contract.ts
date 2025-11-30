@@ -20,6 +20,7 @@ import {
   ConfigTable,
   TokenStatTable,
   DepositTable,
+  SwapsTable,
 } from "./tables";
 import { TokenTransfer } from "./xprswap.inline";
 
@@ -106,6 +107,11 @@ export class XPRSwap extends Contract {
   );
 
   public depositTable: TableStore<DepositTable> = new TableStore<DepositTable>(
+    this.receiver,
+    this.receiver
+  );
+
+  public swapsTable: TableStore<SwapsTable> = new TableStore<SwapsTable>(
     this.receiver,
     this.receiver
   );
@@ -730,7 +736,6 @@ export class XPRSwap extends Contract {
     return null;
   }
 
-
   private transfer(
     tokenContract: Name,
     from: Name,
@@ -848,25 +853,20 @@ export class XPRSwap extends Contract {
   private handleSwap(from: Name, quantityIn: Asset, memo: string): void {
     const config = this.configTable.requireGet(0, "Contract not initialized");
     check(!config.paused, "Contract is paused");
-    
+
     // Memo format: FROM>TO,SLIPPAGE
     const parts = memo.split(",");
     check(parts.length == 2, "Invalid swap memo format.");
 
-    // const poolPair = parts[0].trim();
-    // const minOutStr = parts[1].trim();
-    // const amountOutMin = U64.parseInt(minOutStr) as u64;
+    const pairPart = parts[0].trim(); // XUSDT>XUST
+    const slippageStr = parts[1].trim(); // "1"
 
-    const pairPart = parts[0].trim();  // XUSDT>XUST
-    const slippageStr = parts[1].trim();  // "1"
-
-    // slippage is percent
-    // const slippage = U64.parseInt(slippageStr) as u64;
-    // check(slippage <= 100, "Invalid slippage value");
-    
     // Parse decimal slippage safely
     const slippageFloat = F64.parseFloat(slippageStr);
-    check(!isNaN(slippageFloat) && slippageFloat >= 0 && slippageFloat <= 100, "Invalid slippage value");
+    check(
+      !isNaN(slippageFloat) && slippageFloat >= 0 && slippageFloat <= 100,
+      "Invalid slippage value"
+    );
 
     // Convert to basis points (1% = 100 bps)
     const slippageBps = <u64>Math.ceil(slippageFloat * 100.0);
@@ -926,7 +926,7 @@ export class XPRSwap extends Contract {
       reserveOut,
       config.swap_fee
     );
-    
+
     const minOut = (amountOut * (10000 - slippageBps)) / 10000;
     check(amountOut >= minOut, "Insufficient output amount after slippage");
     check(amountOut < reserveOut, "Insufficient liquidity");
@@ -951,14 +951,26 @@ export class XPRSwap extends Contract {
     pool.blockTimestampLast = currentTimeSec();
     this.poolsTable.update(pool, this.receiver);
 
-    const assetOut = new Asset(amountOut, tokenOutSymbol);
-    this.transfer(
-      tokenOutContract,
-      this.receiver,
+    const feePaid =
+      (quantityIn.amount * config.swap_fee) / this.FEE_DENOMINATOR;
+    const swapId = this.swapsTable.availablePrimaryKey;
+
+    const swap = new SwapsTable(
+      swapId,
+      poolId,
       from,
-      assetOut,
-      memo
+      isToken0Input ? pool.token0 : pool.token1,
+      isToken0Input ? pool.token1 : pool.token0,
+      quantityIn.amount,
+      amountOut,
+      feePaid,
+      currentTimeSec()
     );
+
+    this.swapsTable.store(swap, this.receiver);
+
+    const assetOut = new Asset(amountOut, tokenOutSymbol);
+    this.transfer(tokenOutContract, this.receiver, from, assetOut, memo);
   }
 }
 

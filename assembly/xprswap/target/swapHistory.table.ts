@@ -1,40 +1,44 @@
 import * as _chain from "as-chain";
-import { Table, Name, EMPTY_NAME } from "proton-tsc";
+import { EMPTY_NAME, Name, Table } from "proton-tsc";
 
 
 
-export class PairsTableDB extends _chain.MultiIndex<PairsTable> {
-    get byToken0DB(): _chain.IDX64 {
+export class SwapsTableDB extends _chain.MultiIndex<SwapsTable> {
+    get bypoolDB(): _chain.IDX64 {
         return <_chain.IDX64>this.idxdbs[0];
     }
-    get byToken1DB(): _chain.IDX64 {
+    get bytimeDB(): _chain.IDX64 {
         return <_chain.IDX64>this.idxdbs[1];
     }
 
     
-    updateByToken0(idxIt: _chain.SecondaryIterator, value: u64, payer: Name): void {
+    updateBypool(idxIt: _chain.SecondaryIterator, value: u64, payer: Name): void {
         let secValue = _chain.newSecondaryValue_u64(value);
         this.idxUpdate(idxIt, secValue, payer);
     }
 
     
-    updateByToken1(idxIt: _chain.SecondaryIterator, value: u64, payer: Name): void {
+    updateBytime(idxIt: _chain.SecondaryIterator, value: u64, payer: Name): void {
         let secValue = _chain.newSecondaryValue_u64(value);
         this.idxUpdate(idxIt, secValue, payer);
     }
 
 }
 
-@table("pairs", nocodegen)
+@table("swaps", nocodegen)
 
-export class PairsTable implements _chain.MultiIndexValue {
+export class SwapsTable implements _chain.MultiIndexValue {
     
   constructor(
     public id: u64 = 0,
-    public token0: Name = EMPTY_NAME,
-    public token1: Name = EMPTY_NAME,
-    public creator: Name = EMPTY_NAME,
-    public createdAt: u32 = 0
+    public pool_id: u64 = 0,
+    public trader: Name = EMPTY_NAME,
+    public token_in: Name = EMPTY_NAME,
+    public token_out: Name = EMPTY_NAME,
+    public amount_in: u64 = 0,
+    public amount_out: u64 = 0,
+    public fee_paid: u64 = 0,
+    public timestamp: u64 = 0
   ) {
     
   }
@@ -45,70 +49,82 @@ export class PairsTable implements _chain.MultiIndexValue {
   }
 
   @secondary
-  get byToken0(): u64 {
-    return this.token0.N;
+  get bypool(): u64 {
+    return this.pool_id;
   }
 
-  set byToken0(value: u64) {
-    this.token0 = Name.fromU64(value);
+  set bypool(value: u64) {
+    this.pool_id = value;
   }
 
   @secondary
-  get byToken1(): u64 {
-    return this.token1.N;
+  get bytime(): u64 {
+    return this.timestamp;
   }
 
-  set byToken1(value: u64) {
-    this.token1 = Name.fromU64(value);
+  set bytime(value: u64) {
+    this.timestamp = value;
   }
 
     pack(): u8[] {
         let enc = new _chain.Encoder(this.getSize());
         enc.packNumber<u64>(this.id);
-        enc.pack(this.token0);
-        enc.pack(this.token1);
-        enc.pack(this.creator);
-        enc.packNumber<u32>(this.createdAt);
+        enc.packNumber<u64>(this.pool_id);
+        enc.pack(this.trader);
+        enc.pack(this.token_in);
+        enc.pack(this.token_out);
+        enc.packNumber<u64>(this.amount_in);
+        enc.packNumber<u64>(this.amount_out);
+        enc.packNumber<u64>(this.fee_paid);
+        enc.packNumber<u64>(this.timestamp);
         return enc.getBytes();
     }
     
     unpack(data: u8[]): usize {
         let dec = new _chain.Decoder(data);
         this.id = dec.unpackNumber<u64>();
+        this.pool_id = dec.unpackNumber<u64>();
         
         {
             let obj = new Name();
             dec.unpack(obj);
-            this.token0 = obj;
+            this.trader = obj;
         }
         
         {
             let obj = new Name();
             dec.unpack(obj);
-            this.token1 = obj;
+            this.token_in = obj;
         }
         
         {
             let obj = new Name();
             dec.unpack(obj);
-            this.creator = obj;
+            this.token_out = obj;
         }
-        this.createdAt = dec.unpackNumber<u32>();
+        this.amount_in = dec.unpackNumber<u64>();
+        this.amount_out = dec.unpackNumber<u64>();
+        this.fee_paid = dec.unpackNumber<u64>();
+        this.timestamp = dec.unpackNumber<u64>();
         return dec.getPos();
     }
 
     getSize(): usize {
         let size: usize = 0;
         size += sizeof<u64>();
-        size += this.token0.getSize();
-        size += this.token1.getSize();
-        size += this.creator.getSize();
-        size += sizeof<u32>();
+        size += sizeof<u64>();
+        size += this.trader.getSize();
+        size += this.token_in.getSize();
+        size += this.token_out.getSize();
+        size += sizeof<u64>();
+        size += sizeof<u64>();
+        size += sizeof<u64>();
+        size += sizeof<u64>();
         return size;
     }
 
     static get tableName(): _chain.Name {
-        return _chain.Name.fromU64(0xA99D7C0000000000);
+        return _chain.Name.fromU64(0xC70D5C0000000000);
     }
 
     static tableIndexes(code: _chain.Name, scope: _chain.Name): _chain.IDXDB[] {
@@ -121,11 +137,11 @@ export class PairsTable implements _chain.MultiIndexValue {
     }
 
     getTableName(): _chain.Name {
-        return PairsTable.tableName;
+        return SwapsTable.tableName;
     }
 
     getTableIndexes(code: _chain.Name, scope: _chain.Name): _chain.IDXDB[] {
-        return PairsTable.tableIndexes(code, scope);
+        return SwapsTable.tableIndexes(code, scope);
     }
 
     getPrimaryValue(): u64 {
@@ -135,11 +151,11 @@ export class PairsTable implements _chain.MultiIndexValue {
     getSecondaryValue(i: i32): _chain.SecondaryValue {
         switch (i) {
             case 0: {
-                return _chain.newSecondaryValue_u64(this.byToken0);
+                return _chain.newSecondaryValue_u64(this.bypool);
                 break;
             }
             case 1: {
-                return _chain.newSecondaryValue_u64(this.byToken1);
+                return _chain.newSecondaryValue_u64(this.bytime);
                 break;
             }
             default:
@@ -152,12 +168,12 @@ export class PairsTable implements _chain.MultiIndexValue {
         switch (i) {
             case 0: {
                 let _value = _chain.getSecondaryValue_u64(value);
-                this.byToken0 = _value;
+                this.bypool = _value;
                 break;
             }
             case 1: {
                 let _value = _chain.getSecondaryValue_u64(value);
-                this.byToken1 = _value;
+                this.bytime = _value;
                 break;
             }
             default:
@@ -166,7 +182,7 @@ export class PairsTable implements _chain.MultiIndexValue {
     }
 
 
-    static new(code: _chain.Name, scope: _chain.Name  = _chain.EMPTY_NAME): PairsTableDB {
-        return new PairsTableDB(code, scope, this.tableName, this.tableIndexes(code, scope));
+    static new(code: _chain.Name, scope: _chain.Name  = _chain.EMPTY_NAME): SwapsTableDB {
+        return new SwapsTableDB(code, scope, this.tableName, this.tableIndexes(code, scope));
     }
 }

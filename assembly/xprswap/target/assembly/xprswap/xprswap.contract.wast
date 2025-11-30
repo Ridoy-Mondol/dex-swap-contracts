@@ -10,9 +10,9 @@
  (type $i32_=>_none (func (param i32)))
  (type $i32_i32_i32_i32_=>_none (func (param i32 i32 i32 i32)))
  (type $i32_i32_i32_=>_i32 (func (param i32 i32 i32) (result i32)))
+ (type $i32_i32_i64_i32_=>_i32 (func (param i32 i32 i64 i32) (result i32)))
  (type $i32_i64_=>_i32 (func (param i32 i64) (result i32)))
  (type $i32_i64_i32_=>_i32 (func (param i32 i64 i32) (result i32)))
- (type $i32_i32_i64_i32_=>_i32 (func (param i32 i32 i64 i32) (result i32)))
  (type $i32_i32_i32_i32_=>_i32 (func (param i32 i32 i32 i32) (result i32)))
  (type $i64_i64_i64_i64_=>_i64 (func (param i64 i64 i64 i64) (result i64)))
  (type $i32_i32_i32_i32_i32_i32_=>_none (func (param i32 i32 i32 i32 i32 i32)))
@@ -33,6 +33,7 @@
  (type $i64_i32_i32_=>_i32 (func (param i64 i32 i32) (result i32)))
  (type $i64_i32_i32_i32_i32_i32_i32_i32_i64_i32_i32_i32_=>_i32 (func (param i64 i32 i32 i32 i32 i32 i32 i32 i64 i32 i32 i32) (result i32)))
  (type $i64_i64_=>_i32 (func (param i64 i64) (result i32)))
+ (type $i64_i64_i32_i32_i32_i64_i64_i64_i64_=>_i32 (func (param i64 i64 i32 i32 i32 i64 i64 i64 i64) (result i32)))
  (type $i64_i64_i32_i64_i64_i64_i64_=>_i32 (func (param i64 i64 i32 i64 i64 i64 i64) (result i32)))
  (type $i64_i64_i64_=>_i32 (func (param i64 i64 i64) (result i32)))
  (type $i64_i64_i64_i32_=>_i32 (func (param i64 i64 i64 i32) (result i32)))
@@ -256,11 +257,11 @@
  (data (i32.const 12796) ",")
  (data (i32.const 12808) "\01\00\00\00\14\00\00\00)\00 \00m\00i\00s\00m\00a\00t\00c\00h")
  (data (i32.const 12844) ",")
- (data (i32.const 12856) ")\00\00\00\14\00\00\00\b01\00\00\00\00\00\00\e01\00\00\00\00\00\00\102")
+ (data (i32.const 12856) "-\00\00\00\14\00\00\00\b01\00\00\00\00\00\00\e01\00\00\00\00\00\00\102")
  (data (i32.const 12892) ",")
  (data (i32.const 12904) "\01\00\00\00\1a\00\00\00T\00o\00k\00e\00n\001\00 \00n\00a\00m\00e\00 \00(")
  (data (i32.const 12940) ",")
- (data (i32.const 12952) ")\00\00\00\14\00\00\00p2\00\00\00\00\00\00\e01\00\00\00\00\00\00\102")
+ (data (i32.const 12952) "-\00\00\00\14\00\00\00p2\00\00\00\00\00\00\e01\00\00\00\00\00\00\102")
  (data (i32.const 12988) "\\")
  (data (i32.const 13000) "\01\00\00\00B\00\00\00F\00a\00c\00t\00o\00r\00y\00:\00 \00I\00N\00V\00A\00L\00I\00D\00_\00S\00Y\00M\00B\00O\00L\00_\00C\00H\00A\00R\00A\00C\00T\00E\00R")
  (data (i32.const 13084) "\1c")
@@ -269,11 +270,11 @@
  (data (i32.const 13148) ",")
  (data (i32.const 13160) "\01\00\00\00\1c\00\00\00 \00N\00O\00T\00 \00F\00O\00U\00N\00D\00 \00I\00N\00 ")
  (data (i32.const 13196) ",")
- (data (i32.const 13208) ")\00\00\00\14\00\00\00P3\00\00\00\00\00\00p3\00\00\00\00\00\00p\t")
+ (data (i32.const 13208) "-\00\00\00\14\00\00\00P3\00\00\00\00\00\00p3\00\00\00\00\00\00p\t")
  (data (i32.const 13244) "<")
  (data (i32.const 13256) "\01\00\00\00(\00\00\00W\00R\00O\00N\00G\00 \00P\00R\00E\00C\00I\00S\00I\00O\00N\00 \00F\00O\00R\00 ")
  (data (i32.const 13308) "\1c")
- (data (i32.const 13320) ")\00\00\00\0c\00\00\00\d03\00\00\00\00\00\00p\t")
+ (data (i32.const 13320) "-\00\00\00\0c\00\00\00\d03\00\00\00\00\00\00p\t")
  (data (i32.const 13340) ",")
  (data (i32.const 13352) "\01\00\00\00\16\00\00\00P\00O\00O\00L\00_\00E\00X\00I\00S\00T\00S")
  (data (i32.const 13388) "L")
@@ -287,11 +288,11 @@
  (data (i32.const 13692) ",")
  (data (i32.const 13704) "\01\00\00\00\1c\00\00\00I\00n\00v\00a\00l\00i\00d\00 \00n\00a\00m\00e\00:\00 ")
  (data (i32.const 13740) "\1c")
- (data (i32.const 13752) ")\00\00\00\0c\00\00\00\905\00\00\00\00\00\00p\t")
+ (data (i32.const 13752) "-\00\00\00\0c\00\00\00\905\00\00\00\00\00\00p\t")
  (data (i32.const 13772) ",")
  (data (i32.const 13784) "\01\00\00\00\1a\00\00\00i\00n\00v\00a\00l\00i\00d\00 \00n\00a\00m\00e\00 ")
  (data (i32.const 13820) "\1c")
- (data (i32.const 13832) ")\00\00\00\0c\00\00\00\e05\00\00\00\00\00\00p\t")
+ (data (i32.const 13832) "-\00\00\00\0c\00\00\00\e05\00\00\00\00\00\00p\t")
  (data (i32.const 13852) "l")
  (data (i32.const 13864) "\01\00\00\00N\00\00\00P\00o\00o\00l\00 \00d\00o\00e\00s\00 \00n\00o\00t\00 \00e\00x\00i\00s\00t\00 \00f\00o\00r\00 \00t\00h\00i\00s\00 \00t\00o\00k\00e\00n\00 \00p\00a\00i\00r")
  (data (i32.const 13964) ",")
@@ -330,11 +331,11 @@
  (data (i32.const 15420) "L")
  (data (i32.const 15432) "\01\00\00\000\00\00\00:\00 \00e\00x\00p\00e\00c\00t\00e\00d\00 \00u\00p\00p\00e\00r\00c\00a\00s\00e\00 \00A\00-\00Z")
  (data (i32.const 15500) "\1c")
- (data (i32.const 15512) ")\00\00\00\0c\00\00\00\f0;\00\00\00\00\00\00P<")
+ (data (i32.const 15512) "-\00\00\00\0c\00\00\00\f0;\00\00\00\00\00\00P<")
  (data (i32.const 15532) "|")
  (data (i32.const 15544) "\01\00\00\00l\00\00\00S\00y\00m\00b\00o\00l\00 \00l\00e\00n\00g\00t\00h\00 \00m\00u\00s\00t\00 \00b\00e\00 \00b\00e\00t\00w\00e\00e\00n\00 \001\00 \00a\00n\00d\00 \007\00 \00c\00h\00a\00r\00a\00c\00t\00e\00r\00s\00,\00 \00g\00o\00t\00 ")
  (data (i32.const 15660) "\1c")
- (data (i32.const 15672) ")\00\00\00\0c\00\00\00\c0<\00\00\00\00\00\00p\t")
+ (data (i32.const 15672) "-\00\00\00\0c\00\00\00\c0<\00\00\00\00\00\00p\t")
  (data (i32.const 15692) "\9c")
  (data (i32.const 15704) "\01\00\00\00\84\00\00\00T\00o\00k\00e\00n\00 \00m\00i\00s\00m\00a\00t\00c\00h\00:\00 \00m\00e\00m\00o\00 \00s\00p\00e\00c\00i\00f\00i\00e\00s\00 \00d\00i\00f\00f\00e\00r\00e\00n\00t\00 \00i\00n\00p\00u\00t\00 \00t\00o\00k\00e\00n\00 \00t\00h\00a\00n\00 \00r\00e\00c\00e\00i\00v\00e\00d")
  (data (i32.const 15852) "\\")
@@ -354,35 +355,35 @@
  (data (i32.const 16396) "<")
  (data (i32.const 16408) "\01\00\00\00(\00\00\00K\00 \00i\00n\00v\00a\00r\00i\00a\00n\00t\00 \00v\00i\00o\00l\00a\00t\00e\00d")
  (data (i32.const 16460) ",")
- (data (i32.const 16472) "\01\00\00\00\10\00\00\00t\00r\00a\00n\00s\00f\00e\00r")
+ (data (i32.const 16472) "\01\00\00\00\1a\00\00\00b\00a\00d\00 \00d\00b\00 \00i\00n\00d\00e\00x\00!")
  (data (i32.const 16508) ",")
- (data (i32.const 16520) ")\00\00\00\14\00\00\00p\t\00\00\00\00\00\00p\t\00\00\00\00\00\00p\t")
+ (data (i32.const 16520) "\01\00\00\00\10\00\00\00t\00r\00a\00n\00s\00f\00e\00r")
  (data (i32.const 16556) ",")
- (data (i32.const 16568) "\01\00\00\00\1a\00\00\00i\00n\00v\00a\00l\00i\00d\00 \00a\00s\00s\00e\00t")
- (data (i32.const 16604) "\\")
- (data (i32.const 16616) "\01\00\00\00J\00\00\00I\00n\00s\00u\00f\00f\00i\00c\00i\00e\00n\00t\00 \00t\00o\00k\00e\00n\001\00 \00d\00e\00p\00o\00s\00i\00t\00e\00d\00.\00 \00H\00a\00v\00e\00:\00 ")
- (data (i32.const 16700) ",")
- (data (i32.const 16712) "\01\00\00\00\10\00\00\00,\00 \00N\00e\00e\00d\00:\00 ")
+ (data (i32.const 16568) "-\00\00\00\14\00\00\00p\t\00\00\00\00\00\00p\t\00\00\00\00\00\00p\t")
+ (data (i32.const 16604) ",")
+ (data (i32.const 16616) "\01\00\00\00\1a\00\00\00i\00n\00v\00a\00l\00i\00d\00 \00a\00s\00s\00e\00t")
+ (data (i32.const 16652) "\\")
+ (data (i32.const 16664) "\01\00\00\00J\00\00\00I\00n\00s\00u\00f\00f\00i\00c\00i\00e\00n\00t\00 \00t\00o\00k\00e\00n\001\00 \00d\00e\00p\00o\00s\00i\00t\00e\00d\00.\00 \00H\00a\00v\00e\00:\00 ")
  (data (i32.const 16748) ",")
- (data (i32.const 16760) ")\00\00\00\14\00\00\00\f0@\00\00\00\00\00\00PA\00\00\00\00\00\00p\t")
- (data (i32.const 16796) "\\")
- (data (i32.const 16808) "\01\00\00\00J\00\00\00I\00n\00s\00u\00f\00f\00i\00c\00i\00e\00n\00t\00 \00t\00o\00k\00e\00n\002\00 \00d\00e\00p\00o\00s\00i\00t\00e\00d\00.\00 \00H\00a\00v\00e\00:\00 ")
- (data (i32.const 16892) ",")
- (data (i32.const 16904) ")\00\00\00\14\00\00\00\b0A\00\00\00\00\00\00PA\00\00\00\00\00\00p\t")
- (data (i32.const 16940) "<")
- (data (i32.const 16952) "\01\00\00\00&\00\00\00I\00N\00S\00U\00F\00F\00I\00C\00I\00E\00N\00T\00_\00A\00M\00O\00U\00N\00T")
- (data (i32.const 17004) "L")
- (data (i32.const 17016) "\01\00\00\004\00\00\00I\00n\00s\00u\00f\00f\00i\00c\00i\00e\00n\00t\00 \00t\00o\00k\00e\00n\001\00 \00a\00m\00o\00u\00n\00t")
- (data (i32.const 17084) "<")
- (data (i32.const 17096) "\01\00\00\00\1e\00\00\00I\00n\00v\00a\00l\00i\00d\00 \00a\00m\00o\00u\00n\00t\00s")
- (data (i32.const 17148) "L")
- (data (i32.const 17160) "\01\00\00\004\00\00\00I\00n\00s\00u\00f\00f\00i\00c\00i\00e\00n\00t\00 \00t\00o\00k\00e\00n\000\00 \00a\00m\00o\00u\00n\00t")
- (data (i32.const 17228) "L")
- (data (i32.const 17240) "\01\00\00\00<\00\00\00I\00n\00s\00u\00f\00f\00i\00c\00i\00e\00n\00t\00 \00i\00n\00i\00t\00i\00a\00l\00 \00l\00i\00q\00u\00i\00d\00i\00t\00y")
- (data (i32.const 17308) "L")
- (data (i32.const 17320) "\01\00\00\00:\00\00\00I\00n\00s\00u\00f\00f\00i\00c\00i\00e\00n\00t\00 \00l\00i\00q\00u\00i\00d\00i\00t\00y\00 \00m\00i\00n\00t\00e\00d")
- (data (i32.const 17388) ",")
- (data (i32.const 17400) "\01\00\00\00\1a\00\00\00b\00a\00d\00 \00d\00b\00 \00i\00n\00d\00e\00x\00!")
+ (data (i32.const 16760) "\01\00\00\00\10\00\00\00,\00 \00N\00e\00e\00d\00:\00 ")
+ (data (i32.const 16796) ",")
+ (data (i32.const 16808) "-\00\00\00\14\00\00\00 A\00\00\00\00\00\00\80A\00\00\00\00\00\00p\t")
+ (data (i32.const 16844) "\\")
+ (data (i32.const 16856) "\01\00\00\00J\00\00\00I\00n\00s\00u\00f\00f\00i\00c\00i\00e\00n\00t\00 \00t\00o\00k\00e\00n\002\00 \00d\00e\00p\00o\00s\00i\00t\00e\00d\00.\00 \00H\00a\00v\00e\00:\00 ")
+ (data (i32.const 16940) ",")
+ (data (i32.const 16952) "-\00\00\00\14\00\00\00\e0A\00\00\00\00\00\00\80A\00\00\00\00\00\00p\t")
+ (data (i32.const 16988) "<")
+ (data (i32.const 17000) "\01\00\00\00&\00\00\00I\00N\00S\00U\00F\00F\00I\00C\00I\00E\00N\00T\00_\00A\00M\00O\00U\00N\00T")
+ (data (i32.const 17052) "L")
+ (data (i32.const 17064) "\01\00\00\004\00\00\00I\00n\00s\00u\00f\00f\00i\00c\00i\00e\00n\00t\00 \00t\00o\00k\00e\00n\001\00 \00a\00m\00o\00u\00n\00t")
+ (data (i32.const 17132) "<")
+ (data (i32.const 17144) "\01\00\00\00\1e\00\00\00I\00n\00v\00a\00l\00i\00d\00 \00a\00m\00o\00u\00n\00t\00s")
+ (data (i32.const 17196) "L")
+ (data (i32.const 17208) "\01\00\00\004\00\00\00I\00n\00s\00u\00f\00f\00i\00c\00i\00e\00n\00t\00 \00t\00o\00k\00e\00n\000\00 \00a\00m\00o\00u\00n\00t")
+ (data (i32.const 17276) "L")
+ (data (i32.const 17288) "\01\00\00\00<\00\00\00I\00n\00s\00u\00f\00f\00i\00c\00i\00e\00n\00t\00 \00i\00n\00i\00t\00i\00a\00l\00 \00l\00i\00q\00u\00i\00d\00i\00t\00y")
+ (data (i32.const 17356) "L")
+ (data (i32.const 17368) "\01\00\00\00:\00\00\00I\00n\00s\00u\00f\00f\00i\00c\00i\00e\00n\00t\00 \00l\00i\00q\00u\00i\00d\00i\00t\00y\00 \00m\00i\00n\00t\00e\00d")
  (data (i32.const 17436) "<")
  (data (i32.const 17448) "\01\00\00\00*\00\00\00R\00e\00f\00u\00n\00d\00 \00e\00x\00c\00e\00s\00s\00 \00d\00e\00p\00o\00s\00i\00t")
  (data (i32.const 17500) "L")
@@ -429,6 +430,8 @@
  (export "XPRSwap#set:configTable" (func $assembly/xprswap/tables/pools.table/PoolsTable#set:token1_contract))
  (export "XPRSwap#get:depositTable" (func $assembly/xprswap/xprswap.contract/XPRSwap#get:depositTable))
  (export "XPRSwap#set:depositTable" (func $assembly/xprswap/tables/pools.table/PoolsTable#set:token0_symbol))
+ (export "XPRSwap#get:swapsTable" (func $assembly/xprswap/xprswap.contract/XPRSwap#get:swapsTable))
+ (export "XPRSwap#set:swapsTable" (func $assembly/xprswap/tables/pools.table/PoolsTable#set:token1_symbol))
  (export "XPRSwap#init" (func $assembly/xprswap/xprswap.contract/XPRSwap#init))
  (export "XPRSwap#createPool" (func $assembly/xprswap/xprswap.contract/XPRSwap#createPool))
  (export "XPRSwap#depositPrep" (func $assembly/xprswap/xprswap.contract/XPRSwap#depositPrep))
@@ -1279,7 +1282,7 @@
    (local.tee $1
     (call $~lib/rt/stub/__new
      (i32.const 12)
-     (i32.const 31)
+     (i32.const 35)
     )
    )
    (i32.const 0)
@@ -1804,7 +1807,7 @@
       (local.tee $4
        (call $~lib/rt/stub/__new
         (i32.const 28)
-        (i32.const 33)
+        (i32.const 37)
        )
       )
      )
@@ -2162,6 +2165,225 @@
   )
   (local.get $0)
  )
+ (func $assembly/xprswap/tables/swapHistory.table/SwapsTable#set:timestamp (param $0 i32) (param $1 i64)
+  (i64.store offset=56
+   (local.get $0)
+   (local.get $1)
+  )
+ )
+ (func $assembly/xprswap/tables/swapHistory.table/SwapsTable#constructor (param $0 i64) (param $1 i64) (param $2 i32) (param $3 i32) (param $4 i32) (param $5 i64) (param $6 i64) (param $7 i64) (param $8 i64) (result i32)
+  (local $9 i32)
+  (call $~lib/as-chain/name/Name#set:N
+   (local.tee $9
+    (call $~lib/rt/stub/__new
+     (i32.const 64)
+     (i32.const 31)
+    )
+   )
+   (local.get $0)
+  )
+  (call $~lib/as-chain/bignum/integer/u128/u128#set:hi
+   (local.get $9)
+   (local.get $1)
+  )
+  (call $~lib/rt/common/OBJECT#set:rtSize
+   (local.get $9)
+   (local.get $2)
+  )
+  (call $assembly/xprswap/tables/pools.table/PoolsTable#set:token1_contract
+   (local.get $9)
+   (local.get $3)
+  )
+  (call $assembly/xprswap/tables/pools.table/PoolsTable#set:token0_symbol
+   (local.get $9)
+   (local.get $4)
+  )
+  (call $assembly/xprswap/tables/pools.table/PoolsTable#set:reserve0
+   (local.get $9)
+   (local.get $5)
+  )
+  (call $assembly/xprswap/tables/pools.table/PoolsTable#set:reserve1
+   (local.get $9)
+   (local.get $6)
+  )
+  (call $assembly/xprswap/tables/pools.table/PoolsTable#set:lp_supply
+   (local.get $9)
+   (local.get $7)
+  )
+  (call $assembly/xprswap/tables/swapHistory.table/SwapsTable#set:timestamp
+   (local.get $9)
+   (local.get $8)
+  )
+  (local.get $9)
+ )
+ (func $assembly/xprswap/tables/swapHistory.table/SwapsTable.get:tableName (result i32)
+  (local $0 i32)
+  (call $~lib/as-chain/name/Name#set:N
+   (local.tee $0
+    (call $~lib/rt/stub/__new
+     (i32.const 8)
+     (i32.const 5)
+    )
+   )
+   (i64.const 0)
+  )
+  (call $~lib/as-chain/name/Name#set:N
+   (local.get $0)
+   (i64.const -4103522530394898432)
+  )
+  (local.get $0)
+ )
+ (func $~lib/proton-tsc/modules/store/store/TableStore<assembly/xprswap/tables/swapHistory.table/SwapsTable>#constructor (param $0 i32) (param $1 i32) (result i32)
+  (local $2 i32)
+  (local $3 i64)
+  (local $4 i32)
+  (local $5 i32)
+  (local $6 i32)
+  (local $7 i64)
+  (local $8 i64)
+  (call $~lib/rt/common/BLOCK#set:mmInfo
+   (local.tee $4
+    (call $~lib/rt/stub/__new
+     (i32.const 16)
+     (i32.const 32)
+    )
+   )
+   (i32.const 0)
+  )
+  (call $~lib/as-chain/bignum/integer/u128/u128#set:hi
+   (local.get $4)
+   (i64.const -1)
+  )
+  (drop
+   (call $assembly/xprswap/tables/swapHistory.table/SwapsTable#constructor
+    (i64.const 0)
+    (i64.const 0)
+    (global.get $~lib/as-chain/name/EMPTY_NAME)
+    (global.get $~lib/as-chain/name/EMPTY_NAME)
+    (global.get $~lib/as-chain/name/EMPTY_NAME)
+    (i64.const 0)
+    (i64.const 0)
+    (i64.const 0)
+    (i64.const 0)
+   )
+  )
+  (local.set $6
+   (call $assembly/xprswap/tables/swapHistory.table/SwapsTable.get:tableName)
+  )
+  (local.set $3
+   (i64.and
+    (i64.load
+     (call $assembly/xprswap/tables/swapHistory.table/SwapsTable.get:tableName)
+    )
+    (i64.const -16)
+   )
+  )
+  (drop
+   (i32.load offset=4
+    (local.tee $5
+     (call $~lib/rt/__newArray
+      (i32.const 2)
+      (i32.const 2)
+      (i32.const 18)
+      (i32.const 0)
+     )
+    )
+   )
+  )
+  (call $~lib/array/Array<~lib/as-chain/idxdb/IDXDB>#__uset
+   (local.get $5)
+   (i32.const 0)
+   (call $~lib/as-chain/idx64/IDX64#constructor
+    (i64.load
+     (local.get $0)
+    )
+    (i64.load
+     (local.get $1)
+    )
+    (local.get $3)
+    (i32.const 0)
+   )
+  )
+  (call $~lib/array/Array<~lib/as-chain/idxdb/IDXDB>#__uset
+   (local.get $5)
+   (i32.const 1)
+   (call $~lib/as-chain/idx64/IDX64#constructor
+    (i64.load
+     (local.get $0)
+    )
+    (i64.load
+     (local.get $1)
+    )
+    (i64.add
+     (local.get $3)
+     (i64.const 1)
+    )
+    (i32.const 1)
+   )
+  )
+  (call $~lib/rt/common/BLOCK#set:mmInfo
+   (local.tee $2
+    (call $~lib/rt/stub/__new
+     (i32.const 16)
+     (i32.const 33)
+    )
+   )
+   (i32.const 0)
+  )
+  (call $~lib/rt/common/OBJECT#set:gcInfo
+   (local.get $2)
+   (i32.const 0)
+  )
+  (call $~lib/as-chain/bignum/integer/u128/u128#set:hi
+   (local.get $2)
+   (i64.const -1)
+  )
+  (local.set $3
+   (i64.load
+    (local.get $0)
+   )
+  )
+  (local.set $7
+   (i64.load
+    (local.get $1)
+   )
+  )
+  (local.set $8
+   (i64.load
+    (local.get $6)
+   )
+  )
+  (call $~lib/as-chain/name/Name#set:N
+   (local.tee $0
+    (call $~lib/rt/stub/__new
+     (i32.const 24)
+     (i32.const 34)
+    )
+   )
+   (local.get $3)
+  )
+  (call $~lib/as-chain/bignum/integer/u128/u128#set:hi
+   (local.get $0)
+   (local.get $7)
+  )
+  (call $~lib/as-chain/dbi64/DBI64<assembly/xprswap/tables/pools.table/PoolsTable>#set:table
+   (local.get $0)
+   (local.get $8)
+  )
+  (call $~lib/rt/common/BLOCK#set:mmInfo
+   (local.get $2)
+   (local.get $0)
+  )
+  (call $~lib/rt/common/OBJECT#set:gcInfo
+   (local.get $2)
+   (local.get $5)
+  )
+  (call $~lib/rt/common/BLOCK#set:mmInfo
+   (local.get $4)
+   (local.get $2)
+  )
+  (local.get $4)
+ )
  (func $assembly/xprswap/xprswap.contract/XPRSwap#constructor (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32) (result i32)
   (local $4 i32)
   (local $5 i32)
@@ -2180,7 +2402,7 @@
         )
         (local.set $0
          (call $~lib/rt/stub/__new
-          (i32.const 32)
+          (i32.const 36)
           (i32.const 7)
          )
         )
@@ -2559,6 +2781,17 @@
   )
   (call $assembly/xprswap/tables/pools.table/PoolsTable#set:token1_symbol
    (local.get $0)
+   (call $~lib/proton-tsc/modules/store/store/TableStore<assembly/xprswap/tables/swapHistory.table/SwapsTable>#constructor
+    (i32.load
+     (local.get $0)
+    )
+    (i32.load
+     (local.get $0)
+    )
+   )
+  )
+  (i32.store offset=32
+   (local.get $0)
    (i32.const 10000)
   )
   (local.get $0)
@@ -2588,6 +2821,11 @@
    (local.get $0)
   )
  )
+ (func $assembly/xprswap/xprswap.contract/XPRSwap#get:swapsTable (param $0 i32) (result i32)
+  (i32.load offset=28
+   (local.get $0)
+  )
+ )
  (func $~lib/as-chain/action/requireAuth (param $0 i32)
   (call $~lib/as-chain/env/require_auth
    (i64.load
@@ -2601,7 +2839,7 @@
    (local.tee $4
     (call $~lib/rt/stub/__new
      (i32.const 24)
-     (i32.const 34)
+     (i32.const 38)
     )
    )
    (i32.const 0)
@@ -2789,7 +3027,7 @@
    (local.tee $1
     (call $~lib/rt/stub/__new
      (i32.const 8)
-     (i32.const 35)
+     (i32.const 39)
     )
    )
    (i32.const 0)
@@ -3138,7 +3376,7 @@
    (local.tee $1
     (call $~lib/rt/stub/__new
      (i32.const 8)
-     (i32.const 36)
+     (i32.const 40)
     )
    )
    (i32.const 0)
@@ -3405,7 +3643,7 @@
    (local.tee $1
     (call $~lib/rt/stub/__new
      (i32.const 8)
-     (i32.const 39)
+     (i32.const 43)
     )
    )
    (i32.const 0)
@@ -3424,7 +3662,7 @@
    (local.tee $1
     (call $~lib/rt/stub/__new
      (i32.const 16)
-     (i32.const 40)
+     (i32.const 44)
     )
    )
    (i32.const 0)
@@ -5911,7 +6149,7 @@
    (local.tee $2
     (call $~lib/rt/stub/__new
      (i32.const 12)
-     (i32.const 43)
+     (i32.const 47)
     )
    )
    (local.get $0)
@@ -5982,7 +6220,7 @@
    (local.tee $1
     (call $~lib/rt/stub/__new
      (i32.const 12)
-     (i32.const 42)
+     (i32.const 46)
     )
    )
    (local.get $3)
@@ -6020,7 +6258,7 @@
    (local.tee $4
     (call $~lib/rt/stub/__new
      (i32.const 24)
-     (i32.const 47)
+     (i32.const 51)
     )
    )
    (i32.const 0)
@@ -6219,7 +6457,7 @@
      (local.tee $4
       (call $~lib/rt/stub/__new
        (i32.const 16)
-       (i32.const 44)
+       (i32.const 48)
       )
      )
      (i32.const 0)
@@ -6256,7 +6494,7 @@
      (local.tee $1
       (call $~lib/rt/stub/__new
        (i32.const 16)
-       (i32.const 45)
+       (i32.const 49)
       )
      )
      (i32.const 0)
@@ -6288,7 +6526,7 @@
      (local.tee $5
       (call $~lib/rt/stub/__new
        (i32.const 24)
-       (i32.const 46)
+       (i32.const 50)
       )
      )
      (local.get $9)
@@ -6503,7 +6741,7 @@
        (call $~lib/rt/__newArray
         (i32.const 2)
         (i32.const 2)
-        (i32.const 48)
+        (i32.const 52)
         (i32.const 0)
        )
       )
@@ -6527,7 +6765,7 @@
        (call $~lib/rt/__newArray
         (i32.const 2)
         (i32.const 2)
-        (i32.const 48)
+        (i32.const 52)
         (i32.const 0)
        )
       )
@@ -6553,7 +6791,7 @@
    (local.tee $4
     (call $~lib/rt/stub/__new
      (i32.const 24)
-     (i32.const 49)
+     (i32.const 53)
     )
    )
    (i32.const 0)
@@ -7196,7 +7434,7 @@
    (local.tee $1
     (call $~lib/rt/stub/__new
      (i32.const 8)
-     (i32.const 51)
+     (i32.const 55)
     )
    )
    (local.get $0)
@@ -7213,7 +7451,7 @@
    (local.tee $0
     (call $~lib/rt/stub/__new
      (i32.const 4)
-     (i32.const 50)
+     (i32.const 54)
     )
    )
    (call $~lib/as-chain/time/Microseconds#constructor
@@ -7936,7 +8174,7 @@
        (call $~lib/rt/__newArray
         (i32.const 1)
         (i32.const 2)
-        (i32.const 54)
+        (i32.const 58)
         (i32.const 0)
        )
       )
@@ -7975,7 +8213,7 @@
          (call $~lib/rt/__newArray
           (i32.const 1)
           (i32.const 2)
-          (i32.const 54)
+          (i32.const 58)
           (i32.const 0)
          )
         )
@@ -8008,7 +8246,7 @@
           )
          )
          (i32.const 2)
-         (i32.const 54)
+         (i32.const 58)
          (i32.const 0)
         )
        )
@@ -8067,7 +8305,7 @@
     (call $~lib/rt/__newArray
      (i32.const 0)
      (i32.const 2)
-     (i32.const 54)
+     (i32.const 58)
      (i32.const 0)
     )
    )
@@ -8213,7 +8451,7 @@
   (call $~lib/rt/__newArray
    (i32.const 0)
    (i32.const 2)
-   (i32.const 54)
+   (i32.const 58)
    (i32.const 0)
   )
  )
@@ -8917,7 +9155,7 @@
    (local.tee $4
     (call $~lib/rt/stub/__new
      (i32.const 24)
-     (i32.const 55)
+     (i32.const 59)
     )
    )
    (i32.const 0)
@@ -11971,7 +12209,7 @@
       (local.tee $1
        (call $~lib/rt/stub/__new
         (i32.const 12)
-        (i32.const 56)
+        (i32.const 60)
        )
       )
      )
@@ -13465,7 +13703,7 @@
   )
   (local.set $4
    (i32.sub
-    (i32.load offset=28
+    (i32.load offset=32
      (local.get $0)
     )
     (local.get $4)
@@ -13500,7 +13738,7 @@
   (local.set $0
    (call $~lib/as-chain/bignum/integer/u128/u128#constructor
     (i64.extend_i32_u
-     (i32.load offset=28
+     (i32.load offset=32
       (local.get $0)
      )
     )
@@ -14141,13 +14379,673 @@
    (local.get $2)
   )
  )
+ (func $~lib/as-chain/dbi64/PrimaryIterator<assembly/xprswap/tables/swapHistory.table/SwapsTable>#constructor (param $0 i32) (param $1 i32) (param $2 i64) (param $3 i32) (result i32)
+  (local $4 i32)
+  (call $~lib/rt/common/BLOCK#set:mmInfo
+   (local.tee $4
+    (call $~lib/rt/stub/__new
+     (i32.const 24)
+     (i32.const 61)
+    )
+   )
+   (i32.const 0)
+  )
+  (call $~lib/rt/common/OBJECT#set:gcInfo
+   (local.get $4)
+   (i32.const 0)
+  )
+  (call $assembly/xprswap/tables/config.table/ConfigTable#set:paused
+   (local.get $4)
+   (i32.const 0)
+  )
+  (call $~lib/as-chain/dbi64/DBI64<assembly/xprswap/tables/pools.table/PoolsTable>#set:table
+   (local.get $4)
+   (i64.const 0)
+  )
+  (call $~lib/rt/common/BLOCK#set:mmInfo
+   (local.get $4)
+   (local.get $0)
+  )
+  (call $~lib/rt/common/OBJECT#set:gcInfo
+   (local.get $4)
+   (local.get $1)
+  )
+  (call $~lib/as-chain/dbi64/DBI64<assembly/xprswap/tables/pools.table/PoolsTable>#set:table
+   (local.get $4)
+   (local.get $2)
+  )
+  (call $assembly/xprswap/tables/config.table/ConfigTable#set:paused
+   (local.get $4)
+   (local.get $3)
+  )
+  (local.get $4)
+ )
+ (func $~lib/as-chain/mi/MultiIndex<assembly/xprswap/tables/swapHistory.table/SwapsTable>#end (param $0 i32) (result i32)
+  (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/xprswap/tables/swapHistory.table/SwapsTable>#constructor
+   (local.tee $0
+    (i32.load
+     (local.get $0)
+    )
+   )
+   (call $~lib/as-chain/env/db_end_i64
+    (i64.load
+     (local.get $0)
+    )
+    (i64.load offset=8
+     (local.get $0)
+    )
+    (i64.load offset=16
+     (local.get $0)
+    )
+   )
+   (i64.const 0)
+   (i32.const 0)
+  )
+ )
+ (func $assembly/xprswap/tables/swapHistory.table/SwapsTable#unpack (param $0 i32) (param $1 i32) (result i32)
+  (local $2 i32)
+  (call $~lib/as-chain/name/Name#set:N
+   (local.get $0)
+   (call $~lib/as-chain/serializer/Decoder#unpackNumber<u64>
+    (local.tee $1
+     (call $~lib/as-chain/serializer/Decoder#constructor
+      (local.get $1)
+     )
+    )
+   )
+  )
+  (call $~lib/as-chain/bignum/integer/u128/u128#set:hi
+   (local.get $0)
+   (call $~lib/as-chain/serializer/Decoder#unpackNumber<u64>
+    (local.get $1)
+   )
+  )
+  (call $~lib/as-chain/name/Name#set:N
+   (local.tee $2
+    (call $~lib/rt/stub/__new
+     (i32.const 8)
+     (i32.const 5)
+    )
+   )
+   (i64.const 0)
+  )
+  (call $~lib/as-chain/name/Name#set:N
+   (local.get $2)
+   (i64.const 0)
+  )
+  (call $~lib/as-chain/serializer/Decoder#unpack
+   (local.get $1)
+   (local.get $2)
+  )
+  (call $~lib/rt/common/OBJECT#set:rtSize
+   (local.get $0)
+   (local.get $2)
+  )
+  (call $~lib/as-chain/name/Name#set:N
+   (local.tee $2
+    (call $~lib/rt/stub/__new
+     (i32.const 8)
+     (i32.const 5)
+    )
+   )
+   (i64.const 0)
+  )
+  (call $~lib/as-chain/name/Name#set:N
+   (local.get $2)
+   (i64.const 0)
+  )
+  (call $~lib/as-chain/serializer/Decoder#unpack
+   (local.get $1)
+   (local.get $2)
+  )
+  (call $assembly/xprswap/tables/pools.table/PoolsTable#set:token1_contract
+   (local.get $0)
+   (local.get $2)
+  )
+  (call $~lib/as-chain/name/Name#set:N
+   (local.tee $2
+    (call $~lib/rt/stub/__new
+     (i32.const 8)
+     (i32.const 5)
+    )
+   )
+   (i64.const 0)
+  )
+  (call $~lib/as-chain/name/Name#set:N
+   (local.get $2)
+   (i64.const 0)
+  )
+  (call $~lib/as-chain/serializer/Decoder#unpack
+   (local.get $1)
+   (local.get $2)
+  )
+  (call $assembly/xprswap/tables/pools.table/PoolsTable#set:token0_symbol
+   (local.get $0)
+   (local.get $2)
+  )
+  (call $assembly/xprswap/tables/pools.table/PoolsTable#set:reserve0
+   (local.get $0)
+   (call $~lib/as-chain/serializer/Decoder#unpackNumber<u64>
+    (local.get $1)
+   )
+  )
+  (call $assembly/xprswap/tables/pools.table/PoolsTable#set:reserve1
+   (local.get $0)
+   (call $~lib/as-chain/serializer/Decoder#unpackNumber<u64>
+    (local.get $1)
+   )
+  )
+  (call $assembly/xprswap/tables/pools.table/PoolsTable#set:lp_supply
+   (local.get $0)
+   (call $~lib/as-chain/serializer/Decoder#unpackNumber<u64>
+    (local.get $1)
+   )
+  )
+  (call $assembly/xprswap/tables/swapHistory.table/SwapsTable#set:timestamp
+   (local.get $0)
+   (call $~lib/as-chain/serializer/Decoder#unpackNumber<u64>
+    (local.get $1)
+   )
+  )
+  (i32.load offset=4
+   (local.get $1)
+  )
+ )
+ (func $~lib/proton-tsc/modules/store/store/TableStore<assembly/xprswap/tables/swapHistory.table/SwapsTable>#get:availablePrimaryKey (param $0 i32) (result i64)
+  (local $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  (local $4 i64)
+  (local $5 i64)
+  (if
+   (i64.eq
+    (i64.load offset=8
+     (local.get $0)
+    )
+    (i64.const -1)
+   )
+   (if
+    (i32.eq
+     (i32.load offset=4
+      (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/xprswap/tables/swapHistory.table/SwapsTable>#constructor
+       (local.tee $1
+        (i32.load
+         (i32.load
+          (local.get $0)
+         )
+        )
+       )
+       (call $~lib/as-chain/env/db_lowerbound_i64
+        (i64.load
+         (local.get $1)
+        )
+        (i64.load offset=8
+         (local.get $1)
+        )
+        (i64.load offset=16
+         (local.get $1)
+        )
+        (i64.const 0)
+       )
+       (i64.const 0)
+       (i32.const 0)
+      )
+     )
+     (i32.load offset=4
+      (call $~lib/as-chain/mi/MultiIndex<assembly/xprswap/tables/swapHistory.table/SwapsTable>#end
+       (i32.load
+        (local.get $0)
+       )
+      )
+     )
+    )
+    (call $~lib/as-chain/bignum/integer/u128/u128#set:hi
+     (local.get $0)
+     (i64.const 0)
+    )
+    (block
+     (local.set $2
+      (call $~lib/as-chain/mi/MultiIndex<assembly/xprswap/tables/swapHistory.table/SwapsTable>#end
+       (i32.load
+        (local.get $0)
+       )
+      )
+     )
+     (local.set $1
+      (i32.load
+       (i32.load
+        (local.get $0)
+       )
+      )
+     )
+     (local.set $3
+      (call $~lib/rt/stub/__alloc
+       (i32.const 8)
+      )
+     )
+     (local.set $2
+      (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/xprswap/tables/swapHistory.table/SwapsTable>#constructor
+       (local.get $1)
+       (call $~lib/as-chain/env/db_previous_i64
+        (i32.load offset=4
+         (local.get $2)
+        )
+        (local.get $3)
+       )
+       (i64.load
+        (local.get $3)
+       )
+       (i32.const 1)
+      )
+     )
+     (drop
+      (i32.load
+       (i32.load
+        (local.get $0)
+       )
+      )
+     )
+     (block $__inlined_func$~lib/as-chain/dbi64/DBI64<assembly/xprswap/tables/swapHistory.table/SwapsTable>#get
+      (if
+       (i32.eqz
+        (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/xprswap/tables/config.table/ConfigTable>#isOk
+         (local.get $2)
+        )
+       )
+       (block
+        (local.set $1
+         (i32.const 0)
+        )
+        (br $__inlined_func$~lib/as-chain/dbi64/DBI64<assembly/xprswap/tables/swapHistory.table/SwapsTable>#get)
+       )
+      )
+      (local.set $1
+       (i32.const 0)
+      )
+      (if
+       (local.tee $3
+        (call $~lib/as-chain/env/db_get_i64
+         (local.tee $2
+          (i32.load offset=4
+           (local.get $2)
+          )
+         )
+         (i32.const 0)
+         (i32.const 0)
+        )
+       )
+       (block
+        (drop
+         (call $~lib/as-chain/env/db_get_i64
+          (local.get $2)
+          (i32.load offset=4
+           (local.tee $2
+            (call $~lib/array/Array<u8>#constructor
+             (local.get $3)
+            )
+           )
+          )
+          (local.get $3)
+         )
+        )
+        (drop
+         (call $assembly/xprswap/tables/swapHistory.table/SwapsTable#unpack
+          (local.tee $1
+           (call $assembly/xprswap/tables/swapHistory.table/SwapsTable#constructor
+            (i64.const 0)
+            (i64.const 0)
+            (global.get $~lib/as-chain/name/EMPTY_NAME)
+            (global.get $~lib/as-chain/name/EMPTY_NAME)
+            (global.get $~lib/as-chain/name/EMPTY_NAME)
+            (i64.const 0)
+            (i64.const 0)
+            (i64.const 0)
+            (i64.const 0)
+           )
+          )
+          (local.get $2)
+         )
+        )
+       )
+      )
+     )
+     (local.set $5
+      (local.tee $4
+       (i64.load
+        (if (result i32)
+         (local.get $1)
+         (local.get $1)
+         (call $assembly/xprswap/tables/swapHistory.table/SwapsTable#constructor
+          (i64.const 0)
+          (i64.const 0)
+          (global.get $~lib/as-chain/name/EMPTY_NAME)
+          (global.get $~lib/as-chain/name/EMPTY_NAME)
+          (global.get $~lib/as-chain/name/EMPTY_NAME)
+          (i64.const 0)
+          (i64.const 0)
+          (i64.const 0)
+          (i64.const 0)
+         )
+        )
+       )
+      )
+     )
+     (if
+      (i64.ge_u
+       (local.get $4)
+       (i64.const -2)
+      )
+      (call $~lib/as-chain/bignum/integer/u128/u128#set:hi
+       (local.get $0)
+       (i64.const -2)
+      )
+      (call $~lib/as-chain/bignum/integer/u128/u128#set:hi
+       (local.get $0)
+       (i64.add
+        (local.get $5)
+        (i64.const 1)
+       )
+      )
+     )
+    )
+   )
+  )
+  (call $~lib/as-chain/system/check
+   (i64.lt_u
+    (i64.load offset=8
+     (local.get $0)
+    )
+    (i64.const -2)
+   )
+   (i32.const 2160)
+  )
+  (i64.load offset=8
+   (local.get $0)
+  )
+ )
+ (func $assembly/xprswap/tables/swapHistory.table/SwapsTable#pack (param $0 i32) (result i32)
+  (local $1 i32)
+  (call $~lib/as-chain/serializer/Encoder#packNumber<u64>
+   (local.tee $1
+    (call $~lib/as-chain/serializer/Encoder#constructor
+     (block (result i32)
+      (drop
+       (i32.load offset=16
+        (local.get $0)
+       )
+      )
+      (drop
+       (i32.load offset=20
+        (local.get $0)
+       )
+      )
+      (drop
+       (i32.load offset=24
+        (local.get $0)
+       )
+      )
+      (i32.const 72)
+     )
+    )
+   )
+   (i64.load
+    (local.get $0)
+   )
+  )
+  (call $~lib/as-chain/serializer/Encoder#packNumber<u64>
+   (local.get $1)
+   (i64.load offset=8
+    (local.get $0)
+   )
+  )
+  (call $~lib/as-chain/serializer/Encoder#pack
+   (local.get $1)
+   (i32.load offset=16
+    (local.get $0)
+   )
+  )
+  (call $~lib/as-chain/serializer/Encoder#pack
+   (local.get $1)
+   (i32.load offset=20
+    (local.get $0)
+   )
+  )
+  (call $~lib/as-chain/serializer/Encoder#pack
+   (local.get $1)
+   (i32.load offset=24
+    (local.get $0)
+   )
+  )
+  (call $~lib/as-chain/serializer/Encoder#packNumber<u64>
+   (local.get $1)
+   (i64.load offset=32
+    (local.get $0)
+   )
+  )
+  (call $~lib/as-chain/serializer/Encoder#packNumber<u64>
+   (local.get $1)
+   (i64.load offset=40
+    (local.get $0)
+   )
+  )
+  (call $~lib/as-chain/serializer/Encoder#packNumber<u64>
+   (local.get $1)
+   (i64.load offset=48
+    (local.get $0)
+   )
+  )
+  (call $~lib/as-chain/serializer/Encoder#packNumber<u64>
+   (local.get $1)
+   (i64.load offset=56
+    (local.get $0)
+   )
+  )
+  (call $~lib/as-chain/serializer/Encoder#getBytes
+   (local.get $1)
+  )
+ )
+ (func $~lib/array/Array<u64>#__set (param $0 i32) (param $1 i64)
+  (if
+   (i32.eqz
+    (i32.load offset=12
+     (local.get $0)
+    )
+   )
+   (block
+    (call $~lib/array/ensureCapacity
+     (local.get $0)
+     (i32.const 1)
+     (i32.const 3)
+    )
+    (call $~lib/rt/common/OBJECT#set:rtId
+     (local.get $0)
+     (i32.const 1)
+    )
+   )
+  )
+  (i64.store
+   (i32.load offset=4
+    (local.get $0)
+   )
+   (local.get $1)
+  )
+ )
+ (func $~lib/as-chain/idxdb/newSecondaryValue_u64 (param $0 i64) (result i32)
+  (local $1 i32)
+  (call $~lib/array/Array<u64>#__set
+   (local.tee $1
+    (call $~lib/array/Array<u64>#constructor
+     (i32.const 1)
+    )
+   )
+   (local.get $0)
+  )
+  (call $~lib/as-chain/idxdb/SecondaryValue#constructor
+   (local.get $1)
+  )
+ )
+ (func $~lib/as-chain/mi/MultiIndex<assembly/xprswap/tables/swapHistory.table/SwapsTable>#store (param $0 i32) (param $1 i32) (param $2 i32)
+  (local $3 i64)
+  (local $4 i32)
+  (local $5 i32)
+  (local $6 i64)
+  (local $7 i32)
+  (local $8 i32)
+  (local.set $3
+   (i64.load
+    (local.get $1)
+   )
+  )
+  (local.set $6
+   (i64.load
+    (local.get $2)
+   )
+  )
+  (local.set $5
+   (i32.load
+    (local.get $0)
+   )
+  )
+  (local.set $8
+   (i32.load offset=12
+    (local.tee $7
+     (call $assembly/xprswap/tables/swapHistory.table/SwapsTable#pack
+      (local.get $1)
+     )
+    )
+   )
+  )
+  (drop
+   (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/xprswap/tables/swapHistory.table/SwapsTable>#constructor
+    (local.get $5)
+    (call $~lib/as-chain/env/db_store_i64
+     (i64.load offset=8
+      (local.get $5)
+     )
+     (i64.load offset=16
+      (local.get $5)
+     )
+     (local.get $6)
+     (local.get $3)
+     (i32.load offset=4
+      (local.get $7)
+     )
+     (local.get $8)
+    )
+    (local.get $3)
+    (i32.const 1)
+   )
+  )
+  (loop $for-loop|0
+   (if
+    (i32.lt_s
+     (local.get $4)
+     (i32.load offset=12
+      (i32.load offset=4
+       (local.get $0)
+      )
+     )
+    )
+    (block
+     (call $~lib/as-chain/idxdb/IDXDB#storeEx@virtual
+      (call $~lib/array/Array<~lib/as-chain/idxdb/IDXDB>#__get
+       (i32.load offset=4
+        (local.get $0)
+       )
+       (local.get $4)
+      )
+      (i64.load
+       (local.get $1)
+      )
+      (block $__inlined_func$assembly/xprswap/tables/swapHistory.table/SwapsTable#getSecondaryValue (result i32)
+       (block $case2|0
+        (block $case1|0
+         (if
+          (local.get $4)
+          (block
+           (br_if $case1|0
+            (i32.eq
+             (local.get $4)
+             (i32.const 1)
+            )
+           )
+           (br $case2|0)
+          )
+         )
+         (br $__inlined_func$assembly/xprswap/tables/swapHistory.table/SwapsTable#getSecondaryValue
+          (call $~lib/as-chain/idxdb/newSecondaryValue_u64
+           (i64.load offset=8
+            (local.get $1)
+           )
+          )
+         )
+        )
+        (br $__inlined_func$assembly/xprswap/tables/swapHistory.table/SwapsTable#getSecondaryValue
+         (call $~lib/as-chain/idxdb/newSecondaryValue_u64
+          (i64.load offset=56
+           (local.get $1)
+          )
+         )
+        )
+       )
+       (call $~lib/as-chain/system/assert
+        (i32.const 0)
+        (i32.const 16480)
+       )
+       (call $~lib/as-chain/idxdb/SecondaryValue#constructor
+        (call $~lib/array/Array<u64>#constructor
+         (i32.const 0)
+        )
+       )
+      )
+      (i64.load
+       (local.get $2)
+      )
+     )
+     (local.set $4
+      (i32.add
+       (local.get $4)
+       (i32.const 1)
+      )
+     )
+     (br $for-loop|0)
+    )
+   )
+  )
+  (if
+   (i64.ge_u
+    (local.tee $3
+     (i64.load
+      (local.get $1)
+     )
+    )
+    (i64.load offset=8
+     (local.get $0)
+    )
+   )
+   (call $~lib/as-chain/bignum/integer/u128/u128#set:hi
+    (local.get $0)
+    (select
+     (i64.const -2)
+     (i64.add
+      (local.get $3)
+      (i64.const 1)
+     )
+     (i64.ge_u
+      (local.get $3)
+      (i64.const -2)
+     )
+    )
+   )
+  )
+ )
  (func $~lib/as-chain/action/PermissionLevel#constructor (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (call $~lib/rt/common/BLOCK#set:mmInfo
    (local.tee $2
     (call $~lib/rt/stub/__new
      (i32.const 8)
-     (i32.const 59)
+     (i32.const 64)
     )
    )
    (local.get $0)
@@ -14490,14 +15388,14 @@
    (local.tee $7
     (call $~lib/rt/stub/__new
      (i32.const 4)
-     (i32.const 58)
+     (i32.const 63)
     )
    )
    (i32.const 0)
   )
   (local.set $8
    (call $~lib/as-chain/name/S2N
-    (i32.const 16480)
+    (i32.const 16528)
    )
   )
   (call $~lib/as-chain/name/Name#set:N
@@ -14550,7 +15448,7 @@
    (local.tee $0
     (call $~lib/rt/stub/__new
      (i32.const 12)
-     (i32.const 60)
+     (i32.const 65)
     )
    )
    (local.get $7)
@@ -14567,7 +15465,7 @@
    (local.tee $1
     (call $~lib/rt/stub/__new
      (i32.const 16)
-     (i32.const 57)
+     (i32.const 62)
     )
    )
    (local.get $2)
@@ -14590,7 +15488,7 @@
      (call $~lib/rt/__newArray
       (i32.const 1)
       (i32.const 2)
-      (i32.const 61)
+      (i32.const 66)
       (i32.const 0)
      )
     )
@@ -14622,7 +15520,7 @@
    (local.tee $0
     (call $~lib/rt/stub/__new
      (i32.const 16)
-     (i32.const 62)
+     (i32.const 67)
     )
    )
    (local.get $3)
@@ -14658,18 +15556,23 @@
  (func $assembly/xprswap/xprswap.contract/XPRSwap#handleSwap (param $0 i32) (param $1 i32) (param $2 i32) (param $3 i32)
   (local $4 i32)
   (local $5 i32)
-  (local $6 i64)
+  (local $6 i32)
   (local $7 i64)
   (local $8 i64)
   (local $9 i32)
-  (local $10 f64)
-  (local $11 i32)
-  (local $12 i32)
-  (local $13 i64)
+  (local $10 i64)
+  (local $11 i64)
+  (local $12 f64)
+  (local $13 i32)
+  (local $14 i32)
+  (local $15 i32)
+  (local $16 i64)
+  (local $17 i32)
+  (local $18 i32)
   (call $~lib/as-chain/system/check
    (i32.eqz
     (i32.load8_u offset=8
-     (local.tee $9
+     (local.tee $13
       (call $~lib/proton-tsc/modules/store/store/TableStore<assembly/xprswap/tables/config.table/ConfigTable>#requireGet
        (i32.load offset=20
         (local.get $0)
@@ -14695,7 +15598,7 @@
    )
    (i32.const 14464)
   )
-  (local.set $5
+  (local.set $6
    (call $~lib/string/String#trim
     (call $~lib/array/Array<~lib/as-chain/idxdb/IDXDB>#__get
      (local.get $4)
@@ -14706,7 +15609,7 @@
   (call $~lib/as-chain/system/check
    (select
     (f64.le
-     (local.tee $10
+     (local.tee $12
       (call $~lib/util/string/strtod
        (call $~lib/string/String#trim
         (call $~lib/array/Array<~lib/as-chain/idxdb/IDXDB>#__get
@@ -14721,23 +15624,23 @@
     (i32.const 0)
     (select
      (f64.ge
-      (local.get $10)
+      (local.get $12)
       (f64.const 0)
      )
      (i32.const 0)
      (f64.eq
-      (local.get $10)
-      (local.get $10)
+      (local.get $12)
+      (local.get $12)
      )
     )
    )
    (i32.const 14736)
   )
-  (local.set $13
+  (local.set $16
    (i64.trunc_f64_u
     (f64.ceil
      (f64.mul
-      (local.get $10)
+      (local.get $12)
       (f64.const 100)
      )
     )
@@ -14748,7 +15651,7 @@
     (i32.load offset=12
      (local.tee $4
       (call $~lib/string/String#split
-       (local.get $5)
+       (local.get $6)
        (i32.const 14432)
       )
      )
@@ -14757,7 +15660,7 @@
    )
    (i32.const 14800)
   )
-  (local.set $11
+  (local.set $5
    (call $~lib/string/String#toLowerCase
     (call $~lib/string/String#trim
      (call $~lib/array/Array<~lib/as-chain/idxdb/IDXDB>#__get
@@ -14767,7 +15670,7 @@
     )
    )
   )
-  (local.set $12
+  (local.set $9
    (call $~lib/string/String#toLowerCase
     (call $~lib/string/String#trim
      (call $~lib/array/Array<~lib/as-chain/idxdb/IDXDB>#__get
@@ -14777,7 +15680,7 @@
     )
    )
   )
-  (local.set $5
+  (local.set $6
    (call $~lib/as-chain/asset/Symbol#precision
     (i32.load offset=8
      (local.tee $4
@@ -14795,14 +15698,14 @@
     )
     (i32.and
      (i32.add
-      (local.get $5)
+      (local.get $6)
       (i32.const 1)
      )
      (i32.const 255)
     )
    )
   )
-  (local.set $6
+  (local.set $7
    (call $~lib/as-chain/name/S2N
     (call $~lib/string/String#toLowerCase
      (call $assembly/xprswap/xprswap.contract/XPRSwap#extractSymbolFromQuantity
@@ -14810,7 +15713,7 @@
        (call $~lib/string/String.__concat
         (if (result i32)
          (i32.and
-          (local.get $5)
+          (local.get $6)
           (i32.const 255)
          )
          (call $~lib/string/String.__concat
@@ -14822,9 +15725,9 @@
              (call $~lib/string/String#get:length
               (local.get $2)
              )
-             (local.tee $5
+             (local.tee $6
               (i32.and
-               (local.get $5)
+               (local.get $6)
                (i32.const 255)
               )
              )
@@ -14838,7 +15741,7 @@
             (call $~lib/string/String#get:length
              (local.get $2)
             )
-            (local.get $5)
+            (local.get $6)
            )
            (call $~lib/string/String#get:length
             (local.get $2)
@@ -14870,15 +15773,15 @@
   )
   (call $~lib/as-chain/name/Name#set:N
    (local.get $2)
-   (local.get $6)
+   (local.get $7)
   )
-  (local.set $6
+  (local.set $7
    (call $~lib/as-chain/name/S2N
-    (local.get $11)
+    (local.get $5)
    )
   )
   (call $~lib/as-chain/name/Name#set:N
-   (local.tee $5
+   (local.tee $6
     (call $~lib/rt/stub/__new
      (i32.const 8)
      (i32.const 5)
@@ -14887,8 +15790,8 @@
    (i64.const 0)
   )
   (call $~lib/as-chain/name/Name#set:N
-   (local.get $5)
    (local.get $6)
+   (local.get $7)
   )
   (call $~lib/as-chain/system/check
    (i64.eq
@@ -14896,18 +15799,18 @@
      (local.get $2)
     )
     (i64.load
-     (local.get $5)
+     (local.get $6)
     )
    )
    (i32.const 15712)
   )
-  (local.set $6
+  (local.set $7
    (call $~lib/as-chain/name/S2N
-    (local.get $12)
+    (local.get $9)
    )
   )
   (call $~lib/as-chain/name/Name#set:N
-   (local.tee $5
+   (local.tee $6
     (call $~lib/rt/stub/__new
      (i32.const 8)
      (i32.const 5)
@@ -14916,25 +15819,25 @@
    (i64.const 0)
   )
   (call $~lib/as-chain/name/Name#set:N
-   (local.get $5)
    (local.get $6)
+   (local.get $7)
   )
   (call $~lib/as-chain/system/check
    (i64.ne
-    (local.tee $6
+    (local.tee $7
      (call $assembly/xprswap/xprswap.contract/XPRSwap#findPoolId
       (local.get $0)
       (call $~lib/array/Array<~lib/as-chain/idxdb/IDXDB>#__get
-       (local.tee $5
+       (local.tee $6
         (call $assembly/xprswap/xprswap.contract/XPRSwap#sortTokens
          (local.get $2)
-         (local.get $5)
+         (local.get $6)
         )
        )
        (i32.const 0)
       )
       (call $~lib/array/Array<~lib/as-chain/idxdb/IDXDB>#__get
-       (local.get $5)
+       (local.get $6)
        (i32.const 1)
       )
      )
@@ -14952,7 +15855,7 @@
         (i32.load offset=12
          (local.get $0)
         )
-        (local.get $6)
+        (local.get $7)
         (i32.const 15968)
        )
       )
@@ -14969,9 +15872,9 @@
    )
    (i32.const 16016)
   )
-  (local.set $6
+  (local.set $8
    (if (result i64)
-    (local.tee $2
+    (local.tee $9
      (i64.eq
       (i64.load
        (local.get $2)
@@ -14984,17 +15887,17 @@
      )
     )
     (block (result i64)
-     (local.set $7
+     (local.set $11
       (i64.load offset=32
        (local.get $5)
       )
      )
-     (local.set $11
+     (local.set $14
       (i32.load offset=20
        (local.get $5)
       )
      )
-     (local.set $12
+     (local.set $15
       (i32.load offset=28
        (local.get $5)
       )
@@ -15004,17 +15907,17 @@
      )
     )
     (block (result i64)
-     (local.set $7
+     (local.set $11
       (i64.load offset=40
        (local.get $5)
       )
      )
-     (local.set $11
+     (local.set $14
       (i32.load offset=16
        (local.get $5)
       )
      )
-     (local.set $12
+     (local.set $15
       (i32.load offset=24
        (local.get $5)
       )
@@ -15027,26 +15930,26 @@
   )
   (call $~lib/as-chain/system/check
    (i64.ge_u
-    (local.tee $8
+    (local.tee $10
      (call $assembly/xprswap/xprswap.contract/XPRSwap#computeAmountOut
       (local.get $0)
       (i64.load
        (local.get $4)
       )
-      (local.get $7)
-      (local.get $6)
+      (local.get $11)
+      (local.get $8)
       (i32.load offset=28
-       (local.get $9)
+       (local.get $13)
       )
      )
     )
     (i64.div_u
      (i64.mul
+      (local.get $10)
       (i64.sub
        (i64.const 10000)
-       (local.get $13)
+       (local.get $16)
       )
-      (local.get $8)
      )
      (i64.const 10000)
     )
@@ -15055,13 +15958,13 @@
   )
   (call $~lib/as-chain/system/check
    (i64.gt_u
-    (local.get $6)
     (local.get $8)
+    (local.get $10)
    )
    (i32.const 16352)
   )
   (if
-   (local.get $2)
+   (local.get $9)
    (block
     (call $assembly/xprswap/tables/pools.table/PoolsTable#set:reserve0
      (local.get $5)
@@ -15080,7 +15983,7 @@
       (i64.load offset=40
        (local.get $5)
       )
-      (local.get $8)
+      (local.get $10)
      )
     )
    )
@@ -15102,7 +16005,7 @@
       (i64.load offset=32
        (local.get $5)
       )
-      (local.get $8)
+      (local.get $10)
      )
     )
    )
@@ -15115,7 +16018,7 @@
     (i64.const 0)
    )
   )
-  (local.set $4
+  (local.set $6
    (call $~lib/as-chain/bignum/integer/u128/u128#constructor
     (i64.load offset=40
      (local.get $5)
@@ -15123,82 +16026,86 @@
     (i64.const 0)
    )
   )
+  (local.set $18
+   (local.tee $17
+    (call $~lib/as-chain/bignum/integer/u128/u128#constructor
+     (call $~lib/as-chain/bignum/globals/__multi3
+      (i64.load
+       (local.get $2)
+      )
+      (i64.load offset=8
+       (local.get $2)
+      )
+      (i64.load
+       (local.get $6)
+      )
+      (i64.load offset=8
+       (local.get $6)
+      )
+     )
+     (global.get $~lib/as-chain/bignum/globals/__res128_hi)
+    )
+   )
+  )
   (local.set $2
    (call $~lib/as-chain/bignum/integer/u128/u128#constructor
-    (call $~lib/as-chain/bignum/globals/__multi3
-     (i64.load
-      (local.get $2)
-     )
-     (i64.load offset=8
-      (local.get $2)
-     )
-     (i64.load
-      (local.get $4)
-     )
-     (i64.load offset=8
-      (local.get $4)
-     )
-    )
-    (global.get $~lib/as-chain/bignum/globals/__res128_hi)
-   )
-  )
-  (local.set $4
-   (call $~lib/as-chain/bignum/integer/u128/u128#constructor
-    (local.get $7)
+    (local.get $11)
     (i64.const 0)
    )
   )
-  (local.set $9
+  (local.set $6
    (call $~lib/as-chain/bignum/integer/u128/u128#constructor
-    (local.get $6)
+    (local.get $8)
     (i64.const 0)
    )
   )
-  (local.set $4
-   (call $~lib/as-chain/bignum/integer/u128/u128#constructor
-    (call $~lib/as-chain/bignum/globals/__multi3
-     (i64.load
-      (local.get $4)
+  (local.set $6
+   (local.tee $2
+    (call $~lib/as-chain/bignum/integer/u128/u128#constructor
+     (call $~lib/as-chain/bignum/globals/__multi3
+      (i64.load
+       (local.get $2)
+      )
+      (i64.load offset=8
+       (local.get $2)
+      )
+      (i64.load
+       (local.get $6)
+      )
+      (i64.load offset=8
+       (local.get $6)
+      )
      )
-     (i64.load offset=8
-      (local.get $4)
-     )
-     (i64.load
-      (local.get $9)
-     )
-     (i64.load offset=8
-      (local.get $9)
-     )
+     (global.get $~lib/as-chain/bignum/globals/__res128_hi)
     )
-    (global.get $~lib/as-chain/bignum/globals/__res128_hi)
    )
   )
   (call $~lib/as-chain/system/check
    (i32.eqz
     (if (result i32)
      (i64.eq
-      (local.tee $6
+      (local.tee $8
+       (i64.load offset=8
+        (local.get $17)
+       )
+      )
+      (local.tee $11
        (i64.load offset=8
         (local.get $2)
        )
       )
-      (local.tee $7
-       (i64.load offset=8
-        (local.get $4)
-       )
-      )
      )
      (i64.lt_u
       (i64.load
-       (local.get $2)
+       (local.get $18)
       )
       (i64.load
-       (local.get $4)
+       (local.get $6)
       )
      )
      (i64.lt_u
-      (local.get $6)
-      (local.get $7)
+      (local.get $8)
+      (local.get $11)
      )
     )
    )
@@ -15220,15 +16127,164 @@
     (local.get $0)
    )
   )
+  (local.set $8
+   (i64.div_s
+    (i64.mul
+     (i64.load
+      (local.get $4)
+     )
+     (i64.extend_i32_u
+      (i32.load offset=28
+       (local.get $13)
+      )
+     )
+    )
+    (i64.extend_i32_u
+     (i32.load offset=32
+      (local.get $0)
+     )
+    )
+   )
+  )
+  (local.set $2
+   (call $assembly/xprswap/tables/swapHistory.table/SwapsTable#constructor
+    (call $~lib/proton-tsc/modules/store/store/TableStore<assembly/xprswap/tables/swapHistory.table/SwapsTable>#get:availablePrimaryKey
+     (i32.load offset=28
+      (local.get $0)
+     )
+    )
+    (local.get $7)
+    (local.get $1)
+    (if (result i32)
+     (local.get $9)
+     (i32.load offset=8
+      (local.get $5)
+     )
+     (i32.load offset=12
+      (local.get $5)
+     )
+    )
+    (if (result i32)
+     (local.get $9)
+     (i32.load offset=12
+      (local.get $5)
+     )
+     (i32.load offset=8
+      (local.get $5)
+     )
+    )
+    (i64.load
+     (local.get $4)
+    )
+    (local.get $10)
+    (local.get $8)
+    (i64.extend_i32_u
+     (call $~lib/as-chain/system/currentTimeSec)
+    )
+   )
+  )
+  (local.set $9
+   (i32.load
+    (local.get $0)
+   )
+  )
+  (local.set $8
+   (local.tee $7
+    (i64.load
+     (local.get $2)
+    )
+   )
+  )
+  (call $~lib/as-chain/system/check
+   (i32.eqz
+    (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/xprswap/tables/config.table/ConfigTable>#isOk
+     (block $__inlined_func$~lib/as-chain/dbi64/DBI64<assembly/xprswap/tables/swapHistory.table/SwapsTable>#find (result i32)
+      (if
+       (i32.ge_s
+        (local.tee $5
+         (call $~lib/as-chain/env/db_find_i64
+          (i64.load
+           (local.tee $4
+            (i32.load
+             (i32.load
+              (local.tee $6
+               (i32.load offset=28
+                (local.get $0)
+               )
+              )
+             )
+            )
+           )
+          )
+          (i64.load offset=8
+           (local.get $4)
+          )
+          (i64.load offset=16
+           (local.get $4)
+          )
+          (local.get $7)
+         )
+        )
+        (i32.const 0)
+       )
+       (br $__inlined_func$~lib/as-chain/dbi64/DBI64<assembly/xprswap/tables/swapHistory.table/SwapsTable>#find
+        (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/xprswap/tables/swapHistory.table/SwapsTable>#constructor
+         (local.get $4)
+         (local.get $5)
+         (local.get $8)
+         (i32.const 1)
+        )
+       )
+      )
+      (call $~lib/as-chain/dbi64/PrimaryIterator<assembly/xprswap/tables/swapHistory.table/SwapsTable>#constructor
+       (local.get $4)
+       (local.get $5)
+       (i64.const 0)
+       (i32.const 0)
+      )
+     )
+    )
+   )
+   (i32.const 1200)
+  )
+  (call $~lib/as-chain/mi/MultiIndex<assembly/xprswap/tables/swapHistory.table/SwapsTable>#store
+   (i32.load
+    (local.get $6)
+   )
+   (local.get $2)
+   (local.get $9)
+  )
+  (if
+   (i64.ge_u
+    (local.get $7)
+    (i64.load offset=8
+     (local.get $6)
+    )
+   )
+   (call $~lib/as-chain/bignum/integer/u128/u128#set:hi
+    (local.get $6)
+    (select
+     (i64.const -2)
+     (i64.add
+      (local.get $7)
+      (i64.const 1)
+     )
+     (i64.ge_u
+      (local.get $7)
+      (i64.const -2)
+     )
+    )
+   )
+  )
   (local.set $2
    (call $~lib/as-chain/asset/Asset#constructor
-    (local.get $8)
-    (local.get $12)
+    (local.get $10)
+    (local.get $15)
    )
   )
   (call $assembly/xprswap/xprswap.contract/XPRSwap#transfer
    (local.get $0)
-   (local.get $11)
+   (local.get $14)
    (i32.load
     (local.get $0)
    )
@@ -15695,7 +16751,7 @@
    )
   )
   (call $~lib/staticarray/StaticArray<~lib/string/String>#__uset
-   (i32.const 16528)
+   (i32.const 16576)
    (i32.const 1)
    (call $~lib/array/Array<~lib/as-chain/idxdb/IDXDB>#__get
     (local.get $0)
@@ -15703,7 +16759,7 @@
    )
   )
   (call $~lib/staticarray/StaticArray<~lib/string/String>#__uset
-   (i32.const 16528)
+   (i32.const 16576)
    (i32.const 3)
    (call $~lib/array/Array<~lib/as-chain/idxdb/IDXDB>#__get
     (local.get $0)
@@ -15716,7 +16772,7 @@
      (call $~lib/as-chain/asset/Asset#constructor
       (call $~lib/util/string/strtol<i64>
        (call $~lib/staticarray/StaticArray<~lib/string/String>#join
-        (i32.const 16528)
+        (i32.const 16576)
        )
       )
       (call $~lib/as-chain/asset/Symbol#constructor
@@ -15726,7 +16782,7 @@
      )
     )
    )
-   (i32.const 16576)
+   (i32.const 16624)
   )
   (local.get $0)
  )
@@ -15799,7 +16855,7 @@
     (local.get $0)
     (i64.const 0)
    )
-   (i32.const 16960)
+   (i32.const 17008)
   )
   (call $~lib/as-chain/system/check
    (select
@@ -16083,7 +17139,7 @@
    (local.tee $4
     (call $~lib/rt/stub/__new
      (i32.const 24)
-     (i32.const 64)
+     (i32.const 69)
     )
    )
    (i32.const 0)
@@ -16623,46 +17679,6 @@
    (local.get $1)
   )
  )
- (func $~lib/array/Array<u64>#__set (param $0 i32) (param $1 i64)
-  (if
-   (i32.eqz
-    (i32.load offset=12
-     (local.get $0)
-    )
-   )
-   (block
-    (call $~lib/array/ensureCapacity
-     (local.get $0)
-     (i32.const 1)
-     (i32.const 3)
-    )
-    (call $~lib/rt/common/OBJECT#set:rtId
-     (local.get $0)
-     (i32.const 1)
-    )
-   )
-  )
-  (i64.store
-   (i32.load offset=4
-    (local.get $0)
-   )
-   (local.get $1)
-  )
- )
- (func $~lib/as-chain/idxdb/newSecondaryValue_u64 (param $0 i64) (result i32)
-  (local $1 i32)
-  (call $~lib/array/Array<u64>#__set
-   (local.tee $1
-    (call $~lib/array/Array<u64>#constructor
-     (i32.const 1)
-    )
-   )
-   (local.get $0)
-  )
-  (call $~lib/as-chain/idxdb/SecondaryValue#constructor
-   (local.get $1)
-  )
- )
  (func $assembly/xprswap/tables/liquidity.table/LiquidityTable#getSecondaryValue (param $0 i32) (param $1 i32) (result i32)
   (block $case2|0
    (block $case1|0
@@ -16698,7 +17714,7 @@
   )
   (call $~lib/as-chain/system/assert
    (i32.const 0)
-   (i32.const 17408)
+   (i32.const 16480)
   )
   (call $~lib/as-chain/idxdb/SecondaryValue#constructor
    (call $~lib/array/Array<u64>#constructor
@@ -17221,7 +18237,7 @@
    )
   )
   (call $~lib/staticarray/StaticArray<~lib/string/String>#__uset
-   (i32.const 16768)
+   (i32.const 16816)
    (i32.const 1)
    (call $~lib/number/U64#toString
     (i64.load offset=24
@@ -17230,7 +18246,7 @@
    )
   )
   (call $~lib/staticarray/StaticArray<~lib/string/String>#__uset
-   (i32.const 16768)
+   (i32.const 16816)
    (i32.const 3)
    (call $~lib/number/I64#toString
     (i64.load
@@ -17241,7 +18257,7 @@
   (call $~lib/as-chain/system/check
    (local.get $4)
    (call $~lib/staticarray/StaticArray<~lib/string/String>#join
-    (i32.const 16768)
+    (i32.const 16816)
    )
   )
   (local.set $4
@@ -17255,7 +18271,7 @@
    )
   )
   (call $~lib/staticarray/StaticArray<~lib/string/String>#__uset
-   (i32.const 16912)
+   (i32.const 16960)
    (i32.const 1)
    (call $~lib/number/U64#toString
     (i64.load offset=32
@@ -17264,7 +18280,7 @@
    )
   )
   (call $~lib/staticarray/StaticArray<~lib/string/String>#__uset
-   (i32.const 16912)
+   (i32.const 16960)
    (i32.const 3)
    (call $~lib/number/I64#toString
     (i64.load
@@ -17275,7 +18291,7 @@
   (call $~lib/as-chain/system/check
    (local.get $4)
    (call $~lib/staticarray/StaticArray<~lib/string/String>#join
-    (i32.const 16912)
+    (i32.const 16960)
    )
   )
   (local.set $4
@@ -17451,7 +18467,7 @@
        (local.get $8)
        (local.get $10)
       )
-      (i32.const 17024)
+      (i32.const 17072)
      )
      (local.set $7
       (local.get $10)
@@ -17473,14 +18489,14 @@
         )
        )
       )
-      (i32.const 17104)
+      (i32.const 17152)
      )
      (call $~lib/as-chain/system/check
       (i64.ge_u
        (local.get $9)
        (local.get $17)
       )
-      (i32.const 17168)
+      (i32.const 17216)
      )
     )
    )
@@ -17531,7 +18547,7 @@
        (local.get $15)
       )
      )
-     (i32.const 17248)
+     (i32.const 17296)
     )
     (local.set $8
      (i64.sub
@@ -17588,7 +18604,7 @@
     (local.get $8)
     (i64.const 0)
    )
-   (i32.const 17328)
+   (i32.const 17376)
   )
   (call $assembly/xprswap/tables/pools.table/PoolsTable#set:reserve0
    (local.get $11)
@@ -19056,7 +20072,7 @@
    (local.tee $2
     (call $~lib/rt/stub/__new
      (i32.const 16)
-     (i32.const 53)
+     (i32.const 57)
     )
    )
    (i32.const 0)
@@ -19135,7 +20151,7 @@
       (local.tee $1
        (call $~lib/rt/stub/__new
         (i32.const 8)
-        (i32.const 52)
+        (i32.const 56)
        )
       )
       (local.get $3)
@@ -19183,7 +20199,7 @@
    (local.tee $1
     (call $~lib/rt/stub/__new
      (i32.const 8)
-     (i32.const 63)
+     (i32.const 68)
     )
    )
    (i32.const 14880)
@@ -19713,7 +20729,7 @@
        (local.tee $3
         (call $~lib/rt/stub/__new
          (i32.const 4)
-         (i32.const 65)
+         (i32.const 70)
         )
        )
        (i32.const 0)
@@ -19750,7 +20766,7 @@
        (local.tee $3
         (call $~lib/rt/stub/__new
          (i32.const 26)
-         (i32.const 66)
+         (i32.const 71)
         )
        )
        (i32.const 0)
@@ -19860,7 +20876,7 @@
        (local.tee $3
         (call $~lib/rt/stub/__new
          (i32.const 8)
-         (i32.const 67)
+         (i32.const 72)
         )
        )
        (i32.const 0)
@@ -19912,7 +20928,7 @@
        (local.tee $3
         (call $~lib/rt/stub/__new
          (i32.const 20)
-         (i32.const 68)
+         (i32.const 73)
         )
        )
        (i32.const 0)
@@ -20009,7 +21025,7 @@
        (local.tee $3
         (call $~lib/rt/stub/__new
          (i32.const 4)
-         (i32.const 69)
+         (i32.const 74)
         )
        )
        (i32.const 0)
@@ -20046,7 +21062,7 @@
        (local.tee $3
         (call $~lib/rt/stub/__new
          (i32.const 56)
-         (i32.const 70)
+         (i32.const 75)
         )
        )
        (i32.const 0)
@@ -20213,7 +21229,7 @@
        (local.tee $3
         (call $~lib/rt/stub/__new
          (i32.const 1)
-         (i32.const 71)
+         (i32.const 76)
         )
        )
        (i32.const 0)
@@ -20242,7 +21258,7 @@
        (local.tee $3
         (call $~lib/rt/stub/__new
          (i32.const 16)
-         (i32.const 72)
+         (i32.const 77)
         )
        )
        (i32.const 0)
@@ -20301,7 +21317,7 @@
        (call $assembly/xprswap/xprswap.contract/clearPairAction#unpack
         (call $~lib/rt/stub/__new
          (i32.const 0)
-         (i32.const 73)
+         (i32.const 78)
         )
         (local.get $4)
        )
@@ -20328,7 +21344,7 @@
       (local.tee $3
        (call $~lib/rt/stub/__new
         (i32.const 16)
-        (i32.const 74)
+        (i32.const 79)
        )
       )
       (i32.const 0)
@@ -20450,7 +21466,7 @@
    (local.tee $2
     (call $~lib/rt/stub/__new
      (i32.const 16)
-     (i32.const 61)
+     (i32.const 66)
     )
    )
    (i32.const 0)
@@ -20599,47 +21615,87 @@
    (block $folding-inner1
     (block $folding-inner0
      (block $default
-      (block $case25
-       (block $case24
-        (block $case23
-         (block $case22
-          (block $case21
-           (block $case20
-            (block $case19
-             (block $case18
-              (block $case17
-               (block $case16
-                (block $case15
-                 (block $case14
-                  (block $case13
-                   (block $case11
-                    (block $case10
-                     (block $case9
-                      (block $case8
-                       (block $case6
-                        (block $case4
-                         (block $case3
-                          (block $case1
-                           (block $case0
-                            (br_table $case17 $default $default $default $case20 $default $default $case18 $case25 $default $default $default $default $default $case21 $default $default $default $case22 $default $default $default $case24 $default $default $default $default $default $default $default $default $default $default $default $default $default $default $case23 $case19 $default $default $default $default $default $default $case14 $case13 $case0 $default $default $default $default $folding-inner1 $default $case15 $default $default $case16 $case1 $default $folding-inner0 $case3 $case4 $case6 $folding-inner0 $case8 $case9 $case10 $case11 $folding-inner1 $default
-                             (i32.sub
-                              (i32.load
-                               (i32.sub
-                                (local.get $0)
-                                (i32.const 8)
+      (block $case26
+       (block $case25
+        (block $case24
+         (block $case23
+          (block $case22
+           (block $case21
+            (block $case20
+             (block $case19
+              (block $case18
+               (block $case17
+                (block $case16
+                 (block $case15
+                  (block $case14
+                   (block $case13
+                    (block $case11
+                     (block $case10
+                      (block $case9
+                       (block $case8
+                        (block $case6
+                         (block $case4
+                          (block $case3
+                           (block $case1
+                            (block $case0
+                             (br_table $case17 $default $default $default $case20 $default $default $case18 $case26 $default $default $default $default $default $case21 $default $default $default $case22 $default $default $default $case24 $default $default $default $case25 $default $default $default $default $default $default $default $default $default $default $default $default $default $default $case23 $case19 $default $default $default $default $default $default $case14 $case13 $case0 $default $default $default $default $default $folding-inner1 $default $case15 $default $default $case16 $case1 $default $folding-inner0 $case3 $case4 $case6 $folding-inner0 $case8 $case9 $case10 $case11 $folding-inner1 $default
+                              (i32.sub
+                               (i32.load
+                                (i32.sub
+                                 (local.get $0)
+                                 (i32.const 8)
+                                )
                                )
+                               (i32.const 5)
                               )
-                              (i32.const 5)
+                             )
+                            )
+                            (local.set $1
+                             (call $~lib/as-chain/serializer/Decoder#constructor
+                              (local.get $1)
+                             )
+                            )
+                            (call $~lib/as-chain/name/Name#set:N
+                             (local.tee $2
+                              (call $~lib/rt/stub/__new
+                               (i32.const 8)
+                               (i32.const 5)
+                              )
+                             )
+                             (i64.const 0)
+                            )
+                            (call $~lib/as-chain/name/Name#set:N
+                             (local.get $2)
+                             (i64.const 0)
+                            )
+                            (call $~lib/as-chain/serializer/Decoder#unpack
+                             (local.get $1)
+                             (local.get $2)
+                            )
+                            (call $~lib/rt/common/BLOCK#set:mmInfo
+                             (local.get $0)
+                             (local.get $2)
+                            )
+                            (call $~lib/rt/common/OBJECT#set:gcInfo
+                             (local.get $0)
+                             (call $~lib/as-chain/serializer/Decoder#unpackString
+                              (local.get $1)
+                             )
+                            )
+                            (br $folding-inner2)
+                           )
+                           (call $~lib/rt/common/BLOCK#set:mmInfo
+                            (local.get $0)
+                            (call $~lib/as-chain/serializer/Decoder#unpackString
+                             (local.tee $2
+                              (call $~lib/as-chain/serializer/Decoder#constructor
+                               (local.get $1)
+                              )
                              )
                             )
                            )
-                           (local.set $1
-                            (call $~lib/as-chain/serializer/Decoder#constructor
-                             (local.get $1)
-                            )
-                           )
                            (call $~lib/as-chain/name/Name#set:N
-                            (local.tee $2
+                            (local.tee $1
                              (call $~lib/rt/stub/__new
                               (i32.const 8)
                               (i32.const 5)
@@ -20648,268 +21704,236 @@
                             (i64.const 0)
                            )
                            (call $~lib/as-chain/name/Name#set:N
-                            (local.get $2)
+                            (local.get $1)
                             (i64.const 0)
                            )
                            (call $~lib/as-chain/serializer/Decoder#unpack
+                            (local.get $2)
                             (local.get $1)
-                            (local.get $2)
-                           )
-                           (call $~lib/rt/common/BLOCK#set:mmInfo
-                            (local.get $0)
-                            (local.get $2)
                            )
                            (call $~lib/rt/common/OBJECT#set:gcInfo
                             (local.get $0)
-                            (call $~lib/as-chain/serializer/Decoder#unpackString
-                             (local.get $1)
+                            (local.get $1)
+                           )
+                           (return
+                            (i32.load offset=4
+                             (local.get $2)
                             )
                            )
-                           (br $folding-inner2)
-                          )
-                          (call $~lib/rt/common/BLOCK#set:mmInfo
-                           (local.get $0)
-                           (call $~lib/as-chain/serializer/Decoder#unpackString
-                            (local.tee $2
-                             (call $~lib/as-chain/serializer/Decoder#constructor
-                              (local.get $1)
-                             )
-                            )
-                           )
-                          )
-                          (call $~lib/as-chain/name/Name#set:N
-                           (local.tee $1
-                            (call $~lib/rt/stub/__new
-                             (i32.const 8)
-                             (i32.const 5)
-                            )
-                           )
-                           (i64.const 0)
-                          )
-                          (call $~lib/as-chain/name/Name#set:N
-                           (local.get $1)
-                           (i64.const 0)
-                          )
-                          (call $~lib/as-chain/serializer/Decoder#unpack
-                           (local.get $2)
-                           (local.get $1)
-                          )
-                          (call $~lib/rt/common/OBJECT#set:gcInfo
-                           (local.get $0)
-                           (local.get $1)
                           )
                           (return
-                           (i32.load offset=4
-                            (local.get $2)
+                           (call $assembly/xprswap/xprswap.contract/createPoolAction#unpack
+                            (local.get $0)
+                            (local.get $1)
                            )
                           )
                          )
                          (return
-                          (call $assembly/xprswap/xprswap.contract/createPoolAction#unpack
+                          (call $assembly/xprswap/xprswap.contract/depositPrepAction#unpack
                            (local.get $0)
                            (local.get $1)
                           )
                          )
                         )
                         (return
-                         (call $assembly/xprswap/xprswap.contract/depositPrepAction#unpack
+                         (call $assembly/xprswap/xprswap.contract/liquidityAddAction#unpack
                           (local.get $0)
                           (local.get $1)
                          )
                         )
                        )
                        (return
-                        (call $assembly/xprswap/xprswap.contract/liquidityAddAction#unpack
+                        (call $assembly/xprswap/xprswap.contract/removeLiquidityAction#unpack
                          (local.get $0)
                          (local.get $1)
                         )
                        )
                       )
                       (return
-                       (call $assembly/xprswap/xprswap.contract/removeLiquidityAction#unpack
+                       (call $assembly/xprswap/xprswap.contract/togglePauseAction#unpack
                         (local.get $0)
                         (local.get $1)
                        )
                       )
                      )
                      (return
-                      (call $assembly/xprswap/xprswap.contract/togglePauseAction#unpack
+                      (call $assembly/xprswap/xprswap.contract/getSwapQuoteAction#unpack
                        (local.get $0)
                        (local.get $1)
                       )
                      )
                     )
                     (return
-                     (call $assembly/xprswap/xprswap.contract/getSwapQuoteAction#unpack
+                     (call $assembly/xprswap/xprswap.contract/clearPairAction#unpack
                       (local.get $0)
                       (local.get $1)
                      )
                     )
                    )
+                   (call $~lib/as-chain/name/Name#set:N
+                    (local.get $0)
+                    (call $~lib/as-chain/serializer/Decoder#unpackNumber<u64>
+                     (local.tee $0
+                      (call $~lib/as-chain/serializer/Decoder#constructor
+                       (local.get $1)
+                      )
+                     )
+                    )
+                   )
                    (return
-                    (call $assembly/xprswap/xprswap.contract/clearPairAction#unpack
+                    (i32.load offset=4
                      (local.get $0)
+                    )
+                   )
+                  )
+                  (call $~lib/as-chain/serializer/Decoder#unpack
+                   (local.tee $1
+                    (call $~lib/as-chain/serializer/Decoder#constructor
+                     (local.get $1)
+                    )
+                   )
+                   (i32.load
+                    (local.get $0)
+                   )
+                  )
+                  (br $folding-inner2)
+                 )
+                 (call $~lib/rt/common/BLOCK#set:mmInfo
+                  (local.get $0)
+                  (call $~lib/as-chain/serializer/Decoder#unpackName
+                   (local.tee $1
+                    (call $~lib/as-chain/serializer/Decoder#constructor
                      (local.get $1)
                     )
                    )
                   )
-                  (call $~lib/as-chain/name/Name#set:N
-                   (local.get $0)
-                   (call $~lib/as-chain/serializer/Decoder#unpackNumber<u64>
-                    (local.tee $0
-                     (call $~lib/as-chain/serializer/Decoder#constructor
-                      (local.get $1)
-                     )
-                    )
-                   )
-                  )
-                  (return
-                   (i32.load offset=4
-                    (local.get $0)
-                   )
-                  )
                  )
-                 (call $~lib/as-chain/serializer/Decoder#unpack
-                  (local.tee $1
-                   (call $~lib/as-chain/serializer/Decoder#constructor
-                    (local.get $1)
-                   )
-                  )
-                  (i32.load
-                   (local.get $0)
+                 (call $~lib/rt/common/OBJECT#set:gcInfo
+                  (local.get $0)
+                  (call $~lib/as-chain/serializer/Decoder#unpackName
+                   (local.get $1)
                   )
                  )
                  (br $folding-inner2)
                 )
-                (call $~lib/rt/common/BLOCK#set:mmInfo
-                 (local.get $0)
-                 (call $~lib/as-chain/serializer/Decoder#unpackName
-                  (local.tee $1
-                   (call $~lib/as-chain/serializer/Decoder#constructor
-                    (local.get $1)
-                   )
-                  )
-                 )
-                )
-                (call $~lib/rt/common/OBJECT#set:gcInfo
-                 (local.get $0)
-                 (call $~lib/as-chain/serializer/Decoder#unpackName
+                (return
+                 (call $~lib/as-chain/action/Action#unpack
+                  (local.get $0)
                   (local.get $1)
                  )
                 )
-                (br $folding-inner2)
+               )
+               (call $~lib/as-chain/name/Name#set:N
+                (local.get $0)
+                (call $~lib/as-chain/serializer/Decoder#unpackNumber<u64>
+                 (call $~lib/as-chain/serializer/Decoder#constructor
+                  (local.get $1)
+                 )
+                )
                )
                (return
-                (call $~lib/as-chain/action/Action#unpack
-                 (local.get $0)
-                 (local.get $1)
-                )
+                (i32.const 8)
                )
               )
               (call $~lib/as-chain/name/Name#set:N
                (local.get $0)
                (call $~lib/as-chain/serializer/Decoder#unpackNumber<u64>
-                (call $~lib/as-chain/serializer/Decoder#constructor
-                 (local.get $1)
-                )
-               )
-              )
-              (return
-               (i32.const 8)
-              )
-             )
-             (call $~lib/as-chain/name/Name#set:N
-              (local.get $0)
-              (call $~lib/as-chain/serializer/Decoder#unpackNumber<u64>
-               (local.tee $1
-                (call $~lib/as-chain/serializer/Decoder#constructor
-                 (local.get $1)
-                )
-               )
-              )
-             )
-             (call $~lib/as-chain/system/check
-              (call $~lib/as-chain/asset/Symbol#isValid
-               (local.get $0)
-              )
-              (i32.const 18288)
-             )
-             (br $folding-inner2)
-            )
-            (local.set $3
-             (i64.load
-              (i32.add
-               (i32.load offset=4
-                (i32.load
-                 (local.tee $1
-                  (call $~lib/as-chain/serializer/Decoder#constructor
-                   (local.get $1)
-                  )
+                (local.tee $1
+                 (call $~lib/as-chain/serializer/Decoder#constructor
+                  (local.get $1)
                  )
                 )
                )
-               (i32.load offset=4
-                (local.get $1)
+              )
+              (call $~lib/as-chain/system/check
+               (call $~lib/as-chain/asset/Symbol#isValid
+                (local.get $0)
+               )
+               (i32.const 18288)
+              )
+              (br $folding-inner2)
+             )
+             (local.set $3
+              (i64.load
+               (i32.add
+                (i32.load offset=4
+                 (i32.load
+                  (local.tee $1
+                   (call $~lib/as-chain/serializer/Decoder#constructor
+                    (local.get $1)
+                   )
+                  )
+                 )
+                )
+                (i32.load offset=4
+                 (local.get $1)
+                )
                )
               )
              )
-            )
-            (call $~lib/as-chain/serializer/Decoder#incPos
-             (local.get $1)
-             (i32.const 8)
-            )
-            (call $~lib/as-chain/name/Name#set:N
-             (local.get $0)
-             (local.get $3)
-            )
-            (call $~lib/as-chain/serializer/Decoder#unpack
-             (local.get $1)
-             (i32.load offset=8
-              (local.get $0)
+             (call $~lib/as-chain/serializer/Decoder#incPos
+              (local.get $1)
+              (i32.const 8)
              )
-            )
-            (call $~lib/as-chain/system/check
-             (call $~lib/as-chain/asset/Asset#isValid
+             (call $~lib/as-chain/name/Name#set:N
               (local.get $0)
+              (local.get $3)
              )
-             (i32.const 16576)
+             (call $~lib/as-chain/serializer/Decoder#unpack
+              (local.get $1)
+              (i32.load offset=8
+               (local.get $0)
+              )
+             )
+             (call $~lib/as-chain/system/check
+              (call $~lib/as-chain/asset/Asset#isValid
+               (local.get $0)
+              )
+              (i32.const 16624)
+             )
+             (return
+              (i32.load offset=4
+               (local.get $1)
+              )
+             )
             )
             (return
-             (i32.load offset=4
+             (call $assembly/xprswap/tables/pools.table/PoolsTable#unpack
+              (local.get $0)
               (local.get $1)
              )
             )
            )
            (return
-            (call $assembly/xprswap/tables/pools.table/PoolsTable#unpack
+            (call $assembly/xprswap/tables/liquidity.table/LiquidityTable#unpack
              (local.get $0)
              (local.get $1)
             )
            )
           )
           (return
-           (call $assembly/xprswap/tables/liquidity.table/LiquidityTable#unpack
+           (call $assembly/xprswap/tables/config.table/ConfigTable#unpack
             (local.get $0)
             (local.get $1)
            )
           )
          )
          (return
-          (call $assembly/xprswap/tables/config.table/ConfigTable#unpack
+          (call $assembly/xprswap/tables/stat.table/TokenStatTable#unpack
            (local.get $0)
            (local.get $1)
           )
          )
         )
         (return
-         (call $assembly/xprswap/tables/stat.table/TokenStatTable#unpack
+         (call $assembly/xprswap/tables/deposits.table/DepositTable#unpack
           (local.get $0)
           (local.get $1)
          )
         )
        )
        (return
-        (call $assembly/xprswap/tables/deposits.table/DepositTable#unpack
+        (call $assembly/xprswap/tables/swapHistory.table/SwapsTable#unpack
          (local.get $0)
          (local.get $1)
         )
@@ -21670,48 +22694,69 @@
   (block $folding-inner1
    (block $folding-inner0
     (block $default
-     (block $case25
-      (block $case24
-       (block $case23
-        (block $case22
-         (block $case21
-          (block $case20
-           (block $case19
-            (block $case18
-             (block $case17
-              (block $case16
-               (block $case15
-                (block $case14
-                 (block $case13
-                  (block $case12
-                   (block $case11
-                    (block $case10
-                     (block $case9
-                      (block $case8
-                       (block $case7
-                        (block $case6
-                         (block $case5
-                          (block $case4
-                           (block $case3
-                            (block $case2
-                             (block $case1
-                              (block $case0
-                               (br_table $case17 $default $default $default $case20 $default $default $case18 $case25 $default $default $default $default $default $case21 $default $default $default $case22 $default $default $default $case24 $default $default $default $default $default $default $default $default $default $default $default $default $default $default $case23 $case19 $default $default $default $default $default $default $case14 $case13 $case0 $default $default $default $default $case12 $default $case15 $default $default $case16 $case1 $default $case2 $case3 $case4 $case6 $case7 $case8 $case9 $case10 $case11 $case5 $default
-                                (i32.sub
-                                 (i32.load
-                                  (i32.sub
-                                   (local.get $0)
-                                   (i32.const 8)
+     (block $case26
+      (block $case25
+       (block $case24
+        (block $case23
+         (block $case22
+          (block $case21
+           (block $case20
+            (block $case19
+             (block $case18
+              (block $case17
+               (block $case16
+                (block $case15
+                 (block $case14
+                  (block $case13
+                   (block $case12
+                    (block $case11
+                     (block $case10
+                      (block $case9
+                       (block $case8
+                        (block $case7
+                         (block $case6
+                          (block $case5
+                           (block $case4
+                            (block $case3
+                             (block $case2
+                              (block $case1
+                               (block $case0
+                                (br_table $case17 $default $default $default $case20 $default $default $case18 $case26 $default $default $default $default $default $case21 $default $default $default $case22 $default $default $default $case24 $default $default $default $case25 $default $default $default $default $default $default $default $default $default $default $default $default $default $default $case23 $case19 $default $default $default $default $default $default $case14 $case13 $case0 $default $default $default $default $default $case12 $default $case15 $default $default $case16 $case1 $default $case2 $case3 $case4 $case6 $case7 $case8 $case9 $case10 $case11 $case5 $default
+                                 (i32.sub
+                                  (i32.load
+                                   (i32.sub
+                                    (local.get $0)
+                                    (i32.const 8)
+                                   )
                                   )
+                                  (i32.const 5)
                                  )
-                                 (i32.const 5)
                                 )
                                )
+                               (call $~lib/as-chain/serializer/Encoder#pack
+                                (local.tee $1
+                                 (call $~lib/as-chain/serializer/Encoder#constructor
+                                  (call $assembly/xprswap/xprswap.contract/TokenSymbolParam#getSize
+                                   (local.get $0)
+                                  )
+                                 )
+                                )
+                                (i32.load
+                                 (local.get $0)
+                                )
+                               )
+                               (call $~lib/as-chain/serializer/Encoder#packString
+                                (local.get $1)
+                                (i32.load offset=4
+                                 (local.get $0)
+                                )
+                               )
+                               (br $folding-inner1)
                               )
-                              (call $~lib/as-chain/serializer/Encoder#pack
+                              (call $~lib/as-chain/serializer/Encoder#packString
                                (local.tee $1
                                 (call $~lib/as-chain/serializer/Encoder#constructor
-                                 (call $assembly/xprswap/xprswap.contract/TokenSymbolParam#getSize
+                                 (call $assembly/xprswap/xprswap.contract/TokenAmount#getSize
                                   (local.get $0)
                                  )
                                 )
@@ -21720,7 +22765,7 @@
                                 (local.get $0)
                                )
                               )
-                              (call $~lib/as-chain/serializer/Encoder#packString
+                              (call $~lib/as-chain/serializer/Encoder#pack
                                (local.get $1)
                                (i32.load offset=4
                                 (local.get $0)
@@ -21728,376 +22773,362 @@
                               )
                               (br $folding-inner1)
                              )
-                             (call $~lib/as-chain/serializer/Encoder#packString
-                              (local.tee $1
-                               (call $~lib/as-chain/serializer/Encoder#constructor
-                                (call $assembly/xprswap/xprswap.contract/TokenAmount#getSize
-                                 (local.get $0)
-                                )
-                               )
-                              )
-                              (i32.load
+                             (return
+                              (call $assembly/xprswap/xprswap.contract/initAction#pack
                                (local.get $0)
                               )
                              )
-                             (call $~lib/as-chain/serializer/Encoder#pack
-                              (local.get $1)
-                              (i32.load offset=4
-                               (local.get $0)
-                              )
-                             )
-                             (br $folding-inner1)
                             )
                             (return
-                             (call $assembly/xprswap/xprswap.contract/initAction#pack
+                             (call $assembly/xprswap/xprswap.contract/createPoolAction#pack
                               (local.get $0)
                              )
                             )
                            )
                            (return
-                            (call $assembly/xprswap/xprswap.contract/createPoolAction#pack
+                            (call $assembly/xprswap/xprswap.contract/depositPrepAction#pack
                              (local.get $0)
                             )
                            )
                           )
-                          (return
-                           (call $assembly/xprswap/xprswap.contract/depositPrepAction#pack
-                            (local.get $0)
-                           )
-                          )
-                         )
-                         (if
-                          (i32.eqz
-                           (i32.load
-                            (local.get $0)
-                           )
-                          )
-                          (unreachable)
-                         )
-                         (if
-                          (i32.eqz
-                           (i32.load offset=4
-                            (local.get $0)
-                           )
-                          )
-                          (unreachable)
-                         )
-                         (if
-                          (i32.eqz
-                           (i32.load offset=8
-                            (local.get $0)
-                           )
-                          )
-                          (unreachable)
-                         )
-                         (local.set $1
-                          (call $~lib/as-chain/serializer/Encoder#constructor
-                           (i32.add
-                            (call $~lib/as-chain/utils/Utils.calcPackedStringLength
-                             (i32.load offset=12
-                              (local.get $0)
-                             )
-                            )
-                            (i32.const 32)
-                           )
-                          )
-                         )
-                         (if
-                          (i32.eqz
-                           (local.tee $2
+                          (if
+                           (i32.eqz
                             (i32.load
                              (local.get $0)
                             )
                            )
+                           (unreachable)
                           )
-                          (unreachable)
-                         )
-                         (call $~lib/as-chain/serializer/Encoder#pack
-                          (local.get $1)
-                          (local.get $2)
-                         )
-                         (if
-                          (i32.eqz
-                           (local.tee $2
+                          (if
+                           (i32.eqz
                             (i32.load offset=4
                              (local.get $0)
                             )
                            )
+                           (unreachable)
                           )
-                          (unreachable)
-                         )
-                         (call $~lib/as-chain/serializer/Encoder#pack
-                          (local.get $1)
-                          (local.get $2)
-                         )
-                         (if
-                          (i32.eqz
-                           (local.tee $2
+                          (if
+                           (i32.eqz
                             (i32.load offset=8
                              (local.get $0)
                             )
                            )
+                           (unreachable)
                           )
-                          (unreachable)
-                         )
-                         (call $~lib/as-chain/serializer/Encoder#pack
-                          (local.get $1)
-                          (local.get $2)
-                         )
-                         (call $~lib/as-chain/serializer/Encoder#packString
-                          (local.get $1)
-                          (i32.load offset=12
-                           (local.get $0)
+                          (local.set $1
+                           (call $~lib/as-chain/serializer/Encoder#constructor
+                            (i32.add
+                             (call $~lib/as-chain/utils/Utils.calcPackedStringLength
+                              (i32.load offset=12
+                               (local.get $0)
+                              )
+                             )
+                             (i32.const 32)
+                            )
+                           )
+                          )
+                          (if
+                           (i32.eqz
+                            (local.tee $2
+                             (i32.load
+                              (local.get $0)
+                             )
+                            )
+                           )
+                           (unreachable)
+                          )
+                          (call $~lib/as-chain/serializer/Encoder#pack
+                           (local.get $1)
+                           (local.get $2)
+                          )
+                          (if
+                           (i32.eqz
+                            (local.tee $2
+                             (i32.load offset=4
+                              (local.get $0)
+                             )
+                            )
+                           )
+                           (unreachable)
+                          )
+                          (call $~lib/as-chain/serializer/Encoder#pack
+                           (local.get $1)
+                           (local.get $2)
+                          )
+                          (if
+                           (i32.eqz
+                            (local.tee $2
+                             (i32.load offset=8
+                              (local.get $0)
+                             )
+                            )
+                           )
+                           (unreachable)
+                          )
+                          (call $~lib/as-chain/serializer/Encoder#pack
+                           (local.get $1)
+                           (local.get $2)
+                          )
+                          (call $~lib/as-chain/serializer/Encoder#packString
+                           (local.get $1)
+                           (i32.load offset=12
+                            (local.get $0)
+                           )
+                          )
+                          (return
+                           (call $~lib/as-chain/serializer/Encoder#getBytes
+                            (local.get $1)
+                           )
                           )
                          )
                          (return
-                          (call $~lib/as-chain/serializer/Encoder#getBytes
-                           (local.get $1)
+                          (call $assembly/xprswap/xprswap.contract/liquidityAddAction#pack
+                           (local.get $0)
                           )
                          )
                         )
                         (return
-                         (call $assembly/xprswap/xprswap.contract/liquidityAddAction#pack
+                         (call $assembly/xprswap/xprswap.contract/initAction#pack
                           (local.get $0)
                          )
                         )
                        )
                        (return
-                        (call $assembly/xprswap/xprswap.contract/initAction#pack
+                        (call $assembly/xprswap/xprswap.contract/removeLiquidityAction#pack
                          (local.get $0)
                         )
                        )
                       )
-                      (return
-                       (call $assembly/xprswap/xprswap.contract/removeLiquidityAction#pack
+                      (call $~lib/as-chain/serializer/Encoder#packNumber<bool>
+                       (local.tee $1
+                        (call $~lib/as-chain/serializer/Encoder#constructor
+                         (i32.const 1)
+                        )
+                       )
+                       (i32.load8_u
                         (local.get $0)
                        )
                       )
+                      (br $folding-inner1)
                      )
-                     (call $~lib/as-chain/serializer/Encoder#packNumber<bool>
-                      (local.tee $1
-                       (call $~lib/as-chain/serializer/Encoder#constructor
-                        (i32.const 1)
+                     (if
+                      (i32.eqz
+                       (i32.load
+                        (local.get $0)
                        )
                       )
-                      (i32.load8_u
+                      (unreachable)
+                     )
+                     (if
+                      (i32.eqz
+                       (i32.load offset=4
+                        (local.get $0)
+                       )
+                      )
+                      (unreachable)
+                     )
+                     (local.set $1
+                      (call $~lib/as-chain/serializer/Encoder#constructor
+                       (i32.const 24)
+                      )
+                     )
+                     (if
+                      (i32.eqz
+                       (local.tee $2
+                        (i32.load
+                         (local.get $0)
+                        )
+                       )
+                      )
+                      (unreachable)
+                     )
+                     (call $~lib/as-chain/serializer/Encoder#pack
+                      (local.get $1)
+                      (local.get $2)
+                     )
+                     (if
+                      (i32.eqz
+                       (local.tee $2
+                        (i32.load offset=4
+                         (local.get $0)
+                        )
+                       )
+                      )
+                      (unreachable)
+                     )
+                     (call $~lib/as-chain/serializer/Encoder#pack
+                      (local.get $1)
+                      (local.get $2)
+                     )
+                     (call $~lib/as-chain/serializer/Encoder#packNumber<u64>
+                      (local.get $1)
+                      (i64.load offset=8
                        (local.get $0)
                       )
                      )
                      (br $folding-inner1)
                     )
-                    (if
-                     (i32.eqz
-                      (i32.load
-                       (local.get $0)
+                    (return
+                     (call $~lib/as-chain/serializer/Encoder#getBytes
+                      (call $~lib/as-chain/serializer/Encoder#constructor
+                       (i32.const 0)
                       )
                      )
-                     (unreachable)
                     )
-                    (if
-                     (i32.eqz
-                      (i32.load offset=4
-                       (local.get $0)
-                      )
-                     )
-                     (unreachable)
-                    )
-                    (local.set $1
-                     (call $~lib/as-chain/serializer/Encoder#constructor
-                      (i32.const 24)
-                     )
-                    )
-                    (if
-                     (i32.eqz
-                      (local.tee $2
-                       (i32.load
-                        (local.get $0)
-                       )
-                      )
-                     )
-                     (unreachable)
-                    )
-                    (call $~lib/as-chain/serializer/Encoder#pack
-                     (local.get $1)
-                     (local.get $2)
-                    )
-                    (if
-                     (i32.eqz
-                      (local.tee $2
-                       (i32.load offset=4
-                        (local.get $0)
-                       )
-                      )
-                     )
-                     (unreachable)
-                    )
-                    (call $~lib/as-chain/serializer/Encoder#pack
-                     (local.get $1)
-                     (local.get $2)
-                    )
-                    (call $~lib/as-chain/serializer/Encoder#packNumber<u64>
-                     (local.get $1)
-                     (i64.load offset=8
-                      (local.get $0)
-                     )
-                    )
-                    (br $folding-inner1)
                    )
                    (return
-                    (call $~lib/as-chain/serializer/Encoder#getBytes
-                     (call $~lib/as-chain/serializer/Encoder#constructor
-                      (i32.const 0)
-                     )
+                    (call $assembly/xprswap/xprswap.inline/TokenTransfer#pack
+                     (local.get $0)
                     )
                    )
                   )
-                  (return
-                   (call $assembly/xprswap/xprswap.inline/TokenTransfer#pack
+                  (call $~lib/as-chain/serializer/Encoder#packNumber<u64>
+                   (local.tee $1
+                    (call $~lib/as-chain/serializer/Encoder#constructor
+                     (i32.const 8)
+                    )
+                   )
+                   (i64.load
                     (local.get $0)
                    )
                   )
+                  (br $folding-inner1)
                  )
-                 (call $~lib/as-chain/serializer/Encoder#packNumber<u64>
+                 (call $~lib/as-chain/serializer/Encoder#pack
                   (local.tee $1
                    (call $~lib/as-chain/serializer/Encoder#constructor
                     (i32.const 8)
                    )
                   )
-                  (i64.load
+                  (i32.load
                    (local.get $0)
                   )
                  )
                  (br $folding-inner1)
                 )
-                (call $~lib/as-chain/serializer/Encoder#pack
+                (call $~lib/as-chain/serializer/Encoder#packName
                  (local.tee $1
                   (call $~lib/as-chain/serializer/Encoder#constructor
-                   (i32.const 8)
+                   (i32.const 16)
                   )
                  )
                  (i32.load
                   (local.get $0)
                  )
                 )
-                (br $folding-inner1)
-               )
-               (call $~lib/as-chain/serializer/Encoder#packName
-                (local.tee $1
-                 (call $~lib/as-chain/serializer/Encoder#constructor
-                  (i32.const 16)
+                (call $~lib/as-chain/serializer/Encoder#packName
+                 (local.get $1)
+                 (i32.load offset=4
+                  (local.get $0)
                  )
                 )
-                (i32.load
+                (br $folding-inner1)
+               )
+               (return
+                (call $~lib/as-chain/action/Action#pack
                  (local.get $0)
                 )
                )
-               (call $~lib/as-chain/serializer/Encoder#packName
-                (local.get $1)
-                (i32.load offset=4
-                 (local.get $0)
-                )
-               )
-               (br $folding-inner1)
               )
-              (return
-               (call $~lib/as-chain/action/Action#pack
+              (i64.store
+               (i32.load offset=4
+                (local.tee $1
+                 (call $~lib/array/Array<u8>#constructor
+                  (i32.const 8)
+                 )
+                )
+               )
+               (i64.load
                 (local.get $0)
                )
               )
+              (return
+               (local.get $1)
+              )
              )
-             (i64.store
-              (i32.load offset=4
-               (local.tee $1
-                (call $~lib/array/Array<u8>#constructor
-                 (i32.const 8)
-                )
+             (call $~lib/as-chain/serializer/Encoder#packNumber<u64>
+              (local.tee $1
+               (call $~lib/as-chain/serializer/Encoder#constructor
+                (i32.const 8)
                )
               )
               (i64.load
                (local.get $0)
               )
              )
-             (return
-              (local.get $1)
-             )
+             (br $folding-inner1)
             )
             (call $~lib/as-chain/serializer/Encoder#packNumber<u64>
              (local.tee $1
               (call $~lib/as-chain/serializer/Encoder#constructor
-               (i32.const 8)
+               (i32.const 16)
               )
              )
              (i64.load
               (local.get $0)
              )
             )
-            (br $folding-inner1)
+            (br $folding-inner0)
            )
-           (call $~lib/as-chain/serializer/Encoder#packNumber<u64>
-            (local.tee $1
-             (call $~lib/as-chain/serializer/Encoder#constructor
-              (i32.const 16)
-             )
-            )
-            (i64.load
+           (return
+            (call $assembly/xprswap/tables/pools.table/PoolsTable#pack
              (local.get $0)
             )
            )
-           (br $folding-inner0)
           )
           (return
-           (call $assembly/xprswap/tables/pools.table/PoolsTable#pack
+           (call $assembly/xprswap/tables/liquidity.table/LiquidityTable#pack
             (local.get $0)
            )
           )
          )
          (return
-          (call $assembly/xprswap/tables/liquidity.table/LiquidityTable#pack
+          (call $assembly/xprswap/tables/config.table/ConfigTable#pack
            (local.get $0)
           )
          )
         )
-        (return
-         (call $assembly/xprswap/tables/config.table/ConfigTable#pack
+        (drop
+         (i32.load
           (local.get $0)
          )
         )
-       )
-       (drop
-        (i32.load
-         (local.get $0)
-        )
-       )
-       (drop
-        (i32.load offset=4
-         (local.get $0)
-        )
-       )
-       (drop
-        (i32.load offset=8
-         (local.get $0)
-        )
-       )
-       (call $~lib/as-chain/serializer/Encoder#pack
-        (local.tee $1
-         (call $~lib/as-chain/serializer/Encoder#constructor
-          (i32.const 40)
+        (drop
+         (i32.load offset=4
+          (local.get $0)
          )
         )
-        (i32.load
+        (drop
+         (i32.load offset=8
+          (local.get $0)
+         )
+        )
+        (call $~lib/as-chain/serializer/Encoder#pack
+         (local.tee $1
+          (call $~lib/as-chain/serializer/Encoder#constructor
+           (i32.const 40)
+          )
+         )
+         (i32.load
+          (local.get $0)
+         )
+        )
+        (call $~lib/as-chain/serializer/Encoder#pack
+         (local.get $1)
+         (i32.load offset=4
+          (local.get $0)
+         )
+        )
+        (br $folding-inner0)
+       )
+       (return
+        (call $assembly/xprswap/tables/deposits.table/DepositTable#pack
          (local.get $0)
         )
        )
-       (call $~lib/as-chain/serializer/Encoder#pack
-        (local.get $1)
-        (i32.load offset=4
-         (local.get $0)
-        )
-       )
-       (br $folding-inner0)
       )
       (return
-       (call $assembly/xprswap/tables/deposits.table/DepositTable#pack
+       (call $assembly/xprswap/tables/swapHistory.table/SwapsTable#pack
         (local.get $0)
        )
       )
@@ -22139,7 +23170,7 @@
    (local.tee $3
     (call $~lib/rt/stub/__new
      (i32.const 20)
-     (i32.const 38)
+     (i32.const 42)
     )
    )
    (local.get $0)
@@ -22165,7 +23196,7 @@
       (i32.const 8)
      )
     )
-    (i32.const 33)
+    (i32.const 37)
    )
    (block
     (local.set $2
@@ -22213,7 +23244,7 @@
      (local.tee $0
       (call $~lib/rt/stub/__new
        (i32.const 8)
-       (i32.const 37)
+       (i32.const 41)
       )
      )
      (local.get $3)
@@ -22254,7 +23285,7 @@
       (i32.const 8)
      )
     )
-    (i32.const 33)
+    (i32.const 37)
    )
    (block
     (call $~lib/as-chain/system/assert
@@ -22302,7 +23333,7 @@
       (i32.const 8)
      )
     )
-    (i32.const 33)
+    (i32.const 37)
    )
    (block
     (call $~lib/as-chain/system/assert
@@ -22361,7 +23392,7 @@
       (i32.const 8)
      )
     )
-    (i32.const 33)
+    (i32.const 37)
    )
    (block
     (call $~lib/as-chain/env/db_idx64_remove

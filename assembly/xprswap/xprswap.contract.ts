@@ -19,6 +19,7 @@ import {
   ConfigTable,
   TokenStatTable,
   DepositTable,
+  SwapsTable,
 } from "./tables";
 import { TokenTransfer } from "./xprswap.inline";
 
@@ -49,6 +50,11 @@ export class XPRSwap extends Contract {
   );
 
   public depositTable: TableStore<DepositTable> = new TableStore<DepositTable>(
+    this.receiver,
+    this.receiver
+  );
+
+  public swapsTable: TableStore<SwapsTable> = new TableStore<SwapsTable>(
     this.receiver,
     this.receiver
   );
@@ -887,6 +893,24 @@ export class XPRSwap extends Contract {
     this.updatePriceAccumulators(pool);
     pool.blockTimestampLast = currentTimeSec();
     this.poolsTable.update(pool, this.receiver);
+
+    const feePaid =
+      (quantityIn.amount * config.swap_fee) / this.FEE_DENOMINATOR;
+    const swapId = this.swapsTable.availablePrimaryKey;
+
+    const swap = new SwapsTable(
+      swapId,
+      poolId,
+      from,
+      isToken0Input ? pool.token0 : pool.token1,
+      isToken0Input ? pool.token1 : pool.token0,
+      quantityIn.amount,
+      amountOut,
+      feePaid,
+      currentTimeSec()
+    );
+
+    this.swapsTable.store(swap, this.receiver);
 
     const assetOut = new Asset(amountOut, tokenOutSymbol);
     this.transfer(tokenOutContract, this.receiver, from, assetOut, memo);
