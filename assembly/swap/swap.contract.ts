@@ -21,7 +21,7 @@ import {
   DepositTable,
   SwapsTable,
 } from "./tables";
-import { TokenTransfer } from "./xprswap.inline";
+import { TokenTransfer } from "./swap.inline";
 
 class TokenSymbolParam {
   constructor(public contract: Name = EMPTY_NAME, public sym: string = "0,") {}
@@ -489,28 +489,6 @@ export class XPRSwap extends Contract {
     this.configTable.update(config, this.receiver);
   }
 
-  @action("getquote")
-  getSwapQuote(tokenIn: Name, tokenOut: Name, amountIn: u64): void {
-    const sorted = this.sortTokens(tokenIn, tokenOut);
-    const poolId = this.findPoolId(sorted[0], sorted[1]);
-
-    check(poolId != -1, "Pool not found");
-
-    const pool = this.poolsTable.requireGet(poolId, "Pool not found");
-
-    const isToken0Input = tokenIn.N == pool.token0.N;
-    const reserveIn = isToken0Input ? pool.reserve0 : pool.reserve1;
-    const reserveOut = isToken0Input ? pool.reserve1 : pool.reserve0;
-
-    const config = this.configTable.requireGet(0, "Not initialized");
-    const amountOut = this.computeAmountOut(
-      amountIn,
-      reserveIn,
-      reserveOut,
-      config.swap_fee
-    );
-  }
-
   /// ============================================
   // CLEAR TABLES
   // ============================================
@@ -583,7 +561,7 @@ export class XPRSwap extends Contract {
 
     for (let i = 0; i < symbolStr.length && i < 7; i++) {
       const char = symbolStr.charCodeAt(i);
-      check(char >= 65 && char <= 90, "Factory: INVALID_SYMBOL_CHARACTER");
+      check(char >= 65 && char <= 90, "INVALID_SYMBOL_CHARACTER");
       value |= u64(char) << (8 * i);
     }
 
