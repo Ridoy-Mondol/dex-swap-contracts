@@ -21,14 +21,10 @@ export class FeesTable extends Table {
 
   @secondary
   get by_pair_token(): U128 {
-    const two32 = U128.fromU64(1 << 32);
-
-    const high = U128.mul(U128.from(this.pair_id), two32);
-    const highShifted = U128.mul(high, two32);
-
-    const low = U128.from(this.total_collected.symbol.code());
-
-    return U128.or(highShifted, low);
+    const high = U128.fromU64(this.pair_id);
+    const shifted = U128.shl(high, 64);
+    const low = U128.fromU64(this.total_collected.symbol.code());
+    return U128.or(shifted, low);
   }
 
   @secondary

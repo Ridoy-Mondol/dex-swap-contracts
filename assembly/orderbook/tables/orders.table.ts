@@ -44,18 +44,11 @@ export class OrdersTable extends Table {
     return this.price.amount;
   }
 
-  //   @secondary
-  //   get by_pair_price(): U128 {
-  //     return (U128(this.pair_id) << 64) | U128(this.price.amount);
-  //   }
-
   @secondary
   get by_pair_price(): U128 {
-    const high = U128.from(this.pair_id);
-    const highShifted = U128.mul(high, U128.from(2 ** 64));
-
-    const low = U128.from(this.price.amount);
-
-    return U128.add(highShifted, low);
+    const high = U128.fromU64(this.pair_id);
+    const shifted = U128.shl(high, 64);
+    const low = U128.fromU64(this.price.amount);
+    return U128.or(shifted, low);
   }
 }
