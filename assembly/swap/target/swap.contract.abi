@@ -319,24 +319,6 @@
       ]
     },
     {
-      "name": "getquote",
-      "base": "",
-      "fields": [
-        {
-          "name": "tokenIn",
-          "type": "name"
-        },
-        {
-          "name": "tokenOut",
-          "type": "name"
-        },
-        {
-          "name": "amountIn",
-          "type": "uint64"
-        }
-      ]
-    },
-    {
       "name": "init",
       "base": "",
       "fields": [
@@ -462,11 +444,6 @@
     {
       "name": "depositprep",
       "type": "depositprep",
-      "ricardian_contract": ""
-    },
-    {
-      "name": "getquote",
-      "type": "getquote",
       "ricardian_contract": ""
     },
     {

@@ -22,7 +22,7 @@ import {
   DepositTable,
   SwapsTable,
 } from "./tables";
-import { TokenTransfer } from "./xprswap.inline";
+import { TokenTransfer } from "./swap.inline";
 
 
 
@@ -546,28 +546,6 @@ export class XPRSwap extends Contract {
     this.configTable.update(config, this.receiver);
   }
 
-  @action("getquote")
-  getSwapQuote(tokenIn: Name, tokenOut: Name, amountIn: u64): void {
-    const sorted = this.sortTokens(tokenIn, tokenOut);
-    const poolId = this.findPoolId(sorted[0], sorted[1]);
-
-    check(poolId != -1, "Pool not found");
-
-    const pool = this.poolsTable.requireGet(poolId, "Pool not found");
-
-    const isToken0Input = tokenIn.N == pool.token0.N;
-    const reserveIn = isToken0Input ? pool.reserve0 : pool.reserve1;
-    const reserveOut = isToken0Input ? pool.reserve1 : pool.reserve0;
-
-    const config = this.configTable.requireGet(0, "Not initialized");
-    const amountOut = this.computeAmountOut(
-      amountIn,
-      reserveIn,
-      reserveOut,
-      config.swap_fee
-    );
-  }
-
   /// ============================================
   // CLEAR TABLES
   // ============================================
@@ -640,7 +618,7 @@ export class XPRSwap extends Contract {
 
     for (let i = 0; i < symbolStr.length && i < 7; i++) {
       const char = symbolStr.charCodeAt(i);
-      check(char >= 65 && char <= 90, "Factory: INVALID_SYMBOL_CHARACTER");
+      check(char >= 65 && char <= 90, "INVALID_SYMBOL_CHARACTER");
       value |= u64(char) << (8 * i);
     }
 
@@ -727,12 +705,10 @@ export class XPRSwap extends Contract {
   }
 
   private distributeFees(pool: PoolsTable): void {
-    // Check if there's growth in liquidity since last fee distribution
     if (pool.kLast.lo == 0 && pool.kLast.hi == 0) {
-      return; // No previous kLast, skip fee distribution
+      return;
     }
 
-    // Calculate current K and last K
     const currentK = U128.mul(new U128(pool.reserve0), new U128(pool.reserve1));
 
     // If K has grown, there are fees to distribute
@@ -741,7 +717,6 @@ export class XPRSwap extends Contract {
       const rootKLast = this.sqrtU128(pool.kLast);
 
       if (rootK > rootKLast) {
-        // Calculate fee liquidity (1/6th of growth goes to protocol/LPs)
         const numerator = U128.mul(
           new U128(pool.lp_supply),
           new U128(rootK - rootKLast)
@@ -1439,49 +1414,6 @@ class togglePauseAction implements _chain.Packer {
     }
 }
 
-class getSwapQuoteAction implements _chain.Packer {
-    constructor (
-        public tokenIn: _chain.Name | null = null,
-        public tokenOut: _chain.Name | null = null,
-        public amountIn: u64 = 0,
-    ) {
-    }
-
-    pack(): u8[] {
-        let enc = new _chain.Encoder(this.getSize());
-        enc.pack(this.tokenIn!);
-        enc.pack(this.tokenOut!);
-        enc.packNumber<u64>(this.amountIn);
-        return enc.getBytes();
-    }
-    
-    unpack(data: u8[]): usize {
-        let dec = new _chain.Decoder(data);
-        
-        {
-            let obj = new _chain.Name();
-            dec.unpack(obj);
-            this.tokenIn! = obj;
-        }
-        
-        {
-            let obj = new _chain.Name();
-            dec.unpack(obj);
-            this.tokenOut! = obj;
-        }
-        this.amountIn = dec.unpackNumber<u64>();
-        return dec.getPos();
-    }
-
-    getSize(): usize {
-        let size: usize = 0;
-        size += this.tokenIn!.getSize();
-        size += this.tokenOut!.getSize();
-        size += sizeof<u64>();
-        return size;
-    }
-}
-
 class clearPairAction implements _chain.Packer {
     constructor (
     ) {
@@ -1547,11 +1479,6 @@ export function apply(receiver: u64, firstReceiver: u64, action: u64): void {
             const args = new togglePauseAction();
             args.unpack(actionData);
             mycontract.togglePause(args.paused);
-        }
-		if (action == 0x62B36D532A000000) {//getquote
-            const args = new getSwapQuoteAction();
-            args.unpack(actionData);
-            mycontract.getSwapQuote(args.tokenIn!,args.tokenOut!,args.amountIn);
         }
 		if (action == 0x446F533AE0000000) {//clrpair
             const args = new clearPairAction();
