@@ -1,4 +1,4 @@
-import { Asset, EMPTY_NAME, Name, Table, TimePointSec } from "proton-tsc";
+import { Asset, EMPTY_NAME, Name, Table, TimePointSec, U128 } from "proton-tsc";
 
 @table("orders")
 export class OrdersTable extends Table {
@@ -6,7 +6,7 @@ export class OrdersTable extends Table {
     public order_id: u64 = 0,
     public pair_id: u64 = 0,
     public user: Name = EMPTY_NAME,
-    public type: string = "", // "buy" or "sell"
+    public side: string = "", // "buy" or "sell"
     public order_type: string = "", // "limit" or "market"
     public price: Asset = new Asset(),
     public amount: Asset = new Asset(),
@@ -42,5 +42,20 @@ export class OrdersTable extends Table {
   @secondary
   get by_price(): u64 {
     return this.price.amount;
+  }
+
+  //   @secondary
+  //   get by_pair_price(): U128 {
+  //     return (U128(this.pair_id) << 64) | U128(this.price.amount);
+  //   }
+
+  @secondary
+  get by_pair_price(): U128 {
+    const high = U128.from(this.pair_id);
+    const highShifted = U128.mul(high, U128.from(2 ** 64));
+
+    const low = U128.from(this.price.amount);
+
+    return U128.add(highShifted, low);
   }
 }

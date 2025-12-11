@@ -9,11 +9,11 @@ export class TradesTable extends Table {
     public sell_order_id: u64 = 0,
     public buyer: Name = EMPTY_NAME,
     public seller: Name = EMPTY_NAME,
-    public price: Asset = new Asset(),
-    public amount: Asset = new Asset(),
-    public total_value: Asset = new Asset(),
-    public buyer_fee: Asset = new Asset(),
-    public seller_fee: Asset = new Asset(),
+    public price: Asset = new Asset(),   // Execution price in quote
+    public amount: Asset = new Asset(),   // Trade amount in base
+    public total_value: Asset = new Asset(),   // price × amount in quote
+    public buyer_fee: Asset = new Asset(),   // Fee paid by buyer (quote)
+    public seller_fee: Asset = new Asset(),  // Fee paid by seller (base)
     public executed_at: TimePointSec = new TimePointSec()
   ) {
     super();
